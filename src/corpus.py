@@ -23,7 +23,7 @@ class Personnage(Corpus):
         super().__init__(nom)
         self.genre = genre
 
-    def identifier(self):
+    def identifier(self) -> str:
         return "personnage"
     
     def afficher(self):
@@ -35,7 +35,7 @@ class Lieu(Corpus):
         super().__init__(nom)
         self.categorie = categorie
 
-    def identifier(self):
+    def identifier(self) -> str:
         return "lieu"
     
     def afficher(self):
