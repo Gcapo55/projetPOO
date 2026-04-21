@@ -1,22 +1,32 @@
 import spacy
 import fr_core_news_sm
+from importateur import Texte
 from corpus import *
 
 nlp = fr_core_news_sm.load()
 
-texte = """
-Henry allait au marché à Nice et se baladait au bord du port avec Sophie. Pour que Matthias, Matthias puisse les rejoindre, il envoya son adresse à sa maman qui habite à Lausanne. C'était Carnaval.
-Ils ont fini par rejoindre Jean.
-"""
-
 class AnalyseTexte:
+    """ Utilise spaCy pour extraire les personnages et les lieux, les stocke dans un dictionnaire et les attribue à la classe correspondante. """
     def __init__(self, nlp):
         self.nlp = nlp
         self.personnages = {}
         self.lieux = {}
 
-    def analyser(self, texte):
-        doc = self.nlp(texte)
+    """ Stocke les personnages dans le dictionnaire et les attribue à la classe correspondante. """
+    def _ajouter_personnage(self, nom):
+        if nom not in self.personnages:
+            self.personnages[nom] = Personnage(nom)
+        self.personnages[nom].compter()
+
+    """ Stocke les lieux dans le dictionnaire et les attribue à la classe correspondante. """
+    def _ajouter_lieu(self, nom):
+        if nom not in self.lieux:
+            self.lieux[nom] = Lieu(nom)
+        self.lieux[nom].compter()
+
+    """ Attribue le texte récupéré de l'importateur et appelle les fonctions ajouter. """
+    def analyser(self, texte : Texte):
+        doc = self.nlp(texte.contenu)
 
         for ent in doc.ents:
             if ent.label_ == "PER":
@@ -25,19 +35,3 @@ class AnalyseTexte:
             elif ent.label_ in ["LOC", "GPE"]:
                 self._ajouter_lieu(ent.text)
 
-    def _ajouter_personnage(self, nom):
-        if nom not in self.personnages:
-            self.personnages[nom] = Personnage(nom)
-        self.personnages[nom].compter()
-
-    def _ajouter_lieu(self, nom):
-        if nom not in self.lieux:
-            self.lieux[nom] = Lieu(nom)
-        self.lieux[nom].compter()
-
-if __name__ == "__main__":
-    analyse = AnalyseTexte(nlp)
-    analyse.analyser(texte)
-
-    print(analyse.personnages)
-    print(analyse.lieux)
