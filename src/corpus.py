@@ -37,3 +37,6 @@ class Lieu(Corpus):
 
     def identifier(self):
         return "lieu"
+    
+    def afficher(self):
+        print(f" {self.nom} {self.occurences}")

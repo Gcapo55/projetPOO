@@ -5,27 +5,39 @@ from corpus import *
 nlp = fr_core_news_sm.load()
 
 texte = """
-Henry allait au marché à Nice et se baladait au bord du port avec Sophie. Pour que Matthias puisse les rejoindre, il envoya son adresse à sa maman qui habite à Lausanne. C'était Carnaval.
+Henry allait au marché à Nice et se baladait au bord du port avec Sophie. Pour que Matthias, Matthias puisse les rejoindre, il envoya son adresse à sa maman qui habite à Lausanne. C'était Carnaval.
 Ils ont fini par rejoindre Jean.
 """
 
-doc = nlp(texte)
+class AnalyseTexte:
+    def __init__(self, nlp):
+        self.nlp = nlp
+        self.personnages = {}
+        self.lieux = {}
 
-personnages = {}
-lieux = {}
-    
-for ent in doc.ents:
-    if ent.label_ == "PER":
-        nom = ent.text
-        if nom not in personnages:
-            personnages[nom] = Personnage(nom)
-        personnages[nom].compter()
-        
-    elif ent.label_ in ["LOC", "GPE"]:
-        nom = ent.text
-        if nom not in lieux:
-            lieux[nom] = Lieu(nom)
-        lieux[nom].compter()
+    def analyser(self, texte):
+        doc = self.nlp(texte)
 
-for p in personnages:
-    print(p)
+        for ent in doc.ents:
+            if ent.label_ == "PER":
+                self._ajouter_personnage(ent.text)
+
+            elif ent.label_ in ["LOC", "GPE"]:
+                self._ajouter_lieu(ent.text)
+
+    def _ajouter_personnage(self, nom):
+        if nom not in self.personnages:
+            self.personnages[nom] = Personnage(nom)
+        self.personnages[nom].compter()
+
+    def _ajouter_lieu(self, nom):
+        if nom not in self.lieux:
+            self.lieux[nom] = Lieu(nom)
+        self.lieux[nom].compter()
+
+if __name__ == "__main__":
+    analyse = AnalyseTexte(nlp)
+    analyse.analyser(texte)
+
+    print(analyse.personnages)
+    print(analyse.lieux)
