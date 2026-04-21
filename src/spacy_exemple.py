@@ -1,5 +1,6 @@
 import spacy
 import fr_core_news_sm
+from corpus import *
 
 nlp = fr_core_news_sm.load()
 
@@ -10,13 +11,13 @@ Ils ont fini par rejoindre Jean.
 
 doc = nlp(texte)
 
-personnes = set()
+personnes = {}
 lieux = set()
 evenements = set()
 
 for ent in doc.ents:
     if ent.label_ == "PER":
-        personnes.add(ent.text)
+        personnes[ent.text] = Personnage(nom)
 
     elif ent.label_ in "LOC":
         lieux.add(ent.text)
@@ -24,6 +25,5 @@ for ent in doc.ents:
     elif ent.label_ in "MISC":
         evenements.add(ent.text)
 
-print("Personnages :", personnes)
-print("Lieux :", lieux)
-print("Événements :", evenements)
+for personne in personnes:
+    Personnage(nom)
