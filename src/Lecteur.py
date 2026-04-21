@@ -11,19 +11,21 @@ Ils ont fini par rejoindre Jean.
 
 doc = nlp(texte)
 
-personnes = {}
-lieux = set()
-evenements = set()
-
+personnages = {}
+lieux = {}
+    
 for ent in doc.ents:
     if ent.label_ == "PER":
-        personnes[ent.text] = Personnage(nom)
+        nom = ent.text
+        if nom not in personnages:
+            personnages[nom] = Personnage(nom)
+        personnages[nom].compter()
+        
+    elif ent.label_ in ["LOC", "GPE"]:
+        nom = ent.text
+        if nom not in lieux:
+            lieux[nom] = Lieu(nom)
+        lieux[nom].compter()
 
-    elif ent.label_ in "LOC":
-        lieux.add(ent.text)
-
-    elif ent.label_ in "MISC":
-        evenements.add(ent.text)
-
-for personne in personnes:
-    Personnage(nom)
+for p in personnages:
+    print(p)
