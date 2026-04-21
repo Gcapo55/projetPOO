@@ -24,6 +24,6 @@ for ent in doc.ents:
     elif ent.label_ in "MISC":
         evenements.add(ent.text)
 
-print("Personnes :", personnes)
+print("Personnages :", personnes)
 print("Lieux :", lieux)
 print("Événements :", evenements)
