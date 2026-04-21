@@ -13,15 +13,21 @@ class Corpus(ABC):
     def identifier(self) -> str:
         pass
 
+    @abstractmethod
+    def afficher(self) -> str:
+        pass
+
 class Personnage(Corpus):
-    """ Classe Personnage avec attributs age et genre facultatif. """
-    def __init__(self, nom, age: int = None, genre: str = None): 
+    """ Classe Personnage avec attribut de genre facultatif. """
+    def __init__(self, nom, genre: str = None): 
         super().__init__(nom)
-        self.age = age
         self.genre = genre
 
     def identifier(self):
         return "personnage"
+    
+    def afficher(self):
+        print(f" {self.nom} {self.occurences}")
     
 class Lieu(Corpus):
     """ Classe Lieu avec attributs categorie facultatif. """
