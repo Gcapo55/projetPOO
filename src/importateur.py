@@ -1,4 +1,6 @@
-"""importe la classe Texte"""
+"""
+importe la classe Texte
+"""
 
 class Texte: # noqa : PLW1641 //the class doesn't implement the "__hash__" method
     """objet Texte"""
@@ -28,3 +30,11 @@ class Texte: # noqa : PLW1641 //the class doesn't implement the "__hash__" metho
         if not isinstance(other, Texte):
             return False
         return self._annee < other._annee
+
+    def titre(self) -> str:
+        return self._titre
+    def annee(self) -> int:
+        return self._annee
+
+    def auteur(self) -> str:
+        return self._auteur
