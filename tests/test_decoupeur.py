@@ -1,4 +1,4 @@
-from lecteurtexte import DecoupeMots, DecoupePhrases
+from decoupeur import DecoupeMots, DecoupePhrases
 from importateur import Texte
 import pytest
 @pytest.fixture
