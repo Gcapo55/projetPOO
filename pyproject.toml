@@ -108,4 +108,4 @@ no_implicit_optional = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src/projetpoo"]
+pythonpath = ["src"]

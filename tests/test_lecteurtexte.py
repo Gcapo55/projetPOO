@@ -1,12 +1,12 @@
-from src.projetpoo.lecteurtexte import DecoupeMots
-from src.projetpoo.texte import Texte
+from lecteurtexte import DecoupeMots, DecoupePhrases
+from importateur import Texte
 import pytest
 @pytest.fixture
 def texte_test() -> Texte:
     t = Texte(
-        "20'000 lieux sous les mers",
+        "20'000 lieux sous les mers", "Jules Verne",
         "L'année 1866 fut marquée par un événement bizarre, un phénomène "
-        "inexpliqué et inexplicable que personne n'a sans doute oublié.",
+        "inexpliqué et inexplicable que personne n'a sans doute oublié.", 1869
     )
     return t
 
