@@ -1,6 +1,8 @@
+
 import re
 from abc import ABC, abstractmethod
-from texte import Texte
+
+from importateur import Texte
 
 
 class LecteurTexte(ABC):
@@ -11,8 +13,7 @@ class LecteurTexte(ABC):
 
 class DecoupeMots(LecteurTexte):
     def lecture(self, texte: Texte) -> list:
-        resultat = re.sub(r"[\s\W]+", " ", texte.contenu).split()
-        return resultat
+        return re.sub(r"[\s\W]+", " ", texte.contenu).split()
 
 
 

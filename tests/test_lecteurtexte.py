@@ -1,18 +1,10 @@
-from src.projetpoo.lecteurtexte import DecoupeMots
-from src.projetpoo.texte import Texte
-import pytest
-@pytest.fixture
-def texte_test() -> Texte:
-    t = Texte(
-        "20'000 lieux sous les mers",
-        "L'année 1866 fut marquée par un événement bizarre, un phénomène "
-        "inexpliqué et inexplicable que personne n'a sans doute oublié.",
-    )
-    return t
+from importateur import Texte
+from lecteurtexte import DecoupeMots
 
-def test_decoupemots_fonctionne(texte_test):
+TexteTest = Texte("Le Bon, la Brute et le Truand", "Joseph Morrington",
+                  """Le Bon a vu la Brute et le Truand s'entretuer""", 1957)
+
+def test_decoupemots_fonctionne():
     lecteur = DecoupeMots()
-    assert len(lecteur.lecture(texte_test)) == 21
-
-
-#test_decoupemots_fonctionne()
+    nb_mots = 11
+    assert len(lecteur.lecture(TexteTest)) == nb_mots
