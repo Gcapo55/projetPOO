@@ -5,7 +5,7 @@ Hamlet_personnages = ["Hamlet","Horatio","Ophelia","Claudius","Fantôme"]
 
 count= 0
 
-class exportateur():
+class Exportateur:
 
     with open("test.csv", "w", newline="") as csvfile:
 
