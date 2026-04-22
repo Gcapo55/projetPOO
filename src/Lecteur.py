@@ -3,7 +3,7 @@ import fr_core_news_sm
 from importateur import Texte
 from corpus import *
 
-nlp = fr_core_news_sm.load()
+nlp = spacy.load("fr_core_news_sm")
 
 class AnalyseTexte:
     """ Utilise spaCy pour extraire les personnages et les lieux, les stocke dans un dictionnaire et les attribue à la classe correspondante. """
