@@ -1,7 +1,7 @@
 ﻿import pytest
 from importateur import Texte
 
-"""ce fichier permet de configurer des fixtures
+"""Ce fichier permet de configurer des fixtures
 qui seront réutilisées dans tous les fichiers de test"""
 
 @pytest.fixture
