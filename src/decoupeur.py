@@ -14,7 +14,7 @@ class LecteurTexte(ABC):
 
 
 class DecoupeMots(LecteurTexte):
-    """retourne la liste de tous les mots du texte"""
+    """retourne la liste de tous les mots du texte : fonction spacy"""
     def lecture(self, texte: Texte) -> list:
         resultat = []
         for token in nlp(texte.contenu):
@@ -22,7 +22,7 @@ class DecoupeMots(LecteurTexte):
         return resultat
 
 class DecoupePhrases(LecteurTexte):
-    """retourne la liste de toutes les phrases du texte"""
+    """retourne la liste de toutes les phrases du texte : fonction spacy"""
     def lecture(self, texte: Texte) -> list:
         resultat = []
         for token in nlp(texte.contenu).sents:

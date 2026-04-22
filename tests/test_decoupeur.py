@@ -1,5 +1,6 @@
 from decoupeur import DecoupeMots, DecoupePhrases
 
+"""Tests des Découpeurs, utilisation de la fixture texte_test de conftest.py"""
 
 def test_decoupemots_fonctionne(texte_test):
     lecteur = DecoupeMots()
