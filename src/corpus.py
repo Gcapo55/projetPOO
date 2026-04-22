@@ -19,24 +19,24 @@ class Corpus(ABC):
 
 class Personnage(Corpus):
     """ Classe Personnage avec attribut de genre facultatif. """
-    def __init__(self, nom, genre: str = None): 
+    def __init__(self, nom, genre: str | None):
         super().__init__(nom)
         self.genre = genre
 
     def identifier(self) -> str:
         return "personnage"
-    
+
     def afficher(self):
         print(f" {self.nom} {self.occurences}")
-    
+
 class Lieu(Corpus):
     """ Classe Lieu avec attributs categorie facultatif. """
-    def __init__(self, nom, categorie: str = None):
+    def __init__(self, nom, categorie: str | None):
         super().__init__(nom)
         self.categorie = categorie
 
     def identifier(self) -> str:
         return "lieu"
-    
+
     def afficher(self):
         print(f" {self.nom} {self.occurences}")

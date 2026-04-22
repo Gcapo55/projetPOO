@@ -1,5 +1,6 @@
 ﻿import pytest
 from importateur import Texte
+from utils import spacy_conv
 
 """Ce fichier permet de configurer des fixtures
 qui seront réutilisées dans tous les fichiers de test"""
@@ -14,3 +15,7 @@ def texte_test() -> Texte:
         " public à l'intérieur des continents les gens de mer furent particulièrement émus.", 1869
     )
     return t
+
+@pytest.fixture
+def doc_test(texte_test) -> Doc:
+    return spacy_conv(texte_test)
