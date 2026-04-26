@@ -7,7 +7,7 @@ TexteTest = Texte("Le Bon, la Brute et le Truand", "Joseph Morrington", """Le Bo
 
 CONST_ANNEE = 1957
 
-CHEMIN = "./docs/20'000 lieux sous les mers.txt"
+CHEMIN = "20'000 lieux sous les mers_doctest.txt"
 
 
 def test_texte_annee():
