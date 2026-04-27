@@ -42,14 +42,16 @@ class Lieu(Corpus):
         print(f" {self.nom} {self.occurences}")
 
 class Evenement(Corpus):
-    def __init__(self, nom: str, date=None, heure=None, lieu=None):
+    def __init__(self, nom: str, date=None, heure=None, lieu=None, personnage=None):
         super().__init__(nom)
         self.date = date
         self.heure = heure
-        self.lieu = lieu  # objet Lieu
+        self.lieu = lieu
+        self.personnage = personnage if personnage is not None else []
 
     def identifier(self) -> str:
         return "evenement"
 
     def afficher(self):
-        print(f"{self.nom}, {self.date}, {self.lieu.nom}")
+        print(f"{self.nom}, {self.date}, {self.heure}, {self.lieu.nom}, "
+            f"{', '.join(p.nom for p in self.personnage)}")

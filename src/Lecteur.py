@@ -33,10 +33,15 @@ class AnalyseTexte:
             date = None
             heure = None
             lieu_obj = None
+            participants = []
 
             for ent in sent.ents: 
                 if ent.label_ in ["LOC", "GPE"]:
                     lieu_obj = self.lieux.get(ent.text) # lien vers l'objet lieu
+                elif ent.label_ == "PER":
+                    p = self.personnages.get(ent.text)
+                    if p:
+                        participants.append(p)
             
             match_date = re.compile(
                 r"\b\d{1,2}\s+(janvier|février|mars|avril|mai|juin|juillet"
@@ -57,14 +62,15 @@ class AnalyseTexte:
             if match_heure:
                 heure = match_heure.group()
 
-            if date and lieu_obj:
+            if (date or heure) and lieu_obj:
                 nom = sent.text.strip()
                 if nom not in self.evenements:
                     self.evenements[nom] = Evenement(
                         nom=nom,
                         date=date,
                         heure=heure,
-                        lieu=lieu_obj
+                        lieu=lieu_obj,
+                        personnage=participants,
                     )
 
 
