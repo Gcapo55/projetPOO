@@ -1,4 +1,4 @@
-﻿from Lecteur import AnalyseTexte
+﻿from lecteur import AnalyseTexte
 from collections import defaultdict, Counter
 
 
