@@ -1,4 +1,5 @@
 ﻿import pytest
+from spacy.tokens import Doc
 
 from importateur import Texte
 from Lecteur import AnalyseTexte
