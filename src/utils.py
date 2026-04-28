@@ -1,4 +1,4 @@
-"""FICHIER DE FONCTION UTILITAIRES"""
+﻿"""FICHIER DE FONCTION UTILITAIRES"""
 import spacy
 from spacy.tokens import Doc
 
@@ -13,8 +13,6 @@ def spacy_conv(texte : Texte) -> Doc :
     """
     nlp = spacy.load("fr_core_news_sm")
     nlp.add_pipe("sentencizer", before="parser")
-    
-    
     return nlp(texte.contenu)
 
 def nettoyer(txt: str) -> str :
