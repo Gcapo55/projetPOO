@@ -1,28 +1,21 @@
-# projetPOO
+Extracteur d'Ontologie de Narration (version 0.1)
 
-A short description
 
-## Installation
+UTILISATION
 
-```bash
-uv sync
-```
+- indiquer si installation de spacy souhaitée
+- indiquer nom du fichier texte à importer
 
-## Usage
 
-```python
-import projetpoo
-```
+Fonctionnalités du programme
 
-## Development
+- lire un texte importé
+- reconnaître les éléments ontologiques présents dans le texte selon leur catégorie (Personnage, Lieu, Événement)
+- reconnaître les attributs éventuels pour chaque élément
+- exporter proprement ces éléments et leurs attributs respectifs dans un fichier .csv
 
-```bash
-# Run tests
-uv run pytest
 
-# Lint
-uv run ruff check .
+Création du programme
 
-# Format
-uv run ruff format .
-```
+- Ce programme a été réalisé dans le cadre du cours Programmation orientée objet : Python (SP26)
+- Il est le fruit d'une collaboration de cinq étudiants, Clémence Detroyat, Gianni Caporizzo, Nathan Kunz, Guilherme Meireles Pereira et Timoté Sarrasin
