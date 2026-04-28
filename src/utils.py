@@ -12,5 +12,4 @@ def spacy_conv(texte : Texte) -> Doc :
     chacun de nos fichiers d'analyse
     """
     nlp = spacy.load("fr_core_news_lg")
-    # nlp = stanza.Pipeline("fr")
     return nlp(texte.contenu)
