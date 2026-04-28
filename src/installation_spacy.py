@@ -41,6 +41,6 @@ def install_spacy():
     except subprocess.CalledProcessError:
         print("\nÉchec de l'installation :(")
 
-    input("\nAppuyer sur Entrée pour continuer...")
+    input("\nAppuyer sur 'Entrée' pour continuer")
 
 install_spacy()
