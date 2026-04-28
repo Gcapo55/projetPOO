@@ -1,10 +1,7 @@
 ﻿"""FICHIER DE FONCTION UTILITAIRES"""
 import spacy
-
-# import stanza
 from importateur import Texte
 
-# stanza.download("fr")
 
 def spacy_conv(texte : Texte) -> Doc :
     """

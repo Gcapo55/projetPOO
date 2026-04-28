@@ -14,7 +14,8 @@ def texte_test() -> Texte:
         "L'année 1866 fut marquée par un événement bizarre, un phénomène"
         " inexpliqué et inexplicable que personne n'a sans doute oublié. Sans parler"
         " des rumeurs qui agitaient les populations des ports et surexcitaient l'esprit"
-        " public à l'intérieur des continents les gens de mer furent particulièrement émus.", 1869
+        " public à l'intérieur des continents les gens de mer furent"
+        " particulièrement émus.", 1869
     )
 
 
