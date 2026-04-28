@@ -1,6 +1,7 @@
-﻿from utils import *
+﻿from importateur import AnalyseTexte, AnalyseurPersonnages, ChargeurTexte
 from perso_attributs import *
-from importateur import *
+from utils import spacy_conv
+
 
 class Pipeline:
     def __init__(self,
@@ -22,12 +23,12 @@ class Pipeline:
         dico_perso = self._finder.personnages
         # dico_lieu = self._finder.lieux
         # dico_attributs = self._perso_analyser.trouver_attributs(dico_perso, doc)
-        print (list((dico_perso)))
+        print (list(dico_perso))
         print (dico_attributs)
 
 if __name__ == "__main__" :
 
-    pipeline = Pipeline("../docs/20'000 lieux sous les mers.txt",
+    pipeline = Pipeline(input("File name :"),
                     ChargeurTexte(),
                     AnalyseTexte(),
                     AnalyseurPersonnages()
