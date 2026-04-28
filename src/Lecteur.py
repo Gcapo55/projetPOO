@@ -28,11 +28,11 @@ class AnalyseTexte:
             self.lieux[nom] = Lieu(nom, None)
         self.lieux[nom].compter()
 
-    def _ajouter_events(self):
+    def _ajouter_events(self, doc : Doc) -> dict:
         """ Détecte un lieu, une date et l'heure dans une phrase et
         crée un évenement dont le nom de l'objet est la phrase en question. """
 
-        for sent in self.doc.sents:
+        for sent in doc.sents:
             date = None
             heure = None
             lieu_obj = None
@@ -87,6 +87,6 @@ class AnalyseTexte:
             elif ent.label_ in ["LOC", "GPE"]:
                 self._ajouter_lieu(ent.text)
 
-        self._ajouter_events()
+        self._ajouter_events(doc)
 
 

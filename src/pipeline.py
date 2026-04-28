@@ -1,5 +1,6 @@
-﻿from importateur import AnalyseTexte, AnalyseurPersonnages, ChargeurTexte
-from perso_attributs import *
+﻿from importateur import ChargeurTexte
+from Lecteur import AnalyseTexte
+from perso_attributs import AnalyseurPersonnages
 from utils import spacy_conv
 
 
@@ -22,16 +23,20 @@ class Pipeline:
         self._finder.analyser(doc)
         dico_perso = self._finder.personnages
         # dico_lieu = self._finder.lieux
-        # dico_attributs = self._perso_analyser.trouver_attributs(dico_perso, doc)
-        print (list(dico_perso))
-        print (dico_attributs)
+        # dico_evenements = self._finder.evenements
+        dico_attributs = self._perso_analyser.trouver_attributs(dico_perso, doc)
+
 
 if __name__ == "__main__" :
 
-    pipeline = Pipeline(input("File name :"),
+    pipeline = Pipeline(input("Filename : "),
                     ChargeurTexte(),
                     AnalyseTexte(),
                     AnalyseurPersonnages()
                     )
 
     pipeline.executer()
+    print(list(dico_perso))
+    # print (list(dico_lieu))
+    # print (list(dico_evenements))
+    print(dico_attributs)
