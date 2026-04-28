@@ -1,4 +1,4 @@
-"""Lecteur de texte"""
+"""Lecteur de texte"""  # noqa: N999 disable invalid module name
 import re
 
 from spacy.tokens import Doc
