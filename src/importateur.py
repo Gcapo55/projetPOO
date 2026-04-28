@@ -44,7 +44,7 @@ class ChargeurTexte:
     """lis et crée une instance de Texte"
     "avec un nom de fichier .txt, selon le format importé depuis Projekt Gutenberg"""
     def charger(self, source : str)-> Texte:
-        with Path.open(source) as file:
+        with Path.open(source, "r", encoding="utf-8") as file:
             global_contenu = file.read()
             titre = re.search(r"(?<=Title:\s).+?(?=\n)", global_contenu)
             auteur = re.search(r"(?<=Author:\s).+?(?=\n)", global_contenu)

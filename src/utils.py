@@ -11,5 +11,5 @@ def spacy_conv(texte : Texte) -> Doc :
     avec les fonctions spacy. Cela permet de ne pas recréer le même objet dans
     chacun de nos fichiers d'analyse
     """
-    nlp = spacy.load("fr_core_news_lg")
+    nlp = spacy.load("fr_core_news_sm")
     return nlp(texte.contenu)
