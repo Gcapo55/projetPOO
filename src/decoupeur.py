@@ -1,6 +1,8 @@
 
 from abc import ABC, abstractmethod
 
+from spacy.tokens import Doc
+
 
 class DecoupeurTexte(ABC):
     """classe parente et abstraite d'analyse d'un texte"""

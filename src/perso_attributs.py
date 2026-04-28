@@ -1,5 +1,7 @@
 ﻿from collections import Counter, defaultdict
 
+from spacy.tokens import Doc
+
 from Lecteur import AnalyseTexte
 
 
