@@ -46,6 +46,6 @@ class ChargeurTexte:
         global_contenu = chemin.read_text(encoding="utf-8")
         titre = re.search(r"(?<=Title:\s).+?(?=\n)", global_contenu)
         auteur = re.search(r"(?<=Author:\s).+?(?=\n)", global_contenu)
-        contenu = re.search(r"\*\*\*[^*]+\*\*\*(.+?)(?=\*\*\*|$)", global_contenu, re.DOTALL)
+        contenu = re.search(r"\*\*\*[^*]+\*\*\*(.+?)(?=\*\*\*|$)", global_contenu, re.DOTALL)  # noqa: E501 disable line too long
         date = re.search(r"(?<=Release date:\s).+?([\d]{4})(?=\s)", global_contenu)
         return Texte(titre.group(), auteur.group(), contenu.group(), date.group())

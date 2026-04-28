@@ -1,5 +1,6 @@
-﻿from Lecteur import AnalyseTexte
-from collections import defaultdict, Counter
+﻿from collections import Counter, defaultdict
+
+from Lecteur import AnalyseTexte
 
 
 class AnalyseurPersonnages:
