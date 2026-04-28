@@ -5,6 +5,8 @@ from spacy.tokens import Doc
 
 from corpus import Evenement, Lieu, Personnage
 
+from utils import nettoyer
+
 
 class AnalyseTexte:
     """ Utilise spaCy pour extraire les personnages et les lieux,
@@ -67,7 +69,7 @@ class AnalyseTexte:
                 heure = match_heure.group()
 
             if (date or heure) and lieu_obj:
-                nom = sent.text.strip()
+                nom = nettoyer(sent.text.strip())
                 if nom not in self.evenements:
                     self.evenements[nom] = Evenement(
                         nom=nom,
@@ -83,10 +85,10 @@ class AnalyseTexte:
         appelle les fonctions ajouter. """
         for ent in doc.ents:
             if ent.label_ == "PER":
-                self._ajouter_personnage(ent.text)
+                self._ajouter_personnage(nettoyer(ent.text))
 
             elif ent.label_ in ["LOC", "GPE"]:
-                self._ajouter_lieu(ent.text)
+                self._ajouter_lieu(nettoyer(ent.text))
 
         self._ajouter_events(doc)
 

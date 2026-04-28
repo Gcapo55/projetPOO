@@ -4,6 +4,8 @@ from spacy.tokens import Doc
 
 from Lecteur import AnalyseTexte
 
+from utils import nettoyer
+
 
 class AnalyseurPersonnages:
 
@@ -16,7 +18,7 @@ class AnalyseurPersonnages:
         personnages = list(dico_perso.keys())
         for perso in personnages:
             liste_compl = [
-                token.lemma_ for token in doc
+                nettoyer(token.lemma_) for token in doc
                 if token.head.text == perso and token.dep_ == "amod"
             ]
             liste_red = [att for att, _ in Counter(liste_compl).most_common(3)]
