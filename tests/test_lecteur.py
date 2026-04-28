@@ -1,4 +1,5 @@
 import spacy
+
 from lecteur import AnalyseTexte
 
 if __name__ == "__main__":
@@ -21,8 +22,8 @@ if __name__ == "__main__":
         p.afficher()
 
     print("Lieux")
-    for l in analyse.lieux.values():
-        l.afficher()
+    for lieu in analyse.lieux.values():
+        lieu.afficher()
 
     print("Événements")
     for e in analyse.evenements.values():
