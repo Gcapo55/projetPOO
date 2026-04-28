@@ -1,6 +1,8 @@
 ﻿"""FICHIER DE FONCTION UTILITAIRES"""
 import spacy
+
 from importateur import Texte
+
 
 def spacy_conv(texte : Texte) -> Doc :
     """

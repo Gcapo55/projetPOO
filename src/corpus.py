@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Corpus(ABC):
     """ Classe abstraite Corpus avec le nom de l'objet et un compteur d'occurences. """
     def __init__(self, nom: str):

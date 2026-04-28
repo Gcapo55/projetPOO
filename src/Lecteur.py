@@ -1,6 +1,10 @@
-from corpus import Personnage, Lieu, Evenement
-from spacy.tokens import Doc
+"""Lecteur de texte"""
 import re
+
+from spacy.tokens import Doc
+
+from corpus import Evenement, Lieu, Personnage
+
 
 class AnalyseTexte:
     """ Utilise spaCy pour extraire les personnages et les lieux,
@@ -26,7 +30,7 @@ class AnalyseTexte:
         self.lieux[nom].compter()
 
     def _ajouter_events(self):
-        """ Détecte un lieu, une date et l'heure dans une phrase et 
+        """ Détecte un lieu, une date et l'heure dans une phrase et
         crée un évenement dont le nom de l'objet est la phrase en question. """
 
         for sent in self.doc.sents:
@@ -35,14 +39,14 @@ class AnalyseTexte:
             lieu_obj = None
             participants = []
 
-            for ent in sent.ents: 
+            for ent in sent.ents:
                 if ent.label_ in ["LOC", "GPE"]:
                     lieu_obj = self.lieux.get(ent.text) # lien vers l'objet lieu
                 elif ent.label_ == "PER":
                     p = self.personnages.get(ent.text)
                     if p:
                         participants.append(p)
-            
+
             match_date = re.compile(
                 r"\b\d{1,2}\s+(janvier|février|mars|avril|mai|juin|juillet"
                 r"|août|septembre|octobre|novembre|décembre)(\s+\d{4})?\b"

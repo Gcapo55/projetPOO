@@ -41,6 +41,8 @@ class Texte: # noqa : PLW1641 //the class doesn't implement the "__hash__" metho
 
 
 class ChargeurTexte:
+    """lis et crée une instance de Texte"
+    "avec un nom de fichier .txt, selon le format importé depuis Projekt Gutenberg"""
     def charger(self, source : str)-> Texte:
         with Path.open(source) as file:
             global_contenu = file.read()
