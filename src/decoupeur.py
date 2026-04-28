@@ -21,7 +21,3 @@ class DecoupePhrases(LecteurTexte):
     """retourne la liste de toutes les phrases du texte : fonction spacy"""
     def lecture(self, doc: Doc) -> list:
         return [token.sent for token in doc.sents]
-
-
-
-
