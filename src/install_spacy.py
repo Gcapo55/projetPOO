@@ -1,31 +1,46 @@
-"""Module to install spaCy"""
+"""Module pour installer spaCy"""
 
 import subprocess
+import sys
 
 def install_spacy():
+    """Installe spaCy seulement s'il n'est pas déjà installé"""
 
-    """Demande à l'utilisateur s'il veut installer spaCy, et si oui l'installe"""
+    # 1. Vérifier si spaCy est déjà installé
+    try:
+        import spacy
+        return
+    except ImportError:
+        pass
 
-    rep = input("Souhaitez-vous installer SpaCy et son extension française (nécessaire au fonctionnement du programme) Y/N ? ").strip().lower()
+    # 2. Demande utilisateur
+    rep = input(
+        "Souhaitez-vous installer SpaCy et son modèle français "
+        "(nécessaire au fonctionnement du programme) Y/N ? "
+    ).strip().lower()
 
-    if rep == "n":
+    if rep != "y":
         return
 
-    if rep == "y":
-        try:
-            print("Installation de spaCy...\n")
+    # 3. Installation
+    try:
+        print("Installation de spaCy...\n")
 
-            subprocess.check_call(["python", "-m", "pip", "install", "spacy"])
+        subprocess.check_call([
+            sys.executable, "-m", "pip", "install", "spacy"
+        ])
 
-            print("\nInstallation du modèle français...\n")
+        print("\nInstallation du modèle français...\n")
 
-            subprocess.check_call(["python", "-m", "spacy", "download", "fr_core_news_sm"])
+        subprocess.check_call([
+            sys.executable, "-m", "spacy", "download", "fr_core_news_sm"
+        ])
 
-            print("\nInstallation terminée :)")
+        print("\nInstallation terminée :)")
 
-        except subprocess.CalledProcessError:
-            print("\nÉchec de l'installation :(")
+    except subprocess.CalledProcessError:
+        print("\nÉchec de l'installation :(")
 
-        input("\nAppuyer sur 'Enter' pour continuer")
+    input("\nAppuyer sur Entrée pour continuer...")
 
 install_spacy()
