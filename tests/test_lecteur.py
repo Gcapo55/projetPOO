@@ -1,6 +1,6 @@
 import spacy
 
-from lecteur import AnalyseTexte
+from Lecteur import AnalyseTexte
 
 if __name__ == "__main__":
     nlp = spacy.load("fr_core_news_lg")
