@@ -1,4 +1,5 @@
-﻿from importateur import AnalyseTexte, ChargeurTexte
+﻿from importateur import ChargeurTexte
+from Lecteur import AnalyseTexte
 from perso_attributs import AnalyseurPersonnages
 from utils import spacy_conv
 
