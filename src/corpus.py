@@ -19,7 +19,7 @@ class Corpus(ABC):
 
 class Personnage(Corpus):
     """ Classe Personnage avec attribut de genre facultatif. """
-    def __init__(self, nom, genre: str | None):
+    def __init__(self, nom, genre: str | None = None):
         super().__init__(nom)
         self.genre = genre
 
@@ -31,7 +31,7 @@ class Personnage(Corpus):
 
 class Lieu(Corpus):
     """ Classe Lieu avec attributs categorie facultatif. """
-    def __init__(self, nom, categorie: str | None):
+    def __init__(self, nom, categorie: str | None = None):
         super().__init__(nom)
         self.categorie = categorie
 
@@ -40,3 +40,18 @@ class Lieu(Corpus):
 
     def afficher(self):
         print(f" {self.nom} {self.occurences}")
+
+class Evenement(Corpus):
+    def __init__(self, nom: str, date=None, heure=None, lieu=None, personnage=None):
+        super().__init__(nom)
+        self.date = date
+        self.heure = heure
+        self.lieu = lieu
+        self.personnage = personnage if personnage is not None else []
+
+    def identifier(self) -> str:
+        return "evenement"
+
+    def afficher(self):
+        print(f"{self.nom}, {self.date}, {self.heure}, {self.lieu.nom}, "
+            f"{', '.join(p.nom for p in self.personnage)}")

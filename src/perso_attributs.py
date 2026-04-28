@@ -1,13 +1,13 @@
-﻿from Lecteur import AnalyseTexte
+﻿from lecteur import AnalyseTexte
 from collections import defaultdict, Counter
 
 
 class AnalyseurPersonnages:
 
-    def __init__(self, dico_perso : AnalyseTexte | dict, txt_src : Doc):
+    def __init__(self, dico_perso : AnalyseTexte | dict, doc : Doc):
         self.dico_perso = dico_perso
-        self.txt_src = txt_src
-        self.personnages = list(self.source.keys())
+        self.doc = doc
+        self.personnages = list(self.dico_perso.keys())
         self.attributs_personnages = defaultdict(list)
 
 
@@ -15,7 +15,7 @@ class AnalyseurPersonnages:
 
         for perso in self.personnages:
             liste_compl = [
-                token.lemma_ for token in self.txt_src
+                token.lemma_ for token in self.doc
                 if token.head.text == perso and token.dep_ == "amod"
             ]
             liste_red = list(Counter(liste_compl).most_common(3).keys())

@@ -1,5 +1,5 @@
 ﻿import pytest
-
+from Lecteur import AnalyseTexte
 from importateur import Texte
 from utils import spacy_conv
 
@@ -20,3 +20,15 @@ def texte_test() -> Texte:
 @pytest.fixture
 def doc_test(texte_test) -> Doc:
     return spacy_conv(texte_test)
+
+@pytest.fixture
+def dico_perso(doc_test) :
+    resultat = AnalyseTexte(doc_test)
+    return resultat.personnages
+
+
+@pytest.fixture
+def dico_lieux(doc_test) :
+    resultat = AnalyseTexte(doc_test)
+    return resultat.lieux
+

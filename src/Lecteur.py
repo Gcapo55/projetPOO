@@ -1,4 +1,6 @@
-from corpus import Personnage, Lieu
+from corpus import Personnage, Lieu, Evenement
+from spacy.tokens import Doc
+import re
 
 class AnalyseTexte:
     """ Utilise spaCy pour extraire les personnages et les lieux,
@@ -7,6 +9,7 @@ class AnalyseTexte:
         self.doc = doc
         self.personnages = {}
         self.lieux = {}
+        self.evenements = {}
 
     def _ajouter_personnage(self, nom):
         """ Stocke les personnages dans le dictionnaire
@@ -22,13 +25,64 @@ class AnalyseTexte:
             self.lieux[nom] = Lieu(nom)
         self.lieux[nom].compter()
 
+    def _ajouter_events(self):
+        """ Détecte un lieu, une date et l'heure dans une phrase et 
+        crée un évenement dont le nom de l'objet est la phrase en question. """
+
+        for sent in self.doc.sents:
+            date = None
+            heure = None
+            lieu_obj = None
+            participants = []
+
+            for ent in sent.ents: 
+                if ent.label_ in ["LOC", "GPE"]:
+                    lieu_obj = self.lieux.get(ent.text) # lien vers l'objet lieu
+                elif ent.label_ == "PER":
+                    p = self.personnages.get(ent.text)
+                    if p:
+                        participants.append(p)
+            
+            match_date = re.compile(
+                r"\b\d{1,2}\s+(janvier|février|mars|avril|mai|juin|juillet"
+                r"|août|septembre|octobre|novembre|décembre)(\s+\d{4})?\b"
+                r"|\b(en\s+)?\d{4}\b",
+                re.IGNORECASE
+            ).search(sent.text)
+            if match_date:
+                date = match_date.group()
+
+            match_heure = re.compile(
+                r"\b([01]?\d|2[0-3])h([0-5]\d)?\b"
+                r"|\b([01]?\d|2[0-3]):[0-5]\d\b"
+                r"|\b(midi|minuit)\b"
+                r"|\b(matin|soir|après-midi)\b",
+                re.IGNORECASE
+            ).search(sent.text)
+            if match_heure:
+                heure = match_heure.group()
+
+            if (date or heure) and lieu_obj:
+                nom = sent.text.strip()
+                if nom not in self.evenements:
+                    self.evenements[nom] = Evenement(
+                        nom=nom,
+                        date=date,
+                        heure=heure,
+                        lieu=lieu_obj,
+                        personnage=participants,
+                    )
+
+
     def analyser(self) -> dict:
         """ Attribue le texte récupéré de l'importateur et
-        sappelle les fonctions ajouter. """
+        appelle les fonctions ajouter. """
         for ent in self.doc.ents:
             if ent.label_ == "PER":
                 self._ajouter_personnage(ent.text)
 
             elif ent.label_ in ["LOC", "GPE"]:
                 self._ajouter_lieu(ent.text)
+
+        self._ajouter_events()
 
