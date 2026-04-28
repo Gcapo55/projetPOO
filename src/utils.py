@@ -1,6 +1,8 @@
 ﻿"""FICHIER DE FONCTION UTILITAIRES"""
 import spacy
+# import stanza
 from importateur import Texte
+# stanza.download("fr")
 
 def spacy_conv(texte : Texte) -> Doc :
     """
@@ -8,5 +10,6 @@ def spacy_conv(texte : Texte) -> Doc :
     avec les fonctions spacy. Cela permet de ne pas recréer le même objet dans
     chacun de nos fichiers d'analyse
     """
-    nlp = spacy.load("fr_core_news_sm")
+    nlp = spacy.load("fr_core_news_lg")
+    # nlp = stanza.Pipeline("fr")
     return nlp(texte.contenu)

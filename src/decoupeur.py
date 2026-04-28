@@ -1,22 +1,20 @@
 
-import spacy
 from abc import ABC, abstractmethod
 
-nlp = spacy.load("fr_core_news_sm")
 
-class LecteurTexte(ABC):
+class DecoupeurTexte(ABC):
     """classe parente et abstraite d'analyse d'un texte"""
     @abstractmethod
     def lecture(self, doc: Doc):
         pass
 
 
-class DecoupeMots(LecteurTexte):
+class DecoupeMots(DecoupeurTexte):
     """retourne la liste de tous les mots du texte : fonction spacy"""
     def lecture(self, doc: Doc) -> list:
         return [token.text for token in doc]
 
-class DecoupePhrases(LecteurTexte):
+class DecoupePhrases(DecoupeurTexte):
     """retourne la liste de toutes les phrases du texte : fonction spacy"""
     def lecture(self, doc: Doc) -> list:
         return [token.sent for token in doc.sents]
