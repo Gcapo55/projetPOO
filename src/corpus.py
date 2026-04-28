@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 @dataclass
 class Corpus:
     nom: str
-    occurences: int = 0
+    occurences: int = field(default=0, init=False)
 
     def compter(self):
         self.occurences += 1

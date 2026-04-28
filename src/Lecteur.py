@@ -74,7 +74,7 @@ class AnalyseTexte:
                         date=date,
                         heure=heure,
                         lieu=lieu_obj,
-                        personnage=participants,
+                        personnages=participants,
                     )
 
 
