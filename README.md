@@ -4,7 +4,8 @@
 ## UTILISATION
 
 - indiquer si installation de spacy souhaitée
-- indiquer nom du fichier texte à importer
+- télécharger fichier depuis Projet Gutenberg en Plain Text
+- indiquer chemin et nom du fichier texte à importer
 
 
 ## Fonctionnalités du programme
