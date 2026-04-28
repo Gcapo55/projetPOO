@@ -1,4 +1,4 @@
-"""Lecteur de texte"""
+"""Lecteur de texte"""  # noqa: N999 disable invalid module name
 import re
 
 from spacy.tokens import Doc
@@ -9,8 +9,7 @@ from corpus import Evenement, Lieu, Personnage
 class AnalyseTexte:
     """ Utilise spaCy pour extraire les personnages et les lieux,
     les stocke dans un dictionnaire et les attribue à la classe correspondante. """
-    def __init__(self, doc : Doc):
-        self.doc = doc
+    def __init__(self):
         self.personnages = {}
         self.lieux = {}
         self.evenements = {}
@@ -19,14 +18,14 @@ class AnalyseTexte:
         """ Stocke les personnages dans le dictionnaire
         et les attribue à la classe correspondante. """
         if nom not in self.personnages:
-            self.personnages[nom] = Personnage(nom)
+            self.personnages[nom] = Personnage(nom, None)
         self.personnages[nom].compter()
 
     def _ajouter_lieu(self, nom):
         """ Stocke les lieux dans le dictionnaire et
         les attribue à la classe correspondante. """
         if nom not in self.lieux:
-            self.lieux[nom] = Lieu(nom)
+            self.lieux[nom] = Lieu(nom, None)
         self.lieux[nom].compter()
 
     def _ajouter_events(self):
@@ -78,10 +77,10 @@ class AnalyseTexte:
                     )
 
 
-    def analyser(self) -> dict:
+    def analyser(self, doc : Doc) -> dict:
         """ Attribue le texte récupéré de l'importateur et
         appelle les fonctions ajouter. """
-        for ent in self.doc.ents:
+        for ent in doc.ents:
             if ent.label_ == "PER":
                 self._ajouter_personnage(ent.text)
 
@@ -89,4 +88,5 @@ class AnalyseTexte:
                 self._ajouter_lieu(ent.text)
 
         self._ajouter_events()
+
 

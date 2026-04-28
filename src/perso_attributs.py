@@ -1,25 +1,25 @@
 ﻿from collections import Counter, defaultdict
 
-from lecteur import AnalyseTexte
+from spacy.tokens import Doc
+
+from Lecteur import AnalyseTexte
 
 
 class AnalyseurPersonnages:
 
-    def __init__(self, dico_perso : AnalyseTexte | dict, doc : Doc):
-        self.dico_perso = dico_perso
-        self.doc = doc
-        self.personnages = list(self.dico_perso.keys())
+    def __init__(self):
         self.attributs_personnages = defaultdict(list)
 
 
-    def trouver_attributs(self) -> dict:
+    def trouver_attributs(self, dico_perso : AnalyseTexte | dict, doc : Doc) -> dict:
 
-        for perso in self.personnages:
+        personnages = list(dico_perso.keys())
+        for perso in personnages:
             liste_compl = [
-                token.lemma_ for token in self.doc
+                token.lemma_ for token in doc
                 if token.head.text == perso and token.dep_ == "amod"
             ]
-            liste_red = list(Counter(liste_compl).most_common(3).keys())
+            liste_red = [att for att, _ in Counter(liste_compl).most_common(3)]
             self.attributs_personnages[perso] = liste_red
 
         return self.attributs_personnages

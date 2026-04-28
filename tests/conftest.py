@@ -1,7 +1,8 @@
 ﻿import pytest
+from spacy.tokens import Doc
 
 from importateur import Texte
-from lecteur import AnalyseTexte
+from Lecteur import AnalyseTexte
 from utils import spacy_conv
 
 """Ce fichier permet de configurer des fixtures
