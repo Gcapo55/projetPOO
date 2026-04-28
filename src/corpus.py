@@ -1,58 +1,36 @@
-from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
 
-
-class Corpus(ABC):
-    """ Classe abstraite Corpus avec le nom de l'objet et un compteur d'occurences. """
-    def __init__(self, nom: str):
-        self.nom = nom
-        self.occurences = 0
+@dataclass
+class Corpus:
+    nom: str
+    occurences: int = 0
 
     def compter(self):
         self.occurences += 1
 
-    @abstractmethod
-    def identifier(self) -> str:
-        pass
-
-    @abstractmethod
-    def afficher(self) -> str:
-        pass
-
+@dataclass
 class Personnage(Corpus):
-    """ Classe Personnage avec attribut de genre facultatif. """
-    def __init__(self, nom, genre: str | None = None):
-        super().__init__(nom)
-        self.genre = genre
+    genre: str | None = None
 
-    def identifier(self) -> str:
-        return "personnage"
+    def identifier(self): return "personnage"
+    def afficher(self): print(f"{self.nom} {self.occurences}")
 
-    def afficher(self):
-        print(f" {self.nom} {self.occurences}")
-
+@dataclass
 class Lieu(Corpus):
-    """ Classe Lieu avec attributs categorie facultatif. """
-    def __init__(self, nom, categorie: str | None = None):
-        super().__init__(nom)
-        self.categorie = categorie
+    categorie: str | None = None
 
-    def identifier(self) -> str:
-        return "lieu"
+    def identifier(self): return "lieu"
+    def afficher(self): print(f"{self.nom} {self.occurences}")
 
-    def afficher(self):
-        print(f" {self.nom} {self.occurences}")
-
+@dataclass
 class Evenement(Corpus):
-    def __init__(self, nom: str, date=None, heure=None, lieu=None, personnage=None):
-        super().__init__(nom)
-        self.date = date
-        self.heure = heure
-        self.lieu = lieu
-        self.personnage = personnage if personnage is not None else []
+    date: str | None = None
+    heure: str | None = None
+    lieu: Lieu | None = None
+    personnages: list = field(default_factory=list)
 
-    def identifier(self) -> str:
-        return "evenement"
-
+    def identifier(self): return "evenement"
     def afficher(self):
-        print(f"{self.nom}, {self.date}, {self.heure}, {self.lieu.nom}, "
-            f"{', '.join(p.nom for p in self.personnage)}")
+        print(f"{self.nom}, {self.date}, {self.heure}, "
+              f"{self.lieu.nom if self.lieu else 'N/A'}, "
+              f"{', '.join(p.nom for p in self.personnages)}")
