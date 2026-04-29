@@ -7,9 +7,9 @@ from corpus import Evenement, Lieu, Personnage
 
 from utils import nettoyer
 
-from perso_attributs import trouver_attributs
+from fonction_perso import trouver_attributs
 
-from analyse_events import trouver_participants, trouver_lieu, trouver_date, trouver_heure
+from fonctions_evenement import trouver_participants, trouver_lieu, trouver_date, trouver_heure
 
 min_occ = 10
 
@@ -88,8 +88,8 @@ class AnalyseTexte:
             elif ent.label_ in ["LOC", "GPE"]:
                 self._ajouter_lieu(nettoyer(ent.text), doc)
 
-        self.personnages = [p for p in self.personnages if p.occurences >= min_occ]
-        self.lieux = [l for l in self.lieux if l.occurences >= min_occ]
+        self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
+        self.lieux = [l for l in self.lieux if l.occurrences >= min_occ]
 
         self._ajouter_events(doc)
 

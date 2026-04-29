@@ -3,10 +3,10 @@ from dataclasses import dataclass, field
 @dataclass
 class Corpus:
     nom: str
-    occurences: int = field(default=0, init=False)
+    occurrences: int = field(default=0, init=False)
 
     def compter(self):
-        self.occurences += 1
+        self.occurrences += 1
 
 @dataclass
 class Personnage(Corpus):
@@ -15,14 +15,14 @@ class Personnage(Corpus):
 
 
     def identifier(self): return "personnage"
-    def afficher(self): print(f"{self.nom} {self.occurences}")
+    def afficher(self): print(f"{self.nom} {self.occurrences}")
 
 @dataclass
 class Lieu(Corpus):
     categorie: str | None = None
 
     def identifier(self): return "lieu"
-    def afficher(self): print(f"{self.nom} {self.occurences}")
+    def afficher(self): print(f"{self.nom} {self.occurrences}")
 
 @dataclass
 class Evenement(Corpus):
