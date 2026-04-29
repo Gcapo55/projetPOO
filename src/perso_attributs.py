@@ -2,24 +2,11 @@
 
 from spacy.tokens import Doc
 
-from Lecteur import AnalyseTexte
+from utils import nettoyer
 
-
-class AnalyseurPersonnages:
-
-    def __init__(self):
-        self.attributs_personnages = defaultdict(list)
-
-
-    def trouver_attributs(self, dico_perso : AnalyseTexte | dict, doc : Doc) -> dict:
-
-        personnages = list(dico_perso.keys())
-        for perso in personnages:
-            liste_compl = [
-                token.lemma_ for token in doc
-                if token.head.text == perso and token.dep_ == "amod"
-            ]
-            liste_red = [att for att, _ in Counter(liste_compl).most_common(3)]
-            self.attributs_personnages[perso] = liste_red
-
-        return self.attributs_personnages
+def trouver_attributs(nom: str, doc : Doc) -> list:
+    liste_compl = [
+             nettoyer(token.lemma_) for token in doc
+             if token.head.text == nom and token.dep_ == "amod"
+         ]
+    return [att for att, _ in Counter(liste_compl).most_common(3)]

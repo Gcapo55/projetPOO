@@ -1,6 +1,5 @@
 ﻿from importateur import ChargeurTexte
 from Lecteur import AnalyseTexte
-from perso_attributs import AnalyseurPersonnages
 from utils import spacy_conv
 
 
@@ -9,12 +8,10 @@ class Pipeline:
                  source : str,
                  chargeur : ChargeurTexte,
                  finder : AnalyseTexte,
-                 perso_analyser : AnalyseurPersonnages
                  ):
         self.source = source
         self._chargeur = chargeur
         self._finder = finder
-        self._perso_analyser = perso_analyser
 
     def executer(self):
 
@@ -22,21 +19,18 @@ class Pipeline:
         doc = spacy_conv(texte)
         self._finder.analyser(doc)
         dico_perso = self._finder.personnages
-        # dico_lieu = self._finder.lieux
-        # dico_evenements = self._finder.evenements
-        dico_attributs = self._perso_analyser.trouver_attributs(dico_perso, doc)
+        dico_lieu = self._finder.lieux
+        dico_evenements = self._finder.evenements
+        print(dico_perso)
+        print(dico_lieu)
+        print(*dico_evenements, sep="\n")
 
 
 if __name__ == "__main__" :
 
-    pipeline = Pipeline(input("Filename : "),
+    pipeline = Pipeline("../docs/20'000 lieux sous les mers.txt",
                     ChargeurTexte(),
                     AnalyseTexte(),
-                    AnalyseurPersonnages()
                     )
 
     pipeline.executer()
-    print(list(dico_perso))
-    # print (list(dico_lieu))
-    # print (list(dico_evenements))
-    print(dico_attributs)

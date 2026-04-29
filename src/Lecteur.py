@@ -5,77 +5,77 @@ from spacy.tokens import Doc
 
 from corpus import Evenement, Lieu, Personnage
 
+from utils import nettoyer
+
+from perso_attributs import trouver_attributs
+
+from analyse_events import trouver_participants, trouver_lieu, trouver_date, trouver_heure
+
+min_occ = 10
 
 class AnalyseTexte:
     """ Utilise spaCy pour extraire les personnages et les lieux,
     les stocke dans un dictionnaire et les attribue à la classe correspondante. """
     def __init__(self):
-        self.personnages = {}
-        self.lieux = {}
-        self.evenements = {}
+        self.personnages = []
+        self.lieux = []
+        self.evenements = []
 
-    def _ajouter_personnage(self, nom):
-        """ Stocke les personnages dans le dictionnaire
-        et les attribue à la classe correspondante. """
-        if nom not in self.personnages:
-            self.personnages[nom] = Personnage(nom, None)
-        self.personnages[nom].compter()
+    def _ajouter_personnage(self, nom: str, doc: Doc ):
+        """ Stocke tous nouveaux personnages dans la liste de la classe,
+        et lance les fonctions d'analyse sur le personnage;
+         compte les occurrences. """
+        liste_noms = [x.nom for x in self.personnages]
+        if nom not in liste_noms:
+            self.personnages.append(
+                Personnage(nom,
+                           trouver_attributs(nom, doc),
+                           None)
+            )
+            self.personnages[-1].compter()
+        else : self.personnages[liste_noms.index(nom)].compter()
 
-    def _ajouter_lieu(self, nom):
-        """ Stocke les lieux dans le dictionnaire et
-        les attribue à la classe correspondante. """
-        if nom not in self.lieux:
-            self.lieux[nom] = Lieu(nom, None)
-        self.lieux[nom].compter()
+
+    def _ajouter_lieu(self, nom: str, doc: Doc):
+        """ Stocke tous nouveaux lieux dans la liste de la classe,
+        et lance les fonctions d'analyse sur le lieu;
+        compte les occurrences. """
+        liste_lieux = [x.nom for x in self.lieux]
+        if nom not in liste_lieux:
+            self.lieux.append(
+                Lieu(nom,
+                     None)
+            )
+            self.lieux[-1].compter()
+        else : self.lieux[liste_lieux.index(nom)].compter()
 
     def _ajouter_events(self, doc : Doc) -> dict:
         """ Détecte un lieu, une date et l'heure dans une phrase et
-        crée un évenement dont le nom de l'objet est la phrase en question. """
+        crée un événement dont le nom de l'objet est la phrase en question. """
 
         for sent in doc.sents:
-            date = None
-            heure = None
+            # Itère chaque phrase du texte
+            # Trouve les attributs d'un éventuel événement
             lieu_obj = None
             participants = []
-
             for ent in sent.ents:
-                if ent.label_ in ["LOC", "GPE"]:
-                    lieu_obj = self.lieux.get(ent.text) # lien vers l'objet lieu
-                elif ent.label_ == "PER":
-                    p = self.personnages.get(ent.text)
-                    if p:
-                        participants.append(p)
+                lieu_obj = trouver_lieu(ent.text, self.lieux)
+                participants = trouver_participants(ent.text, self.personnages)
+            date = trouver_date(sent.text)
+            heure = trouver_heure(sent.text)
 
-            match_date = re.compile(
-                r"\b\d{1,2}\s+(janvier|février|mars|avril|mai|juin|juillet"
-                r"|août|septembre|octobre|novembre|décembre)(\s+\d{4})?\b"
-                r"|(?:lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)"
-                r"|\b(en\s+)?\d{4}\b",
-                re.IGNORECASE
-            ).search(sent.text)
-            if match_date:
-                date = match_date.group()
-
-            match_heure = re.compile(
-                r"\b([01]?\d|2[0-3])h([0-5]\d)?\b"
-                r"|\b([01]?\d|2[0-3]):[0-5]\d\b"
-                r"|\b(midi|minuit)\b"
-                r"|\b(matin|soir|après-midi)\b",
-                re.IGNORECASE
-            ).search(sent.text)
-            if match_heure:
-                heure = match_heure.group()
-
+            #Ajoute, s'il existe, l'événement à la liste
             if (date or heure) and lieu_obj:
-                nom = sent.text.strip()
-                if nom not in self.evenements:
-                    self.evenements[nom] = Evenement(
-                        nom=nom,
-                        date=date,
-                        heure=heure,
-                        lieu=lieu_obj,
-                        personnage=participants,
-                    )
+                nom = nettoyer(sent.text.strip())
+
+                self.evenements.append(
+                    Evenement(
+                    nom=nom,
+                    date=date,
+                    heure=heure,
+                    lieu=lieu_obj,
+                    participants=participants,
+                ))
 
 
     def analyser(self, doc : Doc) -> dict:
@@ -83,10 +83,13 @@ class AnalyseTexte:
         appelle les fonctions ajouter. """
         for ent in doc.ents:
             if ent.label_ == "PER":
-                self._ajouter_personnage(ent.text)
+                self._ajouter_personnage(nettoyer(ent.text), doc)
 
             elif ent.label_ in ["LOC", "GPE"]:
-                self._ajouter_lieu(ent.text)
+                self._ajouter_lieu(nettoyer(ent.text), doc)
+
+        self.personnages = [p for p in self.personnages if p.occurences >= min_occ]
+        self.lieux = [l for l in self.lieux if l.occurences >= min_occ]
 
         self._ajouter_events(doc)
 
