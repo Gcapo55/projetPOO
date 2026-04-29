@@ -1,6 +1,21 @@
 ﻿import re
 
-def trouver_date(texte: str) :
+from corpus import Personnage
+
+
+def trouver_lieu(texte: str, liste_lieux: list[Lieu]) -> Lieu:
+    for l in liste_lieux:
+        if l.nom == texte:
+            return l
+
+def trouver_participants(texte: str, liste_perso: list[Personnage]) -> list[Personnage]:
+    participants = []
+    for p in liste_perso:
+        if p.nom == texte:
+            participants.append(p)
+        return participants
+
+def trouver_date(texte: str) -> str :
     match_date = re.compile(
         r"\b\d{1,2}\s+(janvier|février|mars|avril|mai|juin|juillet"
         r"|août|septembre|octobre|novembre|décembre)(\s+\d{4})?\b"
@@ -10,3 +25,14 @@ def trouver_date(texte: str) :
     ).search(texte)
     if match_date:
         return match_date.group()
+
+def trouver_heure(texte: str) -> str:
+     match_heure = re.compile(
+                    r"\b([01]?\d|2[0-3])h([0-5]\d)?\b"
+                    r"|\b([01]?\d|2[0-3]):[0-5]\d\b"
+                    r"|\b(midi|minuit)\b"
+                    r"|\b(matin|soir|après-midi)\b",
+                    re.IGNORECASE
+                ).search(texte)
+     if match_heure:
+        return match_heure.group()

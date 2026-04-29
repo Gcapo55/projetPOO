@@ -23,7 +23,7 @@ class Pipeline:
         dico_evenements = self._finder.evenements
         print(dico_perso)
         print(dico_lieu)
-        print(list(dico_evenements))
+        print(*dico_evenements, sep="\n")
 
 
 if __name__ == "__main__" :

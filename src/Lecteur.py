@@ -9,7 +9,7 @@ from utils import nettoyer
 
 from perso_attributs import trouver_attributs
 
-from analyse_events import trouver_date
+from analyse_events import trouver_participants, trouver_lieu, trouver_date, trouver_heure
 
 min_occ = 10
 
@@ -19,7 +19,7 @@ class AnalyseTexte:
     def __init__(self):
         self.personnages = []
         self.lieux = []
-        self.evenements = {}
+        self.evenements = []
 
     def _ajouter_personnage(self, nom: str, doc: Doc ):
         """ Stocke tous nouveaux personnages dans la liste de la classe,
@@ -51,44 +51,31 @@ class AnalyseTexte:
 
     def _ajouter_events(self, doc : Doc) -> dict:
         """ Détecte un lieu, une date et l'heure dans une phrase et
-        crée un évenement dont le nom de l'objet est la phrase en question. """
+        crée un événement dont le nom de l'objet est la phrase en question. """
 
         for sent in doc.sents:
-            date = None
-            heure = None
+            # Itère chaque phrase du texte
+            # Trouve les attributs d'un éventuel événement
             lieu_obj = None
             participants = []
-
             for ent in sent.ents:
-                for l in self.lieux:
-                    if ent.text == l.nom:
-                        lieu_obj = l
-                for p in self.personnages:
-                    if ent.text == p.nom:
-                        participants.append(p)
-
+                lieu_obj = trouver_lieu(ent.text, self.lieux)
+                participants = trouver_participants(ent.text, self.personnages)
             date = trouver_date(sent.text)
+            heure = trouver_heure(sent.text)
 
-            match_heure = re.compile(
-                r"\b([01]?\d|2[0-3])h([0-5]\d)?\b"
-                r"|\b([01]?\d|2[0-3]):[0-5]\d\b"
-                r"|\b(midi|minuit)\b"
-                r"|\b(matin|soir|après-midi)\b",
-                re.IGNORECASE
-            ).search(sent.text)
-            if match_heure:
-                heure = match_heure.group()
-
+            #Ajoute, s'il existe, l'événement à la liste
             if (date or heure) and lieu_obj:
                 nom = nettoyer(sent.text.strip())
-                if nom not in self.evenements:
-                    self.evenements[nom] = Evenement(
-                        nom=nom,
-                        date=date,
-                        heure=heure,
-                        lieu=lieu_obj,
-                        personnages=participants,
-                    )
+
+                self.evenements.append(
+                    Evenement(
+                    nom=nom,
+                    date=date,
+                    heure=heure,
+                    lieu=lieu_obj,
+                    participants=participants,
+                ))
 
 
     def analyser(self, doc : Doc) -> dict:
@@ -103,13 +90,6 @@ class AnalyseTexte:
 
         self.personnages = [p for p in self.personnages if p.occurences >= min_occ]
         self.lieux = [l for l in self.lieux if l.occurences >= min_occ]
-
-        # for nom_lieu, obj_lieu in list(self.lieux.items()):
-        #     if obj_lieu.occurences < min_occ :
-        #         del self.lieux[nom_lieu]
-
-
-
 
         self._ajouter_events(doc)
 
