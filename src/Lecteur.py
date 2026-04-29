@@ -16,12 +16,12 @@ min_occ = 10
 class AnalyseTexte :
     """ Utilise spaCy pour extraire les personnages, les lieux,
     et les événements, les stocke dans une liste d'instances """
-    def __init__(self):
+    def __init__(self) -> None:
         self.personnages = []
         self.lieux = []
         self.evenements = []
 
-    def _ajouter_personnage(self, nom: str, doc: Doc ) -> None:
+    def _ajouter_personnage(self, nom: str, doc: Document, lst_words: list[words]) -> None:
         """ Stocke tous nouveaux personnages dans la liste de la classe,
         et lance les fonctions d'analyse sur le personnage;
          compte les occurrences. """
@@ -29,14 +29,14 @@ class AnalyseTexte :
         if nom not in liste_noms:
             self.personnages.append(
                 Personnage(nom,
-                           trouver_attributs(nom, doc),
+                           trouver_attributs(nom, doc, lst_words),
                            None)
             )
             self.personnages[-1].compter()
         else : self.personnages[liste_noms.index(nom)].compter()
 
 
-    def _ajouter_lieu(self, nom: str, doc: Doc) -> None:
+    def _ajouter_lieu(self, nom: str, doc: Document) -> None:
         """ Stocke tous nouveaux lieux dans la liste de la classe,
         et lance les fonctions d'analyse sur le lieu;
         compte les occurrences. """
@@ -49,16 +49,16 @@ class AnalyseTexte :
             self.lieux[-1].compter()
         else : self.lieux[liste_lieux.index(nom)].compter()
 
-    def _ajouter_events(self, doc : Doc) -> None:
+    def _ajouter_events(self, doc : Document) -> None:
         """ Détecte un lieu, une date et l'heure dans une phrase et
         crée un événement dont le nom de l'objet est la phrase en question. """
 
-        for sent in doc.sents:
+        for sent in doc.sentences:
             # Itère chaque phrase du texte
             # Trouve les attributs d'un éventuel événement
             lieu_obj = None
             participants = []
-            for ent in sent.ents:
+            for ent in sent.entities:
                 lieu_obj = trouver_lieu(ent.text, self.lieux)
                 participants = trouver_participants(ent.text, self.personnages)
             date = trouver_date(sent.text)
@@ -78,14 +78,14 @@ class AnalyseTexte :
                 ))
 
 
-    def analyser(self, doc : Doc) -> None:
+    def analyser(self, doc : Document, liste_words: list[words]) -> None:
         """ Attribue le texte récupéré de l'importateur et
         appelle les fonctions ajouter. """
-        for ent in doc.ents:
-            if ent.label_ == "PER":
-                self._ajouter_personnage(nettoyer(ent.text), doc)
+        for ent in doc.entities:
+            if ent.type == "PER":
+                self._ajouter_personnage(nettoyer(ent.text), doc, liste_words)
 
-            elif ent.label_ in ["LOC", "GPE"]:
+            elif ent.type in ["LOC", "GPE"]:
                 self._ajouter_lieu(nettoyer(ent.text), doc)
 
         self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]

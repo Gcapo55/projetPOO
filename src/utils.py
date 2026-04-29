@@ -1,5 +1,6 @@
 ﻿"""FICHIER DE FONCTION UTILITAIRES"""
 import spacy
+import stanza
 from spacy.tokens import Doc
 
 from importateur import Texte
@@ -18,3 +19,7 @@ def spacy_conv(texte : Texte) -> Doc :
 def nettoyer(txt: str) -> str :
     """supprime les artefacts comme sauts de ligne, underscores,..."""
     return txt.replace("\n", " ").replace("_", "").replace("--", "")
+
+def stanza_conv(texte: Texte) -> Document:
+    nlp = stanza.Pipeline("fr")
+    return nlp(texte.contenu)
