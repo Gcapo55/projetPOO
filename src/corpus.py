@@ -10,7 +10,9 @@ class Corpus:
 
 @dataclass
 class Personnage(Corpus):
+    attributs: list
     genre: str | None = None
+
 
     def identifier(self): return "personnage"
     def afficher(self): print(f"{self.nom} {self.occurences}")

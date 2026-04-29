@@ -7,28 +7,47 @@ from corpus import Evenement, Lieu, Personnage
 
 from utils import nettoyer
 
+from perso_attributs import trouver_attributs
+
+from analyse_events import trouver_date
+
+min_occ = 10
 
 class AnalyseTexte:
     """ Utilise spaCy pour extraire les personnages et les lieux,
     les stocke dans un dictionnaire et les attribue à la classe correspondante. """
     def __init__(self):
-        self.personnages = {}
-        self.lieux = {}
+        self.personnages = []
+        self.lieux = []
         self.evenements = {}
 
-    def _ajouter_personnage(self, nom):
-        """ Stocke les personnages dans le dictionnaire
-        et les attribue à la classe correspondante. """
-        if nom not in self.personnages:
-            self.personnages[nom] = Personnage(nom, None)
-        self.personnages[nom].compter()
+    def _ajouter_personnage(self, nom: str, doc: Doc ):
+        """ Stocke tous nouveaux personnages dans la liste de la classe,
+        et lance les fonctions d'analyse sur le personnage;
+         compte les occurrences. """
+        liste_noms = [x.nom for x in self.personnages]
+        if nom not in liste_noms:
+            self.personnages.append(
+                Personnage(nom,
+                           trouver_attributs(nom, doc),
+                           None)
+            )
+            self.personnages[-1].compter()
+        else : self.personnages[liste_noms.index(nom)].compter()
 
-    def _ajouter_lieu(self, nom):
-        """ Stocke les lieux dans le dictionnaire et
-        les attribue à la classe correspondante. """
-        if nom not in self.lieux:
-            self.lieux[nom] = Lieu(nom, None)
-        self.lieux[nom].compter()
+
+    def _ajouter_lieu(self, nom: str, doc: Doc):
+        """ Stocke tous nouveaux lieux dans la liste de la classe,
+        et lance les fonctions d'analyse sur le lieu;
+        compte les occurrences. """
+        liste_lieux = [x.nom for x in self.lieux]
+        if nom not in liste_lieux:
+            self.lieux.append(
+                Lieu(nom,
+                     None)
+            )
+            self.lieux[-1].compter()
+        else : self.lieux[liste_lieux.index(nom)].compter()
 
     def _ajouter_events(self, doc : Doc) -> dict:
         """ Détecte un lieu, une date et l'heure dans une phrase et
@@ -41,22 +60,14 @@ class AnalyseTexte:
             participants = []
 
             for ent in sent.ents:
-                if ent.label_ in ["LOC", "GPE"]:
-                    lieu_obj = self.lieux.get(ent.text) # lien vers l'objet lieu
-                elif ent.label_ == "PER":
-                    p = self.personnages.get(ent.text)
-                    if p:
+                for l in self.lieux:
+                    if ent.text == l.nom:
+                        lieu_obj = l
+                for p in self.personnages:
+                    if ent.text == p.nom:
                         participants.append(p)
 
-            match_date = re.compile(
-                r"\b\d{1,2}\s+(janvier|février|mars|avril|mai|juin|juillet"
-                r"|août|septembre|octobre|novembre|décembre)(\s+\d{4})?\b"
-                r"|(?:lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)"
-                r"|\b(en\s+)?\d{4}\b",
-                re.IGNORECASE
-            ).search(sent.text)
-            if match_date:
-                date = match_date.group()
+            date = trouver_date(sent.text)
 
             match_heure = re.compile(
                 r"\b([01]?\d|2[0-3])h([0-5]\d)?\b"
@@ -85,10 +96,20 @@ class AnalyseTexte:
         appelle les fonctions ajouter. """
         for ent in doc.ents:
             if ent.label_ == "PER":
-                self._ajouter_personnage(nettoyer(ent.text))
+                self._ajouter_personnage(nettoyer(ent.text), doc)
 
             elif ent.label_ in ["LOC", "GPE"]:
-                self._ajouter_lieu(nettoyer(ent.text))
+                self._ajouter_lieu(nettoyer(ent.text), doc)
+
+        self.personnages = [p for p in self.personnages if p.occurences >= min_occ]
+        self.lieux = [l for l in self.lieux if l.occurences >= min_occ]
+
+        # for nom_lieu, obj_lieu in list(self.lieux.items()):
+        #     if obj_lieu.occurences < min_occ :
+        #         del self.lieux[nom_lieu]
+
+
+
 
         self._ajouter_events(doc)
 
