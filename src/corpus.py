@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 
+
 @dataclass
 class Corpus:
     nom: str
@@ -34,15 +35,15 @@ class Evenement(Corpus):
     def __str__(self):
         return (f"Évenement :"
                 f"nom={" ".join(self.nom.split()[:5])} ...,"
-                f"date={self.date if self.date else 'N/A'},"
-                f"heure={self.heure if self.heure else 'N/A'},"
+                f"date={self.date or 'N/A'},"
+                f"heure={self.heure or 'N/A'},"
                 f"lieu={self.lieu.nom},"
                 f"participants={
-                ", ".join(p.nom for p in self.participants) if self.participants else 'N/A'
+                ", ".join(p.nom for p in self.participants) or 'N/A'
                 })")
 
     def identifier(self): return "evenement"
     def afficher(self):
-        print(f"{self.nom}, {self.date}, {self.heure}, "
+        print(f"{self.nom}, {self.date or 'N/A'}, {self.heure or 'N/A'}, "
               f"{self.lieu.nom if self.lieu else 'N/A'}, "
-              f"{', '.join(p.nom for p in self.participants)}")
+              f"{', '.join(p.nom for p in self.participants) or 'N/A'}")

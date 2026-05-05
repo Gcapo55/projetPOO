@@ -3,6 +3,7 @@
 import subprocess
 import sys
 
+
 def install_spacy():
     """Installe spaCy seulement s'il n'est pas déjà installé"""
 
