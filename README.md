@@ -23,3 +23,4 @@
 
 ## Diagrammes UML de classe et de séquence
 ![Diagramme de classe](./docs/diagramme_classe_UML_V3.png)
+![Diagramme de séquence](./docs/diagramme_timeline_UML_V2.png)
