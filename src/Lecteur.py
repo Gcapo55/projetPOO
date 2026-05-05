@@ -81,8 +81,8 @@ class AnalyseTexte :
 
 
     def analyser(self, doc : Doc) -> None:
-        """ Attribue le texte récupéré de l'importateur et
-        appelle les fonctions ajouter. """
+        """ Analyse le Doc récupéré de l'importateur en
+        appelant les fonctions ajouter. """
         for ent in doc.ents:
             if ent.label_ == "PER":
                 self._ajouter_personnage(nettoyer(ent.text), doc)
