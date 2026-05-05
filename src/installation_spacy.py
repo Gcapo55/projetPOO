@@ -3,6 +3,7 @@
 import subprocess
 import sys
 
+
 class InstallateurSpacy:
     """Classe permettant d'installer spaCy et son modèle français"""
     @staticmethod
