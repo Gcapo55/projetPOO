@@ -17,4 +17,6 @@ def spacy_conv(texte : Texte) -> Doc :
 
 def nettoyer(txt: str) -> str :
     """supprime les artefacts comme sauts de ligne, underscores,..."""
-    return txt.replace("\n", " ").replace("_", "").replace("--", "")
+    return (
+        txt.replace("\n", " ").replace("_", "").replace("--", "")
+    )
