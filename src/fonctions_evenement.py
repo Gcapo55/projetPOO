@@ -1,4 +1,5 @@
 ﻿import re
+
 from corpus import Lieu, Personnage
 
 
