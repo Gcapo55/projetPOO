@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 
+
 @dataclass
 class Corpus:
     """Classe parente qui définit toutes les entités d'un texte"""
@@ -34,9 +35,9 @@ class Evenement(Corpus):
         """Fonction de print() utile à nos tests"""
         return (f"Évenement :"
                 f"nom={" ".join(self.nom.split()[:5])} ...,"
-                f"date={self.date if self.date else 'N/A'},"
-                f"heure={self.heure if self.heure else 'N/A'},"
+                f"date={self.date or 'N/A'},"
+                f"heure={self.heure or 'N/A'},"
                 f"lieu={self.lieu.nom},"
                 f"participants={
-                ", ".join(p.nom for p in self.participants) if self.participants else 'N/A'
+                ", ".join(p.nom for p in self.participants) or 'N/A'
                 })")
