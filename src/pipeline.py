@@ -1,9 +1,12 @@
 ﻿from importateur import ChargeurTexte
+from installation_spacy import InstallateurSpacy
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
 
 
 class Pipeline:
+    """Classe qui fait fonctionner toute l'architecture
+    du projet (import, analyse, export)"""
     def __init__(self,
                  source : str,
                  chargeur : ChargeurTexte,
@@ -14,21 +17,23 @@ class Pipeline:
         self._finder = finder
 
     def executer(self):
-
+        """Fonction qui fait l'exécution du programme"""
         texte = self._chargeur.charger(self.source)
         doc = spacy_conv(texte)
         self._finder.analyser(doc)
-        dico_perso = self._finder.personnages
-        dico_lieu = self._finder.lieux
-        dico_evenements = self._finder.evenements
-        print(dico_perso)
-        print(dico_lieu)
-        print(*dico_evenements, sep="\n")
+        liste_perso = self._finder.personnages
+        liste_lieu = self._finder.lieux
+        liste_evenements = self._finder.evenements
+        print(liste_perso)
+        print(liste_lieu)
+        print(*liste_evenements, sep="\n")
 
 
 if __name__ == "__main__" :
 
-    pipeline = Pipeline("../docs/20'000 lieux sous les mers.txt",
+    InstallateurSpacy.install_spacy()
+
+    pipeline = Pipeline("../docs/ArseneLupin.txt",
                     ChargeurTexte(),
                     AnalyseTexte(),
                     )
