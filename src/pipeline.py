@@ -30,7 +30,7 @@ class Pipeline:
 
 if __name__ == "__main__" :
 
-    pipeline = Pipeline("../docs/20'000 lieux sous les mers.txt",
+    pipeline = Pipeline("../docs/ArseneLupin.txt",
                     ChargeurTexte(),
                     AnalyseTexte(),
                     )
