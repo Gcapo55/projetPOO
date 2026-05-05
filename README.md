@@ -20,3 +20,6 @@
 
 - Ce programme a été réalisé dans le cadre du cours Programmation orientée objet : Python (SP26)
 - Il est le fruit d'une collaboration de cinq étudiants, Clémence Detroyat, Gianni Caporizzo, Nathan Kunz, Guilherme Meireles Pereira et Timoté Sarrasin
+
+## Diagrammes UML de classe et de séquence
+![Diagramme de classe](./docs/diagramme_classe_UML_V3.png)
