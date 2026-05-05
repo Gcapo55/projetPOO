@@ -2,7 +2,6 @@
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
 
-
 class Pipeline:
     def __init__(self,
                  source : str,
