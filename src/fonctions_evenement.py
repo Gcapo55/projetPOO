@@ -3,7 +3,7 @@
 from corpus import Lieu, Personnage
 
 
-def trouver_lieu(texte: str, liste_lieux: list[Lieu]) -> Lieu:
+def trouver_lieu(texte: str, liste_lieux: list[Lieu]) -> Lieu|None:
     """Détérmine si le lieu d'un évenement
     appartient à la liste des lieux"""
     for lieu in liste_lieux:
@@ -20,7 +20,7 @@ def trouver_participants(texte: str, liste_perso: list[Personnage]) -> list[Pers
             participants.append(p)
     return participants
 
-def trouver_date(texte: str) -> str :
+def trouver_date(texte: str) -> str|None :
     """Détérmine la date de l'événement"""
     match_date = re.compile(
         r"\b\d{1,2}\s+(janvier|février|mars|avril|mai|juin|juillet"
@@ -33,7 +33,7 @@ def trouver_date(texte: str) -> str :
         return match_date.group()
     return None
 
-def trouver_heure(texte: str) -> str:
+def trouver_heure(texte: str) -> str|None:
     """Détérmine l'heure de l'événement"""
      match_heure = re.compile(
                     r"\b([01]?\d|2[0-3])h([0-5]\d)?\b"

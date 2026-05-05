@@ -1,7 +1,6 @@
 """Lecteur de texte"""  # noqa: N999 disable invalid module name
 
 from spacy.tokens import Doc
-
 from corpus import Evenement, Lieu, Personnage
 from fonction_perso import trouver_attributs  #trouver_genre
 from fonctions_evenement import (
@@ -92,7 +91,6 @@ class AnalyseTexte :
 
         self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
         self.lieux = [lieu for lieu in self.lieux if lieu.occurrences >= min_occ]
-
         self._ajouter_events(doc)
 
 

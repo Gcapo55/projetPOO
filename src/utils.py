@@ -1,7 +1,6 @@
 ﻿"""FICHIER DE FONCTION UTILITAIRES"""
 import spacy
 from spacy.tokens import Doc
-
 from importateur import Texte
 
 
