@@ -1,15 +1,16 @@
 """Lecteur de texte"""  # noqa: N999 disable invalid module name
-import re
 
 from spacy.tokens import Doc
 
 from corpus import Evenement, Lieu, Personnage
-
+from fonction_perso import trouver_attributs  #trouver_genre
+from fonctions_evenement import (
+    trouver_date,
+    trouver_heure,
+    trouver_lieu,
+    trouver_participants,
+)
 from utils import nettoyer
-
-from fonction_perso import trouver_attributs #trouver_genre
-
-from fonctions_evenement import trouver_participants, trouver_lieu, trouver_date, trouver_heure
 
 min_occ = 10
 
@@ -36,7 +37,8 @@ class AnalyseTexte :
         else : self.personnages[liste_noms.index(nom)].compter()
 
 
-    def _ajouter_lieu(self, nom: str, doc: Doc) -> None:
+
+    def _ajouter_lieu(self, nom: str) -> None:
         """ Stocke tous nouveaux lieux dans la liste de la classe,
         et lance les fonctions d'analyse sur le lieu;
         compte les occurrences. """
@@ -89,7 +91,7 @@ class AnalyseTexte :
                 self._ajouter_lieu(nettoyer(ent.text), doc)
 
         self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
-        self.lieux = [l for l in self.lieux if l.occurrences >= min_occ]
+        self.lieux = [lieu for lieu in self.lieux if lieu.occurrences >= min_occ]
 
         self._ajouter_events(doc)
 

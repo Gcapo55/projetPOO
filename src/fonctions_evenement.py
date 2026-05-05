@@ -1,19 +1,20 @@
 ﻿import re
 
-from corpus import Personnage
+from corpus import Lieu, Personnage
 
 
 def trouver_lieu(texte: str, liste_lieux: list[Lieu]) -> Lieu:
-    for l in liste_lieux:
-        if l.nom == texte:
-            return l
+    for lieu in liste_lieux:
+        if lieu.nom == texte:
+            return lieu
+    return None
 
 def trouver_participants(texte: str, liste_perso: list[Personnage]) -> list[Personnage]:
     participants = []
     for p in liste_perso:
         if p.nom == texte:
             participants.append(p)
-        return participants
+    return participants
 
 def trouver_date(texte: str) -> str :
     match_date = re.compile(
@@ -25,6 +26,7 @@ def trouver_date(texte: str) -> str :
     ).search(texte)
     if match_date:
         return match_date.group()
+    return None
 
 def trouver_heure(texte: str) -> str:
      match_heure = re.compile(
@@ -36,3 +38,4 @@ def trouver_heure(texte: str) -> str:
                 ).search(texte)
      if match_heure:
         return match_heure.group()
+     return None
