@@ -2,6 +2,7 @@
 from spacy.tokens import Doc
 
 from importateur import Texte
+import Lecteur
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
 
@@ -16,22 +17,25 @@ def texte_test() -> Texte:
         " inexpliqué et inexplicable que personne n'a sans doute oublié. Sans parler"
         " des rumeurs qui agitaient les populations des ports et surexcitaient l'esprit"
         " public à l'intérieur des continents les gens de mer furent"
-        " particulièrement émus.", 1869
+        " particulièrement émus."
+        " C'est aussi le cas de Pablo.", 1869
     )
 
+@pytest.fixture
+def analyseur(doc_test):
+    instance = AnalyseTexte()
+    instance.analyser(doc_test, 1)
+    return instance
 
 @pytest.fixture
 def doc_test(texte_test) -> Doc:
     return spacy_conv(texte_test)
 
 @pytest.fixture
-def dico_perso(doc_test) :
-    resultat = AnalyseTexte(doc_test)
-    return resultat.personnages
-
+def dico_perso(analyseur) :
+    return analyseur.personnages
 
 @pytest.fixture
-def dico_lieux(doc_test) :
-    resultat = AnalyseTexte(doc_test)
-    return resultat.lieux
+def dico_lieux(analyseur) :
+    return analyseur.lieux
 

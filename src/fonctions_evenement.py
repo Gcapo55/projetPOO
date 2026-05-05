@@ -1,6 +1,6 @@
 ﻿import re
 
-from corpus import Personnage
+from corpus import Personnage, Lieu
 
 
 def trouver_lieu(texte: str, liste_lieux: list[Lieu]) -> Lieu:
