@@ -35,13 +35,13 @@ def trouver_date(texte: str) -> str :
 
 def trouver_heure(texte: str) -> str:
     """Détérmine l'heure de l'événement"""
-     match_heure = re.compile(
+    match_heure = re.compile(
                     r"\b([01]?\d|2[0-3])h([0-5]\d)?\b"
                     r"|\b([01]?\d|2[0-3]):[0-5]\d\b"
                     r"|\b(midi|minuit)\b"
                     r"|\b(matin|soir|après-midi)\b",
                     re.IGNORECASE
                 ).search(texte)
-     if match_heure:
+    if match_heure:
         return match_heure.group()
-     return None
+    return None
