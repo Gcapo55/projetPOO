@@ -2,7 +2,10 @@
 
 from spacy.tokens import Doc
 from corpus import Evenement, Lieu, Personnage
-from fonction_perso import trouver_attributs  #trouver_genre
+from fonction_perso import (
+    trouver_attributs,
+    trouver_genre,
+)
 from fonctions_evenement import (
     trouver_date,
     trouver_heure,
@@ -28,7 +31,7 @@ class AnalyseTexte :
             self.personnages.append(
                 Personnage(nom,
                            trouver_attributs(nom, doc),
-                           None)
+                           trouver_genre(nom, doc))
             )
             self.personnages[-1].compter()
         else : self.personnages[liste_noms.index(nom)].compter()
