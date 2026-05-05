@@ -4,6 +4,8 @@ from utils import spacy_conv
 from installation_spacy import InstallateurSpacy
 
 class Pipeline:
+    """Classe qui fait fonctionner toute l'architecture
+    du projet (import, analyse, export)"""
     def __init__(self,
                  source : str,
                  chargeur : ChargeurTexte,
@@ -14,7 +16,7 @@ class Pipeline:
         self._finder = finder
 
     def executer(self):
-
+        """Fonction qui fait l'exécution du programme"""
         texte = self._chargeur.charger(self.source)
         doc = spacy_conv(texte)
         self._finder.analyser(doc)
