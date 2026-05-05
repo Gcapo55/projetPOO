@@ -9,5 +9,5 @@ def test_decoupemots_fonctionne(doc_test):
 
 def test_decoupe_phrases_fonctionne(doc_test):
     lecteur = DecoupePhrases()
-    nb_phrases = 2
+    nb_phrases = 3
     assert len(lecteur.lecture(doc_test)) == nb_phrases

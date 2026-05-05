@@ -11,11 +11,11 @@ from utils import spacy_conv
 def texte_test() -> Texte:
     return Texte(
         "20'000 lieux sous les mers", "Jules Verne",
-        "L'année 1866 fut marquée par un événement bizarre, un phénomène"
-        " inexpliqué et inexplicable que personne n'a sans doute oublié. Sans parler"
-        " des rumeurs qui agitaient les populations des ports et surexcitaient l'esprit"
-        " public à l'intérieur des continents les gens de mer furent"
-        " particulièrement émus.", 1869
+        "Le brave Ned Land alla à Paris. Il y rencontra le soir venu,"
+        "Mr Aronnax. Malgré le froid terrible qui faisait grelotter le pauvre"
+        "Ned Land - L'hiver de 1864 était particulièrement rigoureux - il se"
+        "sentait réchauffé par la présence de son ami, le sympathique Mr Aronnax",
+        "1869"
     )
 
 
@@ -28,7 +28,7 @@ def doc_test(texte_test) -> Doc:
 def liste_perso(doc_test) :
     """Retourne une liste des personnages d'un Doc"""
     resultat = AnalyseTexte()
-    resultat.analyser(doc_test)
+    resultat.analyser(doc_test, 1)
     return resultat.personnages
 
 
@@ -36,6 +36,6 @@ def liste_perso(doc_test) :
 def liste_lieux(doc_test) :
     """Retourne une liste des lieux d'un Doc"""
     resultat = AnalyseTexte()
-    resultat.analyser(doc_test)
+    resultat.analyser(doc_test, 1)
     return resultat.lieux
 

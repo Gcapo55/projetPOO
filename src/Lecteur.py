@@ -11,8 +11,6 @@ from fonctions_evenement import (
 )
 from utils import nettoyer
 
-min_occ = 10
-
 class AnalyseTexte :
     """ Utilise spaCy pour extraire les personnages, les lieux,
     et les événements, les stocke dans une liste d'instances """
@@ -79,7 +77,7 @@ class AnalyseTexte :
                 ))
 
 
-    def analyser(self, doc : Doc) -> None:
+    def analyser(self, doc: Doc, min_occ: int) -> None:
         """ Analyse le Doc récupéré de l'importateur en
         appelant les fonctions ajouter. """
         for ent in doc.ents:
