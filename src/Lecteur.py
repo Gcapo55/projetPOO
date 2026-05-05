@@ -7,21 +7,21 @@ from corpus import Evenement, Lieu, Personnage
 
 from utils import nettoyer
 
-from perso_attributs import trouver_attributs
+from fonction_perso import trouver_attributs #trouver_genre
 
-from analyse_events import trouver_participants, trouver_lieu, trouver_date, trouver_heure
+from fonctions_evenement import trouver_participants, trouver_lieu, trouver_date, trouver_heure
 
 min_occ = 10
 
-class AnalyseTexte:
-    """ Utilise spaCy pour extraire les personnages et les lieux,
-    les stocke dans un dictionnaire et les attribue à la classe correspondante. """
+class AnalyseTexte :
+    """ Utilise spaCy pour extraire les personnages, les lieux,
+    et les événements, les stocke dans une liste d'instances """
     def __init__(self):
         self.personnages = []
         self.lieux = []
         self.evenements = []
 
-    def _ajouter_personnage(self, nom: str, doc: Doc ):
+    def _ajouter_personnage(self, nom: str, doc: Doc ) -> None:
         """ Stocke tous nouveaux personnages dans la liste de la classe,
         et lance les fonctions d'analyse sur le personnage;
          compte les occurrences. """
@@ -36,7 +36,7 @@ class AnalyseTexte:
         else : self.personnages[liste_noms.index(nom)].compter()
 
 
-    def _ajouter_lieu(self, nom: str, doc: Doc):
+    def _ajouter_lieu(self, nom: str, doc: Doc) -> None:
         """ Stocke tous nouveaux lieux dans la liste de la classe,
         et lance les fonctions d'analyse sur le lieu;
         compte les occurrences. """
@@ -49,7 +49,7 @@ class AnalyseTexte:
             self.lieux[-1].compter()
         else : self.lieux[liste_lieux.index(nom)].compter()
 
-    def _ajouter_events(self, doc : Doc) -> dict:
+    def _ajouter_events(self, doc : Doc) -> None:
         """ Détecte un lieu, une date et l'heure dans une phrase et
         crée un événement dont le nom de l'objet est la phrase en question. """
 
@@ -78,7 +78,7 @@ class AnalyseTexte:
                 ))
 
 
-    def analyser(self, doc : Doc) -> dict:
+    def analyser(self, doc : Doc) -> None:
         """ Attribue le texte récupéré de l'importateur et
         appelle les fonctions ajouter. """
         for ent in doc.ents:
@@ -88,8 +88,8 @@ class AnalyseTexte:
             elif ent.label_ in ["LOC", "GPE"]:
                 self._ajouter_lieu(nettoyer(ent.text), doc)
 
-        self.personnages = [p for p in self.personnages if p.occurences >= min_occ]
-        self.lieux = [l for l in self.lieux if l.occurences >= min_occ]
+        self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
+        self.lieux = [l for l in self.lieux if l.occurrences >= min_occ]
 
         self._ajouter_events(doc)
 

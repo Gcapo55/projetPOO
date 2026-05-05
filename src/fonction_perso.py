@@ -10,3 +10,5 @@ def trouver_attributs(nom: str, doc : Doc) -> list:
              if token.head.text == nom and token.dep_ == "amod"
          ]
     return [att for att, _ in Counter(liste_compl).most_common(3)]
+
+# def trouver_genre():
