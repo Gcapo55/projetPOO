@@ -1,12 +1,11 @@
 ﻿import pytest
 from spacy.tokens import Doc
+"""Ce fichier permet de configurer des fixtures
+qui seront réutilisées dans tous les fichiers de test"""
 
 from importateur import Texte
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
-
-"""Ce fichier permet de configurer des fixtures
-qui seront réutilisées dans tous les fichiers de test"""
 
 @pytest.fixture
 def texte_test() -> Texte:
@@ -22,16 +21,21 @@ def texte_test() -> Texte:
 
 @pytest.fixture
 def doc_test(texte_test) -> Doc:
+    """Retourne un Doc analysé par spacy"""
     return spacy_conv(texte_test)
 
 @pytest.fixture
-def dico_perso(doc_test) :
-    resultat = AnalyseTexte(doc_test)
+def liste_perso(doc_test) :
+    """Retourne une liste des personnages d'un Doc"""
+    resultat = AnalyseTexte()
+    resultat.analyser(doc_test)
     return resultat.personnages
 
 
 @pytest.fixture
-def dico_lieux(doc_test) :
-    resultat = AnalyseTexte(doc_test)
+def liste_lieux(doc_test) :
+    """Retourne une liste des lieux d'un Doc"""
+    resultat = AnalyseTexte()
+    resultat.analyser(doc_test)
     return resultat.lieux
 
