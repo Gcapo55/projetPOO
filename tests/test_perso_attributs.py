@@ -1,4 +1,4 @@
-﻿from perso_attributs import AnalyseurPersonnages
+﻿from fonction_perso import AnalyseurPersonnages
 
 
 def test_perso_attributs_fonctionne(doc_test, dico_perso):
