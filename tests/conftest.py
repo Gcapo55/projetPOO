@@ -12,9 +12,9 @@ def texte_test() -> Texte:
     """Un texte d'essai"""
     return Texte(
         "20'000 lieux sous les mers", "Jules Verne",
-        "Le brave Ned Land alla à Paris. Il y rencontra le soir venu,"
-        "Mr Aronnax. Malgré le froid terrible qui faisait grelotter le pauvre"
-        "Ned Land - L'hiver de 1864 était particulièrement rigoureux - il se"
+        "Le brave Ned Land alla à Paris. Il y rencontra le soir venu, "
+        "Mr Aronnax. Malgré le froid terrible qui faisait grelotter le pauvre "
+        "Ned Land - L'hiver de 1864 était particulièrement rigoureux - il se "
         "sentait réchauffé par la présence de son ami, le sympathique Mr Aronnax",
         "1869"
     )

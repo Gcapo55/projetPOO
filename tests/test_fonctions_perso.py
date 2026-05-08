@@ -2,9 +2,13 @@
 from fonction_perso import trouver_attributs
 
 
-@pytest.mark.parametrize
+@pytest.mark.parametrize ("nom_perso, genre", [
+    (["Ned Land", "Mr Aronnax"],
+    ["Masc", "Fem"]),
+])
 
-def test_fonctions_perso_fonctionne(doc_test, liste_perso):
-    analyseur = AnalyseurPersonnages(liste_perso, doc_test)
-    dico_attributs = analyseur.trouver_attributs()
-    assert len(dico_attributs) == len (dico_perso)
+def test_fonctions_perso_fonctionne(liste_perso, nom_perso, genre):
+    for p in liste_perso:
+        assert p.nom in nom_perso
+        assert len(p.attributs) > 0
+        assert p.genre in genre
