@@ -37,7 +37,7 @@ class InstallateurSpacy:
             print("\nInstallation du modèle français...\n")
 
             subprocess.check_call([
-                sys.executable, "-m", "spacy", "download", "fr_core_news_sm"
+                sys.executable, "-m", "spacy", "download", "fr_core_news_lg"
             ])
 
             print("\nInstallation terminée :)")
