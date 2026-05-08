@@ -20,7 +20,7 @@ class Pipeline:
         """Fonction qui fait l'exécution du programme"""
         texte = self._chargeur.charger(self.source)
         doc = spacy_conv(texte)
-        self._finder.analyser(doc)
+        self._finder.analyser(doc, 10)
         liste_perso = self._finder.personnages
         liste_lieu = self._finder.lieux
         liste_evenements = self._finder.evenements

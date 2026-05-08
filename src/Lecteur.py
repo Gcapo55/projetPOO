@@ -3,7 +3,10 @@
 from spacy.tokens import Doc
 
 from corpus import Evenement, Lieu, Personnage
-from fonction_perso import trouver_attributs  #trouver_genre
+from fonction_perso import (
+    trouver_attributs,
+    trouver_genre,
+)
 from fonctions_evenement import (
     trouver_date,
     trouver_heure,
@@ -11,8 +14,6 @@ from fonctions_evenement import (
     trouver_participants,
 )
 from utils import nettoyer
-
-min_occ = 10
 
 class AnalyseTexte :
     """ Utilise spaCy pour extraire les personnages, les lieux,
@@ -31,7 +32,7 @@ class AnalyseTexte :
             self.personnages.append(
                 Personnage(nom,
                            trouver_attributs(nom, doc),
-                           None)
+                           trouver_genre(nom, doc))
             )
             self.personnages[-1].compter()
         else : self.personnages[liste_noms.index(nom)].compter()
@@ -80,7 +81,7 @@ class AnalyseTexte :
                 ))
 
 
-    def analyser(self, doc : Doc) -> None:
+    def analyser(self, doc: Doc, min_occ: int) -> None:
         """ Analyse le Doc récupéré de l'importateur en
         appelant les fonctions ajouter. """
         for ent in doc.ents:

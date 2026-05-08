@@ -13,4 +13,13 @@ def trouver_attributs(nom: str, doc : Doc) -> list:
          ]
     return [att for att, _ in Counter(liste_compl).most_common(3)]
 
-# def trouver_genre():
+def trouver_genre(nom: str, doc : Doc) -> str:
+    """Détérmine le genre d'un personnage"""
+    liste_compl = [
+        "".join(token.morph.get("Gender")) for token in doc
+        if token.text == nom
+    ]
+    if liste_compl:
+        return Counter(liste_compl).most_common(1)[0][0]
+    else:
+        return None

@@ -2,24 +2,21 @@
 
 from importateur import ChargeurTexte, Texte
 
-TexteTest = Texte("Le Bon, la Brute et le Truand", "Joseph Morrington", """Le Bon
-                   a vu la Brute et le Truand s'entretuer""", 1957)
+CONST_ANNEE = "1869"
 
-CONST_ANNEE = 1957
-
-CHEMIN = "20'000 lieux sous les mers_doctest.txt"
+CHEMIN = "./docs/20'000 lieux sous les mers.txt"
 
 
-def test_texte_annee():
-    assert TexteTest.annee() == CONST_ANNEE
+def test_texte_annee(texte_test):
+    assert texte_test.annee() == CONST_ANNEE
 
-def test_texte_auteur():
-    assert TexteTest.auteur() == "Joseph Morrington"
+def test_texte_auteur(texte_test):
+    assert texte_test.auteur() == "Jules Verne"
 
-def test_texte_titre():
-    assert TexteTest.titre() == "Le Bon, la Brute et le Truand"
+def test_texte_titre(texte_test):
+    assert texte_test.titre() == "20'000 lieux sous les mers"
 
 def test_charger():
-    charge = ChargeurTexte
-    mille_lieux = charge.charger(charge, CHEMIN)
-    assert mille_lieux.auteur() == "Jules Vernes"
+    charge = ChargeurTexte()
+    mille_lieux = charge.charger(CHEMIN)
+    assert mille_lieux.auteur() == "Jules Verne"
