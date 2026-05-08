@@ -4,44 +4,45 @@ import subprocess
 import sys
 
 
-def install_spacy():
-    """Installe spaCy seulement s'il n'est pas déjà installé"""
+class InstallateurSpacy:
+    """Classe permettant d'installer spaCy et son modèle français"""
+    @staticmethod
+    def install_spacy():
+        """Installe spaCy seulement s'il n'est pas déjà installé"""
 
-    # 1. Vérifier si spaCy est déjà installé
-    try:
-        import spacy
-        return
-    except ImportError:
-        pass
+        # 1. Vérifie si spaCy est déjà installé
+        try:
+            import spacy  # pylint: disable=unused-import
+            return
+        except ImportError:
+            pass
 
-    # 2. Demande utilisateur
-    rep = input(
-        "Souhaitez-vous installer SpaCy et son modèle français "
-        "(nécessaire au fonctionnement du programme) Y/N ? "
-    ).strip().lower()
+        # 2. Demande à l'utilisateur s'il veut l'installer
+        rep = input(
+            "Souhaitez-vous installer SpaCy et son modèle français "
+            "(nécessaire au fonctionnement du programme) Y/N ? "
+        ).strip().lower()
 
-    if rep != "y":
-        return
+        if rep != "y":
+            return
 
-    # 3. Installation
-    try:
-        print("Installation de spaCy...\n")
+        # 3. Installe spaCy
+        try:
+            print("Installation de spaCy...\n")
 
-        subprocess.check_call([
-            sys.executable, "-m", "pip", "install", "spacy"
-        ])
+            subprocess.check_call([
+                sys.executable, "-m", "pip", "install", "spacy"
+            ])
 
-        print("\nInstallation du modèle français...\n")
+            print("\nInstallation du modèle français...\n")
 
-        subprocess.check_call([
-            sys.executable, "-m", "spacy", "download", "fr_core_news_sm"
-        ])
+            subprocess.check_call([
+                sys.executable, "-m", "spacy", "download", "fr_core_news_sm"
+            ])
 
-        print("\nInstallation terminée :)")
+            print("\nInstallation terminée :)")
 
-    except subprocess.CalledProcessError:
-        print("\nÉchec de l'installation :(")
+        except subprocess.CalledProcessError:
+            print("\nÉchec de l'installation :(")
 
-    input("\nAppuyer sur 'Entrée' pour continuer")
-
-install_spacy()
+        input("\nAppuyer sur 'Entrée' pour continuer")

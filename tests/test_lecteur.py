@@ -1,30 +1,19 @@
-import spacy
+import pytest
 
-from Lecteur import AnalyseTexte
+def test_nombre_personnages(dico_perso):
+    """Vérifie qu'on a bien trouvé au moins un personnage."""
+    assert len(dico_perso) > 0
 
-if __name__ == "__main__":
-    nlp = spacy.load("fr_core_news_lg")
-    nlp.add_pipe("sentencizer", before="parser")
+def test_type_personnage(dico_perso):
+    """Vérifie que ce sont bien des instances de Personnage."""
+    from corpus import Personnage
+    for perso in dico_perso:
+        assert isinstance(perso, Personnage)
 
-    texte = """
-    Le 3 mai à 14h30, Napoléon quitta Paris.
-    A midi, la fête commença à Lyon, mais Jacob et Michel n'étaient pas là."
-    Le 21 janvier 1793 à 10:00, Louis XVI fut exécuté à Paris avec Bertrand et Sophie.
-    """
-
-    doc = nlp(texte)
-
-    analyse = AnalyseTexte(doc)
-    analyse.analyser()
-
-    print("Personnages")
-    for p in analyse.personnages.values():
-        p.afficher()
-
-    print("Lieux")
-    for lieu in analyse.lieux.values():
-        lieu.afficher()
-
-    print("Événements")
-    for e in analyse.evenements.values():
-        e.afficher()
+@pytest.mark.parametrize("nom_attendu", [
+    ("Pablo"),  # Liste des noms attendus dans ton texte de test
+])
+def test_presence_personnage(dico_perso, nom_attendu):
+    """Vérifie qu'un personnage spécifique est présent."""
+    noms = [p.nom for p in dico_perso]
+    assert nom_attendu in noms

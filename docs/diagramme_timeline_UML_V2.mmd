@@ -1,0 +1,98 @@
+---
+references:
+  - "File: /src/__pycache__/utils.cpython-313.pyc"
+  - "File: /src/__pycache__/perso_attributs.cpython-313.pyc"
+  - "File: /src/__pycache__/Lecteur.cpython-313.pyc"
+  - "File: /src/__pycache__/importateur.cpython-313.pyc"
+  - "File: /src/__pycache__/corpus.cpython-313.pyc"
+  - "File: /src/__init__.py"
+  - "File: /src/utils.py"
+  - "File: /src/py.typed"
+  - "File: /src/pipeline.py"
+  - "File: /src/Lecteur.py"
+  - "File: /src/installation_spacy.py"
+  - "File: /src/importateur.py"
+  - "File: /src/fonction_perso.py"
+  - "File: /src/fonctions_evenement.py"
+  - "File: /src/exportateur.py"
+  - "File: /src/decoupeur.py"
+  - "File: /src/corpus.py"
+generationTime: 2026-05-05T08:11:46.140Z
+---
+sequenceDiagram
+    participant User
+    participant Pipeline
+    participant ChargeurTexte
+    participant FileSystem
+    participant Texte
+    participant Utils
+    participant spaCy
+    participant AnalyseTexte
+    participant fonction_perso
+    participant fonctions_evenement
+
+    User->>Pipeline: démarrer pipeline
+    activate Pipeline
+
+    Pipeline->>ChargeurTexte: charger(source)
+    activate ChargeurTexte
+    ChargeurTexte->>FileSystem: open/read source file
+    FileSystem-->>ChargeurTexte: file content
+    Note right of ChargeurTexte: parse Title/Author/Content/Date via regex
+    ChargeurTexte-->>Texte: create Texte(title, author, content, date)
+    ChargeurTexte-->>Pipeline: return Texte instance
+    deactivate ChargeurTexte
+
+    Pipeline->>Utils: spacy_conv(texte)
+    activate Utils
+    Utils->>spaCy: load("fr_core_news_lg") + add sentencizer
+    activate spaCy
+    spaCy-->>Utils: nlp pipeline
+    Utils->>spaCy: parse texte.contenu
+    spaCy-->>Utils: Doc
+    deactivate spaCy
+    Utils-->>Pipeline: return Doc
+    deactivate Utils
+
+    Pipeline->>AnalyseTexte: analyser(doc)
+    activate AnalyseTexte
+    Note over AnalyseTexte,fonction_perso: identify characters and locations from doc entities
+    activate fonction_perso
+    loop each entity in doc.ents
+        alt ent.label_ == "PER"
+            AnalyseTexte->>fonction_perso: trouver_attributs(ent.text, doc)
+            fonction_perso-->>AnalyseTexte: return top attributes
+            AnalyseTexte->>AnalyseTexte: _ajouter_personnage(nettoyer(ent.text), doc)
+        else ent.label_ in ["LOC","GPE"]
+            AnalyseTexte->>AnalyseTexte: _ajouter_lieu(nettoyer(ent.text))
+        end
+    end
+    deactivate fonction_perso
+
+    AnalyseTexte->>AnalyseTexte: filter personnages/lieux with occurrences >= min_occ
+
+    Note over AnalyseTexte,fonctions_evenement: extract events from sentences
+    activate fonctions_evenement
+    loop each sentence in doc.sents
+        AnalyseTexte->>fonctions_evenement: trouver_lieu(ent.text, lieux)
+        fonctions_evenement-->>AnalyseTexte: lieu_obj
+        AnalyseTexte->>fonctions_evenement: trouver_participants(ent.text, personnages)
+        fonctions_evenement-->>AnalyseTexte: participants
+        AnalyseTexte->>fonctions_evenement: trouver_date(sent.text)
+        fonctions_evenement-->>AnalyseTexte: date
+        AnalyseTexte->>fonctions_evenement: trouver_heure(sent.text)
+        fonctions_evenement-->>AnalyseTexte: heure
+        alt date/heure found and lieu_obj exists
+            AnalyseTexte->>AnalyseTexte: create Evenement(nom, date, heure, lieu_obj, participants)
+        else no event detected
+            Note right of AnalyseTexte: skip sentence without enough event data
+        end
+    end
+    deactivate fonctions_evenement
+
+    AnalyseTexte-->>Pipeline: return personnages, lieux, evenements
+    deactivate AnalyseTexte
+
+    Pipeline->>Pipeline: print(liste_perso), print(liste_lieu), print(*liste_evenements)
+    Pipeline-->>User: console output
+    deactivate Pipeline

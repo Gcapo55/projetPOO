@@ -1,6 +1,7 @@
 """Lecteur de texte"""  # noqa: N999 disable invalid module name
 
 from spacy.tokens import Doc
+
 from corpus import Evenement, Lieu, Personnage
 from fonction_perso import (
     trouver_attributs,
