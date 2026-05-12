@@ -44,6 +44,6 @@ def liste_lieux(analyseur) :
     return analyseur.lieux
 
 @pytest.fixture
-def dico_evenements(analyseur):
+def liste_evenements(analyseur):
     """Renvoie la liste des évènements"""
     return analyseur.evenements

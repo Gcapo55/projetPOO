@@ -38,7 +38,7 @@ def test_type_evenement(liste_evenements):
 
 def test_evenement_a_une_date_ou_heure(liste_evenements):
     """Un évènement doit avoir au moins une date ou une heure."""
-    for event in dico_evenements:
+    for event in liste_evenements:
         assert event.date is not None or event.heure is not None
 
 def test_presence_lieu_evenement(liste_evenements):
