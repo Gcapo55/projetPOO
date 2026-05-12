@@ -1,6 +1,6 @@
 import pytest
 
-from corpus import Personnage, Lieu
+from corpus import Personnage, Lieu, Evenement
 
 """Test personnages"""
 def test_nombre_personnages(dico_perso):
@@ -37,3 +37,30 @@ def test_presence_lieux(dico_lieux, lieux_attendus):
     """Vérifie qu'un lieu spécifique est présent."""
     noms = [p.nom for p in dico_lieux]
     assert lieux_attendus in noms
+
+"""Tests évènements"""
+
+def test_type_evenement(dico_evenements):
+    """Vérifie que ce sont bien des instances de Evenement."""
+    for event in dico_evenements:
+        assert isinstance(event, Evenement)
+
+def test_evenement_a_une_date_ou_heure(dico_evenements):
+    """Un évènement doit avoir au moins une date ou une heure."""
+    for event in dico_evenements:
+        assert event.date is not None or event.heure is not None
+
+def test_presence_lieu_evenement(dico_evenements):
+    """Vérifie que Paris est associé à un évènement."""
+    lieux = [event.lieu.nom for event in dico_evenements]
+
+    assert "Paris" in lieux
+
+def test_presence_participant(dico_evenements):
+    """Vérifie que Ned Land participe à un évènement."""
+    participants = []
+
+    for event in dico_evenements:
+        participants.extend([p.nom for p in event.participants])
+
+    assert "Ned Land" in participants
