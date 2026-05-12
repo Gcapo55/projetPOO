@@ -1,7 +1,7 @@
 ﻿import pytest
 
 
-@pytest.mark.parametrize (("nom_perso", "genre"), [
+@pytest.mark.parametrize ("nom_perso, genre", [
     (["Ned Land", "Mr Aronnax"],
     ["Masc", "Fem", None]),
 ])

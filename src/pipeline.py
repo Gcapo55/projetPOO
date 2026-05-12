@@ -34,7 +34,9 @@ class Pipeline:
 
 if __name__ == "__main__" :
 
-    pipeline = Pipeline("./docs/ArseneLupin.txt",
+    InstallateurSpacy.install_spacy()
+
+    pipeline = Pipeline("20'000 lieux sous les mers.txt",
                     ChargeurTexte(),
                     AnalyseTexte(),
                     )
