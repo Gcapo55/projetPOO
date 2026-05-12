@@ -47,3 +47,5 @@ class InstallateurSpacy:
             print("\nÉchec de l'installation :(")
 
         input("\nAppuyer sur 'Entrée' pour continuer")
+
+InstallateurSpacy.install_spacy()
