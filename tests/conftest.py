@@ -33,7 +33,7 @@ def analyseur(doc_test):
     return instance
 
 @pytest.fixture
-def dico_perso(analyseur) :
+def liste_perso(analyseur) :
     """Renvoie la liste des Personnages"""
     return analyseur.personnages
 
