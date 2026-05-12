@@ -4,7 +4,7 @@ from fonction_perso import trouver_attributs
 
 @pytest.mark.parametrize ("nom_perso, genre", [
     (["Ned Land", "Mr Aronnax"],
-    ["Masc", "Fem"]),
+    ["Masc", "Fem", None]),
 ])
 
 def test_fonctions_perso_fonctionne(liste_perso, nom_perso, genre):
