@@ -65,8 +65,12 @@ class AnalyseTexte :
             lieu_obj = None
             participants = []
             for ent in sent.ents:
-                lieu_obj = trouver_lieu(ent.text, self.lieux)
-                participants = trouver_participants(ent.text, self.personnages)
+                lieu = trouver_lieu(ent.text, self.lieux)
+                if lieu :
+                    lieu_obj = lieu
+                participants.extend(
+                    trouver_participants(ent.text, self.personnages)
+                )
             date = trouver_date(sent.text)
             heure = trouver_heure(sent.text)
 
