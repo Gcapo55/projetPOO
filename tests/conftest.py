@@ -3,7 +3,6 @@ qui seront réutilisées dans tous les fichiers de test"""
 import pytest
 from spacy.tokens import Doc
 
-import Lecteur
 from importateur import Texte
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
