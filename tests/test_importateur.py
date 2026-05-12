@@ -1,6 +1,6 @@
 """test de classe Texte"""
 
-from importateur import ChargeurTexte, Texte
+from importateur import ChargeurTexte
 
 CONST_ANNEE = "1869"
 
