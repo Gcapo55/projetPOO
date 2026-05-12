@@ -24,20 +24,23 @@ class AnalyseTexte :
         self.lieux = []
         self.evenements = []
 
+        self._liste_noms_perso = []
+        self._liste_noms_lieux = []
+
     def _ajouter_personnage(self, nom: str, doc: Doc ) -> None:
         """ Stocke tous nouveaux personnages dans la liste de la classe,
         et lance les fonctions d'analyse sur le personnage;
          compte les occurrences. """
-        liste_noms = [x.nom for x in self.personnages]
-        if nom not in liste_noms:
+        if nom not in self._liste_noms_perso:
             self.personnages.append(
                 Personnage(nom,
                            trouver_attributs(nom, doc),
                            trouver_genre(nom, doc))
             )
             self.personnages[-1].compter()
+            self._liste_noms_perso.append(nom)
         else :
-            self.personnages[liste_noms.index(nom)].compter()
+            self.personnages[self._liste_noms_perso.index(nom)].compter()
 
 
 
@@ -45,15 +48,15 @@ class AnalyseTexte :
         """ Stocke tous nouveaux lieux dans la liste de la classe,
         et lance les fonctions d'analyse sur le lieu;
         compte les occurrences. """
-        liste_lieux = [x.nom for x in self.lieux]
-        if nom not in liste_lieux:
+        if nom not in self._liste_noms_lieux:
             self.lieux.append(
                 Lieu(nom,
                      None)
             )
             self.lieux[-1].compter()
+            self._liste_noms_lieux.append(nom)
         else :
-            self.lieux[liste_lieux.index(nom)].compter()
+            self.lieux[self._liste_noms_lieux.index(nom)].compter()
 
     def _ajouter_events(self, doc : Doc) -> None:
         """ Détecte un lieu, une date et l'heure dans une phrase et

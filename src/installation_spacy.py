@@ -2,6 +2,7 @@
 
 import subprocess
 import sys
+import importlib.util
 
 
 class InstallateurSpacy:
@@ -12,7 +13,7 @@ class InstallateurSpacy:
 
         # 1. Vérifie si spaCy est déjà installé
         try:
-            import spacy  # pylint: disable=unused-import
+            importlib.util.find_spec("spacy")  # pylint: disable=unused-import
             return
         except ImportError:
             pass

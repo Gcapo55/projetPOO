@@ -3,6 +3,7 @@ qui seront réutilisées dans tous les fichiers de test"""
 import pytest
 from spacy.tokens import Doc
 
+import Lecteur
 from importateur import Texte
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
@@ -39,7 +40,7 @@ def liste_perso(analyseur) :
     return analyseur.personnages
 
 @pytest.fixture
-def dico_lieux(analyseur) :
+def liste_lieux(analyseur) :
     """Rensoie la liste des Lieux"""
     return analyseur.lieux
 

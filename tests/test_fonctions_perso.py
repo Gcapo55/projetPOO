@@ -1,7 +1,15 @@
-﻿from fonction_perso import trouver_attributs
+﻿import pytest
+
+from fonction_perso import trouver_attributs
 
 
-def test_trouver_attributs_fonctionne(doc_test, liste_perso):
-    """Teste que la fonction trouver_attributs retourne une liste d'adjectifs"""
-    dico_attributs = {perso.nom : trouver_attributs(perso.nom, doc_test) for perso in liste_perso}  # noqa: E501
-    assert len(dico_attributs) == len (liste_perso)
+@pytest.mark.parametrize ("nom_perso, genre", [
+    (["Ned Land", "Mr Aronnax"],
+    ["Masc", "Fem", None]),
+])
+
+def test_fonctions_perso_fonctionne(liste_perso, nom_perso, genre):
+    for p in liste_perso:
+        assert p.nom in nom_perso
+        assert len(p.attributs) > 0
+        assert p.genre in genre
