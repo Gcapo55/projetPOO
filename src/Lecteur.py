@@ -15,6 +15,7 @@ from fonctions_evenement import (
 )
 from utils import nettoyer
 
+
 class AnalyseTexte :
     """ Utilise spaCy pour extraire les personnages, les lieux,
     et les événements, les stocke dans une liste d'instances """
@@ -38,7 +39,8 @@ class AnalyseTexte :
             )
             self.personnages[-1].compter()
             self._liste_noms_perso.append(nom)
-        else : self.personnages[self._liste_noms_perso.index(nom)].compter()
+        else :
+            self.personnages[self._liste_noms_perso.index(nom)].compter()
 
 
 
@@ -53,7 +55,8 @@ class AnalyseTexte :
             )
             self.lieux[-1].compter()
             self._liste_noms_lieux.append(nom)
-        else : self.lieux[self._liste_noms_lieux.index(nom)].compter()
+        else :
+            self.lieux[self._liste_noms_lieux.index(nom)].compter()
 
     def _ajouter_events(self, doc : Doc) -> None:
         """ Détecte un lieu, une date et l'heure dans une phrase et

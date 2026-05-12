@@ -1,5 +1,6 @@
 import pytest
 
+
 def test_nombre_personnages(liste_perso):
     """Vérifie qu'on a bien trouvé au moins un personnage."""
     assert len(liste_perso) > 0

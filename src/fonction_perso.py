@@ -4,22 +4,22 @@ from spacy.tokens import Doc
 
 from utils import nettoyer
 
+
 def check_attribut(nom, tok, doc) :
-    """fonction qui utilise les tags de spacy pour vérifier qu'il s'agit d'un adjectif"""
+    """fonction qui utilise les tags de spacy pour vérifier
+    qu'il s'agit d'un adjectif"""
     if tok.text not in nom and tok.head.text not in nom:
         return None
     if tok.text in nom :
-        if tok.dep_ == "appos" and tok.head.pos_ == "ADJ":
-            return tok.head.text
-
-        elif tok.dep_ == "nsubj" and tok.head.pos_ == "ADJ":
-            return tok.head.text
+        if (tok.dep_ == "appos" and tok.head.pos_ == "ADJ"
+        or tok.dep_ == "nsubj" and tok.head.pos_ == "ADJ") :
+            return tok.head.lemma_
 
         elif tok.dep_ == "appos" and doc[tok.i - 1].pos_ == "ADJ":
-            return doc[tok.i - 1].text
+            return doc[tok.i - 1].lemma_
 
     elif tok.head.text in nom and tok.dep_ == "amod" :
-        return tok.text
+        return tok.lemma_
 
     else :
         return None
@@ -41,5 +41,5 @@ def trouver_genre(nom: str, doc : Doc) -> str:
     ]
     if liste_compl:
         return Counter(liste_compl).most_common(1)[0][0]
-    else:
-        return None
+
+    return None
