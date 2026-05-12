@@ -36,7 +36,8 @@ class AnalyseTexte :
                            trouver_genre(nom, doc))
             )
             self.personnages[-1].compter()
-        else : self.personnages[liste_noms.index(nom)].compter()
+        else :
+            self.personnages[liste_noms.index(nom)].compter()
 
 
 
@@ -51,7 +52,8 @@ class AnalyseTexte :
                      None)
             )
             self.lieux[-1].compter()
-        else : self.lieux[liste_lieux.index(nom)].compter()
+        else :
+            self.lieux[liste_lieux.index(nom)].compter()
 
     def _ajouter_events(self, doc : Doc) -> None:
         """ Détecte un lieu, une date et l'heure dans une phrase et
