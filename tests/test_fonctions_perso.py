@@ -1,7 +1,5 @@
 ﻿import pytest
 
-from fonction_perso import trouver_attributs
-
 
 @pytest.mark.parametrize ("nom_perso, genre", [
     (["Ned Land", "Mr Aronnax"],
