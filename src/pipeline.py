@@ -3,6 +3,9 @@ from installation_spacy import InstallateurSpacy
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
 
+InstallateurSpacy.install_spacy()
+
+
 
 class Pipeline:
     """Classe qui fait fonctionner toute l'architecture
@@ -30,8 +33,6 @@ class Pipeline:
 
 
 if __name__ == "__main__" :
-
-    InstallateurSpacy.install_spacy()
 
     pipeline = Pipeline("./docs/ArseneLupin.txt",
                     ChargeurTexte(),

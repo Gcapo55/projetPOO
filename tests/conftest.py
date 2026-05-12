@@ -39,11 +39,11 @@ def liste_perso(analyseur) :
     return analyseur.personnages
 
 @pytest.fixture
-def dico_lieux(analyseur) :
+def liste_lieux(analyseur) :
     """Rensoie la liste des Lieux"""
     return analyseur.lieux
 
 @pytest.fixture
-def dico_evenements(analyseur):
+def liste_evenements(analyseur):
     """Renvoie la liste des évènements"""
     return analyseur.evenements

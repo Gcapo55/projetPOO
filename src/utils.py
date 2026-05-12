@@ -13,7 +13,7 @@ def spacy_conv(texte : Texte) -> Doc :
     """
     nlp = spacy.load("fr_core_news_lg")
     nlp.add_pipe("sentencizer", before="parser")
-    return nlp(texte.contenu)
+    return nlp(nettoyer(texte.contenu))
 
 def nettoyer(txt: str) -> str :
     """supprime les artefacts comme sauts de ligne, underscores,..."""
