@@ -33,7 +33,7 @@ if __name__ == "__main__" :
 
     InstallateurSpacy.install_spacy()
 
-    pipeline = Pipeline("./docs/ArseneLupin.txt",
+    pipeline = Pipeline("20'000 lieux sous les mers.txt",
                     ChargeurTexte(),
                     AnalyseTexte(),
                     )

@@ -2,7 +2,7 @@
 
 from importateur import ChargeurTexte
 
-CHEMIN = "./docs/ArseneLupin.txt"
+CHEMIN = "20'000 lieux sous les mers.txt"
 
 
 def test_charger():
@@ -10,4 +10,4 @@ def test_charger():
     mille_lieux = charge.charger(CHEMIN)
     assert mille_lieux.auteur() == "Jules Verne"
     assert "vingt mille lieues sous les mers" in mille_lieux.titre().lower()
-    assert mille_lieux.annee().lower() in ["1869", None]
+    assert mille_lieux.annee() in ["1869", None]
