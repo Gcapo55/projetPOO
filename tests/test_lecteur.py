@@ -13,7 +13,7 @@ def test_type_personnage(dico_perso):
         assert isinstance(perso, Personnage)
 
 @pytest.mark.parametrize("nom_attendu", [
-    ("Pablo"),  # Liste des noms attendus dans ton texte de test
+    ("Ned Land"),  # Liste des noms attendus dans ton texte de test
 ])
 def test_presence_personnage(dico_perso, nom_attendu):
     """Vérifie qu'un personnage spécifique est présent."""
