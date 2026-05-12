@@ -35,5 +35,6 @@ class ChargeurTexte:
             titre = re.search(r"(?<=Title:\s).+?(?=\n)", global_contenu)
             auteur = re.search(r"(?<=Author:\s).+?(?=\n)", global_contenu)
             contenu = re.search(r"\*\*\*[^*]+\*\*\*(.+?)(?=\*\*\*|$)", global_contenu, re.DOTALL)  # noqa: E501
-            date = re.search(r"(?<=Release date:\s).+?([\d]{4})(?=\s)", global_contenu)#mettre "Original Publication :"
+            date_origine = re.search(r"(?<=Original Publication:\s).+?([\d]{4})(?=\s|\n)", global_contenu)  # noqa: E501
+            date = None if not date_origine else date_origine.group(1)
             return Texte(titre.group(), auteur.group(), contenu.group(), date.group())
