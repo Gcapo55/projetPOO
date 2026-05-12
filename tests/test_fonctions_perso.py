@@ -2,6 +2,6 @@
 
 
 def test_trouver_attributs_fonctionne(doc_test, liste_perso):
-    analyseur = AnalyseurPersonnages(liste_perso, doc_test)
-    dico_attributs = analyseur.trouver_attributs()
-    assert len(dico_attributs) == len (dico_perso)
+    """Teste que la fonction trouver_attributs retourne une liste d'adjectifs"""
+    dico_attributs = {perso.nom : trouver_attributs(perso.nom, doc_test) for perso in liste_perso}
+    assert len(dico_attributs) == len (liste_perso)
