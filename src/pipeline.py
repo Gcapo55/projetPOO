@@ -3,6 +3,7 @@ import installation_spacy # pylint: disable=unused-import
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
 
+
 class Pipeline:
     """Classe qui fait fonctionner toute l'architecture
     du projet (import, analyse, export)"""
@@ -17,6 +18,7 @@ class Pipeline:
 
     def executer(self):
         """Fonction qui fait l'exécution du programme"""
+        
         texte = self._chargeur.charger(self.source)
         doc = spacy_conv(texte)
         self._finder.analyser(doc, 10)

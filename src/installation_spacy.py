@@ -12,11 +12,8 @@ class InstallateurSpacy:
         """Installe spaCy seulement s'il n'est pas déjà installé"""
 
         # 1. Vérifie si spaCy est déjà installé
-        try:
-            importlib.util.find_spec("spacy")  # pylint: disable=unused-import
+        if importlib.util.find_spec("spacy") is not None:
             return
-        except ImportError:
-            pass
 
         # 2. Demande à l'utilisateur s'il veut l'installer
         rep = input(
