@@ -4,7 +4,7 @@ from decoupeur import DecoupeMots, DecoupePhrases
 
 def test_decoupemots_fonctionne(doc_test):
     lecteur = DecoupeMots()
-    nb_mots = 53
+    nb_mots = 55
     assert len(lecteur.lecture(doc_test)) == nb_mots
 
 def test_decoupe_phrases_fonctionne(doc_test):
