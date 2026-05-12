@@ -1,5 +1,6 @@
 ﻿from importateur import ChargeurTexte
 from installation_spacy import InstallateurSpacy
+InstallateurSpacy.install_spacy()
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
 
@@ -30,8 +31,6 @@ class Pipeline:
 
 
 if __name__ == "__main__" :
-
-    InstallateurSpacy.install_spacy()
 
     pipeline = Pipeline("./docs/ArseneLupin.txt",
                     ChargeurTexte(),
