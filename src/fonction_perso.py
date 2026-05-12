@@ -25,7 +25,7 @@ def check_attribut(nom, tok, doc) :
         return None
 
 def trouver_attributs(nom: str, doc : Doc) -> list:
-    """Détérmine les 3 adjectifs les plus associés à chaque personnage"""
+    """Détermine les 3 adjectifs les plus associés à chaque personnage"""
     liste_compl = [
         nettoyer(check_attribut(nom,token,doc)) for token in doc
         if check_attribut(nom,token,doc) is not None
@@ -34,12 +34,11 @@ def trouver_attributs(nom: str, doc : Doc) -> list:
     return [att for att, _ in Counter(liste_compl).most_common(3)]
 
 def trouver_genre(nom: str, doc : Doc) -> str:
-    """Détérmine le genre d'un personnage"""
+    """Détermine le genre d'un personnage"""
     liste_compl = [
         "".join(token.morph.get("Gender")) for token in doc
         if token.text in nom
     ]
     if liste_compl:
         return Counter(liste_compl).most_common(1)[0][0]
-    else:
-        return None
+    return None

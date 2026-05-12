@@ -2,10 +2,11 @@
 qui seront réutilisées dans tous les fichiers de test"""
 import pytest
 from spacy.tokens import Doc
+
 from importateur import Texte
-import Lecteur
 from Lecteur import AnalyseTexte
 from utils import spacy_conv
+
 
 @pytest.fixture
 def texte_test() -> Texte:

@@ -15,6 +15,7 @@ from fonctions_evenement import (
 )
 from utils import nettoyer
 
+
 class AnalyseTexte :
     """ Utilise spaCy pour extraire les personnages, les lieux,
     et les événements, les stocke dans une liste d'instances """

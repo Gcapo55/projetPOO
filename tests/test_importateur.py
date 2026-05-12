@@ -1,6 +1,6 @@
 """test de classe Texte + Importateur"""
 
-from importateur import ChargeurTexte, Texte
+from importateur import ChargeurTexte
 
 CHEMIN = "./docs/20'000 lieux sous les mers.txt"
 
