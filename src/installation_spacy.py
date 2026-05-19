@@ -8,7 +8,7 @@ import importlib.util
 class InstallateurSpacy:
     """Classe permettant d'installer spaCy et son modèle français"""
     @staticmethod
-    def install_spacy():
+    def install_spacy() -> None:
         """Installe spaCy seulement s'il n'est pas déjà installé"""
 
         # 1. Vérifie si spaCy est déjà installé
