@@ -19,7 +19,7 @@ class Texte:
 
     def titre(self) -> str:
         return self._titre
-    def annee(self) -> int:
+    def annee(self) -> str:
         return self._annee
 
     def auteur(self) -> str:
@@ -38,5 +38,5 @@ class ChargeurTexte:
             auteur = re.search(r"(?<=Author:\s).+?(?=\n)", global_contenu)
             contenu = re.search(r"\*\*\*[^*]+\*\*\*(.+?)(?=\*\*\*|$)", global_contenu, re.DOTALL)  # noqa: E501
             date_origine = re.search(r"(?<=Original Publication:\s).+?([\d]{4})(?=\s|\n)", global_contenu)  # noqa: E501
-            date = None if not date_origine else date_origine.group(1)
+            date = "None" if not date_origine else date_origine.group()
             return Texte(titre.group(), auteur.group(), contenu.group(), date)
