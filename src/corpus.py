@@ -13,7 +13,7 @@ class Corpus:
 @dataclass
 class Personnage(Corpus):
     """Définit les personnages d'un texte"""
-    attributs: list
+    attributs: list[str]
     genre: str | None = None
 
 
@@ -29,14 +29,16 @@ class Evenement(Corpus):
     date: str | None = None
     heure: str | None = None
     lieu: Lieu | None = None
-    participants: list = field(default_factory=list)
+    participants: list[Personnage] = field(default_factory=list)
 
     def __str__(self) -> str:
         """Fonction de print() utile à nos tests"""
+        nom_lieu = self.lieu.nom if self.lieu else 'N/A'
+
         return (f"Évenement :"
                 f"nom={' '.join(self.nom.split()[:5])} ...,"
                 f"date={self.date or 'N/A'},"
                 f"heure={self.heure or 'N/A'},"
-                f"lieu={self.lieu.nom},"
+                f"lieu={nom_lieu},"
                 f"participants={', '.join(p.nom for p in self.participants) or 'N/A'}"
         )

@@ -20,10 +20,10 @@ titres_seuls = {"monsieur", "madame", "mme", "m.", "mr"}
 class AnalyseTexte :
     """ Utilise spaCy pour extraire les personnages, les lieux,
     et les événements, les stocke dans une liste d'instances """
-    def __init__(self):
-        self.personnages = []
-        self.lieux = []
-        self.evenements = []
+    def __init__(self) -> None:
+        self.personnages = list[Personnage] = []
+        self.lieux = list[Lieu] = []
+        self.evenements = list[Evenement] = []
 
         self._liste_noms_perso = []
         self._liste_noms_lieux = []
