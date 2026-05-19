@@ -5,9 +5,10 @@ from spacy.tokens import Doc
 from utils import nettoyer
 
 
-def check_attribut(nom, tok, doc) :
+def check_attribut(N, tok, doc) :
     """fonction qui utilise les tags de spacy pour vérifier
     qu'il s'agit d'un adjectif"""
+    nom = N.split(" ")
     if tok.text not in nom and tok.head.text not in nom:
         return None
     if tok.text in nom :
