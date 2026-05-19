@@ -127,6 +127,69 @@ classDiagram
         +trouver_participants(texte: str, liste_perso: list[Personnage]) list[Personnage]
     }
 
+
+
+sequenceDiagram
+    participant User
+    participant Pipeline
+    participant Installateur as InstallateurSpacy
+    participant Chargeur as ChargeurTexte
+    participant FS as Filesystem
+    participant TexteObj as Texte
+    participant Utils
+    participant spaCy
+    participant Analyse as AnalyseTexte
+    participant FP as fonction_perso
+    participant FE as fonctions_evenement
+    participant Corpus
+    participant Exporteur
+
+    User->>Pipeline: run python pipeline.py
+    activate Pipeline
+
+    Pipeline->>Installateur: import installation_spacy
+    alt spaCy not installed
+        Installateur->>User: prompt to install spaCy and fr_core_news_lg
+        User-->>Installateur: Y/N
+        Installateur-->>Pipeline: returns after install attempt
+    end
+
+    Pipeline->>Chargeur: charger(source)
+    Chargeur->>FS: open docs/<source>.txt
+    FS-->>Chargeur: file content
+    Chargeur-->>Pipeline: Texte(titre,auteur,contenu,annee)
+
+    Pipeline->>Utils: spacy_conv(texte)
+    Utils->>spaCy: load fr_core_news_lg, add sentencizer
+    spaCy-->>Utils: Doc
+    Utils-->>Pipeline: Doc
+
+    Pipeline->>Analyse: analyser(Doc, min_occ=10)
+    activate Analyse
+    Analyse->>Analyse: iterate doc.ents
+    alt person entity
+        Analyse->>FP: trouver_attributs / trouver_genre
+        FP-->>Analyse: attributs / genre
+    end
+    alt location entity
+        Analyse->>Analyse: _ajouter_lieu
+    end
+    Analyse->>Analyse: filter personnages / lieux by occurrences
+    Analyse->>Analyse: _ajouter_events(doc)
+    Analyse->>FE: trouver_lieu / trouver_participants / trouver_date / trouver_heure
+    FE-->>Analyse: lieu / participants / date / heure
+    Analyse->>Corpus: create Personnage / Lieu / Evenement
+    Corpus-->>Analyse: instances appended
+    Analyse-->>Pipeline: personnages, lieux, evenements
+    deactivate Analyse
+
+    Pipeline->>Exporteur: ExporterPersonnages / ExporterLieux / ExporterEvenements
+    Exporteur->>FS: write CSV files
+    Exporteur-->>Pipeline: export complete
+
+    Pipeline->>User: complete
+    deactivate Pipeline
+
     AnalyseTexte ..> fonction_perso : uses
     AnalyseTexte ..> fonctions_evenement : uses
     Pipeline ..> Utils : uses
