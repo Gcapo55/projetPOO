@@ -23,6 +23,8 @@
 
 ## Diagrammes UML de classe
 
+## Diagrammes UML de classe
+
 ```mermaid
 classDiagram
     class Corpus {
