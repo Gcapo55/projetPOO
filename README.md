@@ -187,8 +187,3 @@ sequenceDiagram
 
     Pipeline->>User: complete
     deactivate Pipeline
-
-    AnalyseTexte ..> fonction_perso : uses
-    AnalyseTexte ..> fonctions_evenement : uses
-    Pipeline ..> Utils : uses
-    Utils ..> InstallateurSpacy : depends on
