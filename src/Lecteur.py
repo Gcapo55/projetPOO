@@ -21,15 +21,15 @@ class AnalyseTexte :
     """ Utilise spaCy pour extraire les personnages, les lieux,
     et les événements, les stocke dans une liste d'instances """
     def __init__(self) -> None:
-        self.personnages = list[Personnage] = []
-        self.lieux = list[Lieu] = []
-        self.evenements = list[Evenement] = []
+        self.personnages: list[Personnage] = []
+        self.lieux: list[Lieu] = []
+        self.evenements: list[Evenement] = []
 
-        self._liste_noms_perso = []
-        self._liste_noms_lieux = []
+        self._liste_noms_perso: list[str] = []
+        self._liste_noms_lieux: list[str] = []
 
-        self._tot_perso = []
-        self._tot_lieux = []
+        self._tot_perso: list[str] = []
+        self._tot_lieux: list[str] = []
 
     def _ajouter_personnage(self, nom: str, doc: Doc ) -> None:
         """ Stocke tous nouveaux personnages dans la liste de la classe,
@@ -117,4 +117,8 @@ class AnalyseTexte :
 
         self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
         self.lieux = [lieu for lieu in self.lieux if lieu.occurrences >= min_occ]
+
+        self._liste_noms_perso = [p.nom for p in self.personnages]
+        self._liste_noms_lieux = [lieu.nom for lieu in self.lieux]
+
         self._ajouter_events(doc)
