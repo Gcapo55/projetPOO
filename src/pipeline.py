@@ -13,13 +13,13 @@ class Pipeline:
                  chargeur : ChargeurTexte,
                  finder : AnalyseTexte,
                  exportateur : Exportateur,
-                 ):
+                 ) -> None:
         self.source = source
         self._chargeur = chargeur
         self._finder = finder
         self._exportateur = exportateur
 
-    def executer(self):
+    def executer(self) -> None:
         """Fonction qui fait l'exécution du programme"""
         patienter()
         texte = self._chargeur.charger(self.source)
