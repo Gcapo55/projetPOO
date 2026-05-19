@@ -23,8 +23,6 @@
 
 ## Diagrammes UML de classe
 
-## Diagrammes UML de classe
-
 ```mermaid
 classDiagram
     class Corpus {
@@ -128,7 +126,11 @@ classDiagram
         +trouver_lieu(texte: str, liste_lieux: list[Lieu]) Lieu
         +trouver_participants(texte: str, liste_perso: list[Personnage]) list[Personnage]
     }
+```
 
+## Diagramme de séquence
+
+```mermaid
 sequenceDiagram
     participant User
     participant Pipeline
@@ -189,3 +191,4 @@ sequenceDiagram
 
     Pipeline->>User: complete
     deactivate Pipeline
+```
