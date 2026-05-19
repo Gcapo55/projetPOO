@@ -21,7 +21,7 @@
 - Ce programme a été réalisé dans le cadre du cours Programmation orientée objet : Python (SP26)
 - Il est le fruit d'une collaboration de cinq étudiants, Clémence Detroyat, Gianni Caporizzo, Nathan Kunz, Guilherme Meireles Pereira et Timoté Sarrasin
 
-## Diagrammes UML de classe et de séquence
+## Diagrammes UML de classe
 
 ```mermaid
 classDiagram
@@ -33,17 +33,17 @@ classDiagram
 
     class Personnage {
         +list[str] attributs
-        +str|None genre
+        +str genre
     }
 
     class Lieu {
-        +str|None categorie
+        +str categorie
     }
 
     class Evenement {
-        +str|None date
-        +str|None heure
-        +Lieu|None lieu
+        +str date
+        +str heure
+        +Lieu lieu
         +list[Personnage] participants
         +__str__() str
     }
@@ -117,17 +117,15 @@ classDiagram
 
     class fonction_perso {
         +trouver_attributs(nom: str, doc: Doc) list
-        +trouver_genre(nom: str, doc: Doc) str|None
+        +trouver_genre(nom: str, doc: Doc) str
     }
 
     class fonctions_evenement {
-        +trouver_date(texte: str) str|None
-        +trouver_heure(texte: str) str|None
-        +trouver_lieu(texte: str, liste_lieux: list[Lieu]) Lieu|None
+        +trouver_date(texte: str) str
+        +trouver_heure(texte: str) str
+        +trouver_lieu(texte: str, liste_lieux: list[Lieu]) Lieu
         +trouver_participants(texte: str, liste_perso: list[Personnage]) list[Personnage]
     }
-
-
 
 sequenceDiagram
     participant User
