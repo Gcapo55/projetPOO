@@ -1,5 +1,6 @@
 ﻿"""FICHIER DE FONCTION UTILITAIRES"""
 import spacy
+import time
 from spacy.tokens import Doc
 
 from importateur import Texte
@@ -20,3 +21,13 @@ def nettoyer(txt: str) -> str :
     return (
         txt.replace("\n", " ").replace("_", "").replace("--", "")
     )
+
+def patienter():
+    """Affiche une animation de chargement dans la console."""
+    print("Patientez", end="", flush=True)
+
+    for _ in range(3):
+        time.sleep(0.2)
+        print(".", end="", flush=True)
+
+    print()

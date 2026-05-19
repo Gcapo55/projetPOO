@@ -15,6 +15,7 @@ from fonctions_evenement import (
 )
 from utils import nettoyer
 
+titres_seuls = {"monsieur", "madame", "mme", "m.", "mr"}
 
 class AnalyseTexte :
     """ Utilise spaCy pour extraire les personnages, les lieux,
@@ -97,8 +98,13 @@ class AnalyseTexte :
     def analyser(self, doc: Doc, min_occ: int) -> None:
         """ Analyse le Doc récupéré de l'importateur en
         appelant les fonctions ajouter. """
-        for ent in doc.ents:
-            if ent.label_ == "PER":
+        for ent in doc.ents :
+            if ent.label_ == "PER" and not (
+                len(ent) == 1 and (
+                    "Title" in ent[0].morph.get("NameType", [])
+                    or ent[0].text.lower() in titres_seuls
+                )
+            ):
                 self._tot_perso.append(ent.text)
                 self._ajouter_personnage(nettoyer(ent.text), doc)
 
@@ -112,5 +118,3 @@ class AnalyseTexte :
         self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
         self.lieux = [lieu for lieu in self.lieux if lieu.occurrences >= min_occ]
         self._ajouter_events(doc)
-
-

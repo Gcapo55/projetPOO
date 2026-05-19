@@ -1,7 +1,7 @@
 ﻿from importateur import ChargeurTexte
-from installation_spacy import InstallateurSpacy
+import installation_spacy # pylint: disable=unused-import
 from Lecteur import AnalyseTexte
-from utils import spacy_conv
+from utils import spacy_conv, patienter
 
 
 class Pipeline:
@@ -18,6 +18,7 @@ class Pipeline:
 
     def executer(self):
         """Fonction qui fait l'exécution du programme"""
+        patienter()
         texte = self._chargeur.charger(self.source)
         doc = spacy_conv(texte)
         self._finder.analyser(doc, 10)
@@ -30,8 +31,6 @@ class Pipeline:
 
 
 if __name__ == "__main__" :
-
-    InstallateurSpacy.install_spacy()
 
     pipeline = Pipeline("20'000 lieux sous les mers.txt",
                     ChargeurTexte(),

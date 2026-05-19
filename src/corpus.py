@@ -7,7 +7,7 @@ class Corpus:
     nom: str
     occurrences: int = field(default=0, init=False)
 
-    def compter(self):
+    def compter(self) -> None:
         self.occurrences += 1
 
 @dataclass
@@ -31,13 +31,12 @@ class Evenement(Corpus):
     lieu: Lieu | None = None
     participants: list = field(default_factory=list)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Fonction de print() utile à nos tests"""
         return (f"Évenement :"
-                f"nom={" ".join(self.nom.split()[:5])} ...,"
+                f"nom={' '.join(self.nom.split()[:5])} ...,"
                 f"date={self.date or 'N/A'},"
                 f"heure={self.heure or 'N/A'},"
                 f"lieu={self.lieu.nom},"
-                f"participants={
-                ", ".join(p.nom for p in self.participants) or 'N/A'
-                })")
+                f"participants={', '.join(p.nom for p in self.participants) or 'N/A'}"
+        )
