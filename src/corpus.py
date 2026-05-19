@@ -33,7 +33,7 @@ class Evenement(Corpus):
 
     def __str__(self) -> str:
         """Fonction de print() utile à nos tests"""
-        nom_lieu = self.lieu.nom if self.lieu else 'N/A'
+        nom_lieu = self.lieu.nom if self.lieu else "N/A"
 
         return (f"Évenement :"
                 f"nom={' '.join(self.nom.split()[:5])} ...,"
