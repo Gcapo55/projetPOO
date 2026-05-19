@@ -28,6 +28,9 @@ class AnalyseTexte :
         self._liste_noms_perso = []
         self._liste_noms_lieux = []
 
+        self._tot_perso = []
+        self._tot_lieux = []
+
     def _ajouter_personnage(self, nom: str, doc: Doc ) -> None:
         """ Stocke tous nouveaux personnages dans la liste de la classe,
         et lance les fonctions d'analyse sur le personnage;
@@ -95,17 +98,22 @@ class AnalyseTexte :
     def analyser(self, doc: Doc, min_occ: int) -> None:
         """ Analyse le Doc récupéré de l'importateur en
         appelant les fonctions ajouter. """
-        for ent in doc.ents:
+        for ent in doc.ents :
             if ent.label_ == "PER" and not (
                 len(ent) == 1 and (
                     "Title" in ent[0].morph.get("NameType", [])
                     or ent[0].text.lower() in titres_seuls
                 )
             ):
+                self._tot_perso.append(ent.text)
                 self._ajouter_personnage(nettoyer(ent.text), doc)
 
             elif ent.label_ in ["LOC", "GPE"]:
+                self._tot_lieux.append(ent.text)
                 self._ajouter_lieu(nettoyer(ent.text))
+
+        self._tot_perso = []
+        self._tot_lieux = []
 
         self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
         self.lieux = [lieu for lieu in self.lieux if lieu.occurrences >= min_occ]
