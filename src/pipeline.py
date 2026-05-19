@@ -1,7 +1,7 @@
-﻿from importateur import ChargeurTexte
-import installation_spacy # pylint: disable=unused-import
+﻿import installation_spacy  # pylint: disable=unused-import  # noqa: F401
+from importateur import ChargeurTexte
 from Lecteur import AnalyseTexte
-from utils import spacy_conv, patienter
+from utils import patienter, spacy_conv
 
 
 class Pipeline:
