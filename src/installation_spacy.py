@@ -1,8 +1,8 @@
 """Module pour installer spaCy"""
 
+import importlib.util
 import subprocess
 import sys
-import importlib.util
 
 
 class InstallateurSpacy:
