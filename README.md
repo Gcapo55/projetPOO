@@ -23,7 +23,7 @@
 
 ## Diagrammes UML de classe et de séquence
 
-'''mermaid
+```mermaid
 classDiagram
     class Corpus {
         +str nom
