@@ -131,5 +131,3 @@ classDiagram
     AnalyseTexte ..> fonctions_evenement : uses
     Pipeline ..> Utils : uses
     Utils ..> InstallateurSpacy : depends on
-    
-![Diagramme de séquence](./docs/diagramme_timeline_UML_V2.png)
