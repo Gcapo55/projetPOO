@@ -22,7 +22,7 @@ def nettoyer(txt: str) -> str :
         txt.replace("\n", " ").replace("_", "").replace("--", "")
     )
 
-def patienter():
+def patienter() -> None:
     """Affiche une animation de chargement dans la console."""
     print("Patientez", end="", flush=True)
 
