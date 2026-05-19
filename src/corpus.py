@@ -7,8 +7,8 @@ class Corpus:
     nom: str
     occurrences: int = field(default=0, init=False)
 
-    def compter(self) -> None:
-        self.occurrences += 1
+    def compter(self, val: int) -> None:
+        self.occurrences += val
 
 @dataclass
 class Personnage(Corpus):
