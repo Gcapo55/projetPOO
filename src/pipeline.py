@@ -38,8 +38,9 @@ class Pipeline:
 
 
 if __name__ == "__main__" :
-
-    pipeline = Pipeline("20'000 lieux sous les mers.txt",
+    inp = str(input("Quel est le nom du fichier à analyser ? :")
+               or "20'000 lieux sous les mers.txt")
+    pipeline = Pipeline(inp,
                     ChargeurTexte(),
                     AnalyseTexte(),
                     )
