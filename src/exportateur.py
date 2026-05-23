@@ -22,10 +22,10 @@ class Exportateur:
                 values_lists=[]
                 for value in perso.__dict__.values():
                     if type(value) is list:
-                        values_lists.append(value)
+                        values_lists.append(", ".join(map(str, value)))
                     else:
                         values_lists.append([value])
-                csvwriter.writerows(values_lists)
+                csvwriter.writerow(values_lists)
 
     def exporter_lieux(self):
 
@@ -39,10 +39,10 @@ class Exportateur:
                 values_lists=[]
                 for value in lieu.__dict__.values():
                     if type(value) is list:
-                        values_lists.append(value)
+                        values_lists.append(", ".join(map(str, value)))
                     else:
                         values_lists.append([value])
-                csvwriter.writerows(values_lists)
+                csvwriter.writerow(values_lists)
 
     def exporter_evenements(self):
 
@@ -56,7 +56,7 @@ class Exportateur:
                 values_lists=[]
                 for value in event.__dict__.values():
                     if type(value) is list:
-                        values_lists.append(value)
+                        values_lists.append(", ".join(map(str, value)))
                     else:
                         values_lists.append([value])
-                csvwriter.writerows(values_lists)
+                csvwriter.writerow(values_lists)

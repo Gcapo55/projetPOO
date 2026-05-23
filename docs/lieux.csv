@@ -1,67 +1,23 @@
 nom,categorie,occurrences
-détroit de Torrès
-""
-12
-Amérique
-""
-22
-Pacifique
-""
-36
-Atlantique
-""
-39
-Europe
-""
-17
-Angleterre
-""
-10
-Océan
-""
-113
-la France
-""
-14
-New York
-""
-15
-France
-""
-10
-Abraham-Lincoln
-""
-17
-Paris
-""
-12
-Canadien
-""
-229
-Méditerranée
-""
-39
-mer Rouge
-""
-33
-Anglais
-""
-14
-La Pérouse
-""
-12
-Vanikoro
-""
-15
-Papouasie
-""
-12
-Ceylan
-""
-11
-Atlantide
-""
-11
-Gulf-Stream
-""
-11
+['détroit de Torrès'],[None],[12]
+['Amérique'],[None],[22]
+['Pacifique'],[None],[36]
+['Atlantique'],[None],[39]
+['Europe'],[None],[17]
+['Angleterre'],[None],[10]
+['Océan'],[None],[113]
+['la France'],[None],[14]
+['New York'],[None],[15]
+['France'],[None],[10]
+['Abraham-Lincoln'],[None],[17]
+['Paris'],[None],[12]
+['Canadien'],[None],[229]
+['Méditerranée'],[None],[39]
+['mer Rouge'],[None],[33]
+['Anglais'],[None],[14]
+['La Pérouse'],[None],[12]
+['Vanikoro'],[None],[15]
+['Papouasie'],[None],[12]
+['Ceylan'],[None],[11]
+['Atlantide'],[None],[11]
+['Gulf-Stream'],[None],[11]
