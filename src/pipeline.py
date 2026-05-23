@@ -32,9 +32,6 @@ class Pipeline:
         exportateur.exporter_lieux()
         exportateur.exporter_evenements()
         exportateur.exporter_json()
-        print(liste_perso)
-        print(liste_lieu)
-        print(*liste_evenements, sep="\n")
 
 
 if __name__ == "__main__" :
