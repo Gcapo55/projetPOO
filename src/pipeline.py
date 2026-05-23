@@ -1,8 +1,8 @@
-﻿from importateur import ChargeurTexte
-import installation_spacy # pylint: disable=unused-import
-from Lecteur import AnalyseTexte
+﻿import installation_spacy  # pylint: disable=unused-import
 from exportateur import Exportateur
-from utils import spacy_conv, patienter
+from importateur import ChargeurTexte
+from Lecteur import AnalyseTexte
+from utils import patienter, spacy_conv
 
 
 class Pipeline:
@@ -11,13 +11,11 @@ class Pipeline:
     def __init__(self,
                  source : str,
                  chargeur : ChargeurTexte,
-                 finder : AnalyseTexte,
-                 exportateur : Exportateur,
+                 finder : AnalyseTexte
                  ) -> None:
         self.source = source
         self._chargeur = chargeur
         self._finder = finder
-        self._exportateur = exportateur
 
     def executer(self) -> None:
         """Fonction qui fait l'exécution du programme"""
@@ -25,15 +23,17 @@ class Pipeline:
         texte = self._chargeur.charger(self.source)
         doc = spacy_conv(texte)
         self._finder.analyser(doc, 10)
-        #liste_perso = self._finder.personnages
-        #liste_lieu = self._finder.lieux
-        #liste_evenements = self._finder.evenements
-        self._exportateur.ExporterPersonnages()
-        self._exportateur.ExporterLieux()
-        self._exportateur.ExporterEvenements()
-        #print(liste_perso)
-        #print(liste_lieu)
-        #print(*liste_evenements, sep="\n")
+
+        liste_perso = self._finder.personnages
+        liste_lieu = self._finder.lieux
+        liste_evenements = self._finder.evenements
+        exportateur = Exportateur(liste_perso, liste_lieu, liste_evenements)
+        exportateur.exporter_personnages()
+        exportateur.exporter_lieux()
+        exportateur.exporter_evenements()
+        print(liste_perso)
+        print(liste_lieu)
+        print(*liste_evenements, sep="\n")
 
 
 if __name__ == "__main__" :

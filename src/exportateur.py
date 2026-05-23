@@ -1,89 +1,62 @@
 import csv
-from corpus import Personnage,Lieu,Evenement
-from Lecteur import AnalyseTexte
-
-    def __init__(self,lecteur:AnalyseTexte):
-
-        self.personnages=list[Personnage]
-        self.lieux = list[Lieu]
-        self.evenements = list[Evenement]
-
-        self.valeurs_persos=lecteur.personnages
-        self.valeurs_lieux=lecteur.lieux
-        self.valeurs_evenements=lecteur.evenements
-
-    #names=["Hamlet","Horatio","Ophelia"]
-    #values=["Hamlet","danemark","prince","Horatio","coucou","","Ophelia"]
+from pathlib import Path
 
 
-    def ExporterPersonnages(self):
+class Exportateur:
+    """Classe qui exporte les données extraites par le lecteur dans des fichiers CSV"""
+    def __init__(self,liste_persos,liste_lieux,liste_evenements) -> None:
+        self.personnages=liste_persos
+        self.lieux=liste_lieux
+        self.evenements=liste_evenements
 
-        values_lists=[]
-        fields=[]
 
-        for i in range(len(self.valeurs_persos)):
-            if self.valeurs_persos[i] in self.personnages:
-                fields.append(self.valeurs_persos[i])
-                counter=0
-            else:
-                if counter in range(len(values_lists)):
-                    values_lists[counter].append(self.valeurs_persos[i])
-                else:
-                    list=[]
-                    list.append(self.valeurs_persos[i])
-                    values_lists.append(list)
-                counter+=1
+    def exporter_personnages(self):
 
-        filename="personnages.csv"
-        with open(filename, "w") as csvfile:
+        filename=Path("./docs/personnages.csv")
+
+        with Path.open(filename, "w") as csvfile:
             csvwriter=csv.writer(csvfile)
+            fields=self.personnages[0].__dict__.keys()
             csvwriter.writerow(fields)
-            csvwriter.writerows(values_lists)
+            for perso in self.personnages:
+                values_lists=[]
+                for value in perso.__dict__.values():
+                    if type(value) is list:
+                        values_lists.append(value)
+                    else:
+                        values_lists.append([value])
+                csvwriter.writerows(values_lists)
 
-    def ExporterLieux(self):
+    def exporter_lieux(self):
 
-        values_lists=[]
-        fields=[]
+        filename=Path("./docs/lieux.csv")
 
-        for i in range(len(self.valeurs_lieux)):
-            if self.valeurs_lieux[i] in self.lieux:
-                fields.append(self.valeurs_lieux[i])
-                counter=0
-            else:
-                if counter in range(len(values_lists)):
-                    values_lists[counter].append(self.valeurs_lieux[i])
-                else:
-                    list=[]
-                    list.append(self.valeurs_lieux[i])
-                    values_lists.append(list)
-                counter+=1
-
-        filename="lieux.csv"
-        with open(filename, "w") as csvfile:
+        with Path.open(filename, "w") as csvfile:
             csvwriter=csv.writer(csvfile)
+            fields=self.lieux[0].__dict__.keys()
             csvwriter.writerow(fields)
-            csvwriter.writerows(values_lists)
+            for lieu in self.lieux:
+                values_lists=[]
+                for value in lieu.__dict__.values():
+                    if type(value) is list:
+                        values_lists.append(value)
+                    else:
+                        values_lists.append([value])
+                csvwriter.writerows(values_lists)
 
-    def ExporterEvenements(self):
+    def exporter_evenements(self):
 
-        values_lists=[]
-        fields=[]
+        filename=Path("./docs/evenements.csv")
 
-        for i in range(len(self.valeurs_evenements)):
-            if self.valeurs_evenements[i] in self.evenements:
-                fields.append(self.valeurs_evenements[i])
-                counter=0
-            else:
-                if counter in range(len(values_lists)):
-                    values_lists[counter].append(self.valeurs_evenements[i])
-                else:
-                    list=[]
-                    list.append(self.valeurs_evenements[i])
-                    values_lists.append(list)
-                counter+=1
-
-        filename="evenements.csv"
-        with open(filename, "w") as csvfile:
+        with Path.open(filename, "w") as csvfile:
             csvwriter=csv.writer(csvfile)
+            fields=self.evenements[0].__dict__.keys()
             csvwriter.writerow(fields)
-            csvwriter.writerows(values_lists)
+            for event in self.evenements:
+                values_lists=[]
+                for value in event.__dict__.values():
+                    if type(value) is list:
+                        values_lists.append(value)
+                    else:
+                        values_lists.append([value])
+                csvwriter.writerows(values_lists)
