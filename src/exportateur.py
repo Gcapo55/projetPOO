@@ -1,4 +1,6 @@
 import csv
+import json
+from dataclasses import asdict
 from pathlib import Path
 
 
@@ -60,3 +62,15 @@ class Exportateur:
                     else:
                         values_lists.append([value])
                 csvwriter.writerow(values_lists)
+
+    def exporter_json(self):
+
+        data = {
+            "personnages": [asdict(perso) for perso in self.personnages],
+            "lieux": [asdict(lieu) for lieu in self.lieux],
+            "evenements": [asdict(event) for event in self.evenements]
+        }
+
+        filename = Path("./docs/donnees.json")
+        with Path.open(filename, "w", encoding="utf-8") as jsonfile:
+            json.dump(data, jsonfile, indent=4, ensure_ascii=False)

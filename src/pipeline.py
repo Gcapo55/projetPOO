@@ -1,4 +1,4 @@
-﻿import installation_spacy  # pylint: disable=unused-import
+﻿import installation_spacy  # pylint: disable=unused-import  # noqa: F401
 from exportateur import Exportateur
 from importateur import ChargeurTexte
 from Lecteur import AnalyseTexte
@@ -31,6 +31,7 @@ class Pipeline:
         exportateur.exporter_personnages()
         exportateur.exporter_lieux()
         exportateur.exporter_evenements()
+        exportateur.exporter_json()
         print(liste_perso)
         print(liste_lieu)
         print(*liste_evenements, sep="\n")
