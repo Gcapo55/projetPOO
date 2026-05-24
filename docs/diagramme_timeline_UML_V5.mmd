@@ -1,0 +1,133 @@
+---
+references:
+  - "File: /src/__pycache__/utils.cpython-313.pyc"
+  - "File: /src/__pycache__/perso_attributs.cpython-313.pyc"
+  - "File: /src/__pycache__/Lecteur.cpython-313.pyc"
+  - "File: /src/__pycache__/installation_spacy.cpython-313.pyc"
+  - "File: /src/__pycache__/importateur.cpython-313.pyc"
+  - "File: /src/__pycache__/fonction_perso.cpython-313.pyc"
+  - "File: /src/__pycache__/fonctions_evenement.cpython-313.pyc"
+  - "File: /src/__pycache__/exportateur.cpython-313.pyc"
+  - "File: /src/__pycache__/decoupeur.cpython-313.pyc"
+  - "File: /src/__pycache__/corpus.cpython-313.pyc"
+  - "File: /src/__init__.py"
+  - "File: /src/utils.py"
+  - "File: /src/py.typed"
+  - "File: /src/pipeline.py"
+  - "File: /src/Lecteur.py"
+  - "File: /src/installation_spacy.py"
+  - "File: /src/importateur.py"
+  - "File: /src/fonction_perso.py"
+  - "File: /src/fonctions_evenement.py"
+  - "File: /src/exportateur.py"
+  - "File: /src/corpus.py"
+generationTime: 2026-05-24T09:57:15.600Z
+---
+sequenceDiagram
+    participant User
+    participant Pipeline
+    participant ChargeurTexte
+    participant Texte
+    participant Utils
+    participant Spacy
+    participant AnalyseTexte
+    participant FonctionPerso
+    participant FonctionsEvenement
+    participant Exportateur
+    participant Storage
+
+    User->>Pipeline: start pipeline with source filename
+    activate Pipeline
+    Note over Pipeline: installation_spacy imported at startup to ensure spaCy is available
+
+    Pipeline->>Utils: patienter()
+    activate Utils
+    Utils-->>Pipeline: loading animation complete
+
+    Pipeline->>ChargeurTexte: charger(source)
+    activate ChargeurTexte
+    ChargeurTexte->>Storage: open ./docs/source and read raw text
+    activate Storage
+    Storage-->>ChargeurTexte: raw text content
+    deactivate Storage
+    ChargeurTexte->>ChargeurTexte: parse metadata (title, author, content, date)
+    ChargeurTexte->>Texte: create Texte instance
+    ChargeurTexte-->>Pipeline: Texte object
+    deactivate ChargeurTexte
+
+    Pipeline->>Utils: spacy_conv(Texte)
+    Utils->>Spacy: load fr_core_news_lg and add sentencizer
+    Spacy-->>Utils: nlp pipeline
+    Utils->>Spacy: create Doc from cleaned text
+    Utils-->>Pipeline: Doc
+    deactivate Utils
+
+    Pipeline->>AnalyseTexte: analyser(Doc, 10)
+    activate AnalyseTexte
+    Note over AnalyseTexte: extract personnages, lieux, and events from Doc
+
+    loop each entity in Doc.ents
+        alt entity is PERSON and not title
+            AnalyseTexte->>Utils: nettoyer(ent.text)
+            AnalyseTexte->>AnalyseTexte: _ajouter_personnage(nom, Doc)
+            alt personnage new
+                AnalyseTexte->>FonctionPerso: trouver_attributs(nom, Doc)
+                FonctionPerso-->>AnalyseTexte: attributs list
+                AnalyseTexte->>FonctionPerso: trouver_genre(nom, Doc)
+                FonctionPerso-->>AnalyseTexte: genre
+                AnalyseTexte->>AnalyseTexte: create Personnage and compter()
+            else personnage exists
+                AnalyseTexte->>AnalyseTexte: increment occurrences
+            end
+        else entity is LOC/GPE
+            AnalyseTexte->>Utils: nettoyer(ent.text)
+            AnalyseTexte->>AnalyseTexte: _ajouter_lieu(nom)
+            alt lieu new
+                AnalyseTexte->>AnalyseTexte: create Lieu and compter()
+            else lieu exists
+                AnalyseTexte->>AnalyseTexte: increment occurrences
+            end
+        end
+    end
+
+    AnalyseTexte->>AnalyseTexte: filter personnages and lieux by min_occ
+    AnalyseTexte->>AnalyseTexte: rebuild name lookup lists
+    AnalyseTexte->>AnalyseTexte: _ajouter_events(Doc)
+    Note over AnalyseTexte: detect events from sentences with date/heure and known lieu
+
+    loop each sentence in Doc.sents
+        AnalyseTexte->>FonctionsEvenement: trouver_lieu(ent.text, lieux)
+        FonctionsEvenement-->>AnalyseTexte: Lieu or None
+        AnalyseTexte->>FonctionsEvenement: trouver_participants(ent.text, personnages)
+        FonctionsEvenement-->>AnalyseTexte: participants list
+        AnalyseTexte->>FonctionsEvenement: trouver_date(sent.text)
+        FonctionsEvenement-->>AnalyseTexte: date or None
+        AnalyseTexte->>FonctionsEvenement: trouver_heure(sent.text)
+        FonctionsEvenement-->>AnalyseTexte: heure or None
+        alt event has date/heure and known lieu
+            AnalyseTexte->>Utils: nettoyer(sent.text.strip())
+            AnalyseTexte->>AnalyseTexte: append Evenement(...)
+        else no valid event
+            Note over AnalyseTexte, FonctionsEvenement: sentence skipped for events
+        end
+    end
+
+    AnalyseTexte-->>Pipeline: personnages, lieux, evenements lists
+    deactivate AnalyseTexte
+
+    Pipeline->>Exportateur: create Exportateur(liste_perso, liste_lieu, liste_evenements)
+    activate Exportateur
+    activate Storage
+    Exportateur->>Storage: write personnages.csv
+    Storage-->>Exportateur: written
+    Exportateur->>Storage: write lieux.csv
+    Storage-->>Exportateur: written
+    Exportateur->>Storage: write evenements.csv
+    Storage-->>Exportateur: written
+    Exportateur->>Storage: write donnees.json
+    Storage-->>Exportateur: written
+    deactivate Exportateur
+    deactivate Storage
+
+    Pipeline-->>User: export complete
+    deactivate Pipeline

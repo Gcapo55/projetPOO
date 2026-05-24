@@ -37,6 +37,7 @@ references:
     </agents>
 
 generationTime: 2026-05-19T09:18:58.945Z
+id: 13eac80d-c345-428c-927d-be58a001ba93
 ---
 sequenceDiagram
     participant User
@@ -92,8 +93,9 @@ sequenceDiagram
     Analyse-->>Pipeline: personnages, lieux, evenements
     deactivate Analyse
 
-    Pipeline->>Exporteur: ExporterPersonnages / ExporterLieux / ExporterEvenements
-    Exporteur->>FS: write CSV files
+    Pipeline->>Exporteur: Exporteur(liste_perso, liste_lieu, liste_evenements)
+    Pipeline->>Exporteur: exporter_personnages / exporter_lieux / exporter_evenements / exporter_json
+    Exporteur->>FS: write CSV and JSON files
     Exporteur-->>Pipeline: export complete
 
     Pipeline->>User: complete

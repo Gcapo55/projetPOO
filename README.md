@@ -33,17 +33,17 @@ classDiagram
 
     class Personnage {
         +list[str] attributs
-        +str genre
+        +str|None genre
     }
 
     class Lieu {
-        +str categorie
+        +str|None categorie
     }
 
     class Evenement {
-        +str date
-        +str heure
-        +Lieu lieu
+        +str|None date
+        +str|None heure
+        +Lieu|None lieu
         +list[Personnage] participants
         +__str__() str
     }
@@ -77,6 +77,8 @@ classDiagram
         -evenements: list[Evenement]
         -_liste_noms_perso: list[str]
         -_liste_noms_lieux: list[str]
+        -_tot_perso: list[str]
+        -_tot_lieux: list[str]
         +analyser(doc: Doc, min_occ: int) void
         -_ajouter_personnage(nom: str, doc: Doc) void
         -_ajouter_lieu(nom: str) void
@@ -88,16 +90,16 @@ classDiagram
     AnalyseTexte --> Evenement : creates
 
     class Exportateur {
-        +ExporterPersonnages() void
-        +ExporterLieux() void
-        +ExporterEvenements() void
+        +exporter_personnages() void
+        +exporter_lieux() void
+        +exporter_evenements() void
+        +exporter_json() void
     }
 
     class Pipeline {
         -source: str
         -_chargeur: ChargeurTexte
         -_finder: AnalyseTexte
-        -_exportateur: Exportateur
         +executer() void
     }
 
@@ -117,15 +119,20 @@ classDiagram
 
     class fonction_perso {
         +trouver_attributs(nom: str, doc: Doc) list
-        +trouver_genre(nom: str, doc: Doc) str
+        +trouver_genre(nom: str, doc: Doc) str|None
     }
 
     class fonctions_evenement {
-        +trouver_date(texte: str) str
-        +trouver_heure(texte: str) str
-        +trouver_lieu(texte: str, liste_lieux: list[Lieu]) Lieu
+        +trouver_date(texte: str) str|None
+        +trouver_heure(texte: str) str|None
+        +trouver_lieu(texte: str, liste_lieux: list[Lieu]) Lieu|None
         +trouver_participants(texte: str, liste_perso: list[Personnage]) list[Personnage]
     }
+
+    AnalyseTexte ..> fonction_perso : uses
+    AnalyseTexte ..> fonctions_evenement : uses
+    Pipeline ..> Utils : uses
+    Utils ..> InstallateurSpacy : depends on
 ```
 
 ## Diagramme de séquence
@@ -185,8 +192,9 @@ sequenceDiagram
     Analyse-->>Pipeline: personnages, lieux, evenements
     deactivate Analyse
 
-    Pipeline->>Exporteur: ExporterPersonnages / ExporterLieux / ExporterEvenements
-    Exporteur->>FS: write CSV files
+    Pipeline->>Exporteur: Exporteur(liste_perso, liste_lieu, liste_evenements)
+    Pipeline->>Exporteur: exporter_personnages / exporter_lieux / exporter_evenements / exporter_json
+    Exporteur->>FS: write CSV and JSON files
     Exporteur-->>Pipeline: export complete
 
     Pipeline->>User: complete
