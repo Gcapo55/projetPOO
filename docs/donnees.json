@@ -1,747 +1,80 @@
 {
     "personnages": [
         {
-            "nom": "Abraham-Lincoln",
-            "occurrences": 30,
+            "nom": "Ned Land",
+            "occurrences": 1,
             "attributs": [],
             "genre": ""
         },
         {
-            "nom": "Farragut",
-            "occurrences": 24,
-            "attributs": [],
-            "genre": ""
-        },
-        {
-            "nom": "commandant Farragut",
-            "occurrences": 15,
+            "nom": "Mr Aronnax",
+            "occurrences": 2,
             "attributs": [
-                "marin",
-                "désireux",
-                "fidèle"
-            ],
-            "genre": ""
-        },
-        {
-            "nom": "Ned",
-            "occurrences": 130,
-            "attributs": [
-                "riposta",
-                "pauvre",
-                "furieux"
+                "sympathique"
             ],
             "genre": "Masc"
-        },
-        {
-            "nom": "Aronnax",
-            "occurrences": 73,
-            "attributs": [],
-            "genre": ""
-        },
-        {
-            "nom": "Land",
-            "occurrences": 34,
-            "attributs": [],
-            "genre": ""
-        },
-        {
-            "nom": "Ned Land",
-            "occurrences": 14,
-            "attributs": [
-                "riposta",
-                "pauvre",
-                "furieux"
-            ],
-            "genre": ""
-        },
-        {
-            "nom": "stewart",
-            "occurrences": 10,
-            "attributs": [
-                "muet",
-                "étranglé",
-                "impassible"
-            ],
-            "genre": ""
-        },
-        {
-            "nom": "capitaine Nemo",
-            "occurrences": 397,
-            "attributs": [
-                "XXIII",
-                "sobre",
-                "imprudent"
-            ],
-            "genre": ""
-        },
-        {
-            "nom": "Nemo",
-            "occurrences": 34,
-            "attributs": [],
-            "genre": ""
-        },
-        {
-            "nom": "Dumont d'Urville",
-            "occurrences": 17,
-            "attributs": [
-                "perplexe"
-            ],
-            "genre": ""
         }
     ],
     "lieux": [
         {
-            "nom": "détroit de Torrès",
-            "occurrences": 12,
-            "categorie": null
-        },
-        {
-            "nom": "Amérique",
-            "occurrences": 22,
-            "categorie": null
-        },
-        {
-            "nom": "Pacifique",
-            "occurrences": 36,
-            "categorie": null
-        },
-        {
-            "nom": "Atlantique",
-            "occurrences": 39,
-            "categorie": null
-        },
-        {
-            "nom": "Europe",
-            "occurrences": 17,
-            "categorie": null
-        },
-        {
-            "nom": "Angleterre",
-            "occurrences": 10,
-            "categorie": null
-        },
-        {
-            "nom": "Océan",
-            "occurrences": 113,
-            "categorie": null
-        },
-        {
-            "nom": "la France",
-            "occurrences": 14,
-            "categorie": null
-        },
-        {
-            "nom": "New York",
-            "occurrences": 15,
-            "categorie": null
-        },
-        {
-            "nom": "France",
-            "occurrences": 10,
-            "categorie": null
-        },
-        {
-            "nom": "Abraham-Lincoln",
-            "occurrences": 17,
-            "categorie": null
-        },
-        {
             "nom": "Paris",
-            "occurrences": 12,
+            "occurrences": 1,
             "categorie": null
         },
         {
-            "nom": "Canadien",
-            "occurrences": 229,
-            "categorie": null
-        },
-        {
-            "nom": "Méditerranée",
-            "occurrences": 39,
-            "categorie": null
-        },
-        {
-            "nom": "mer Rouge",
-            "occurrences": 33,
-            "categorie": null
-        },
-        {
-            "nom": "Anglais",
-            "occurrences": 14,
-            "categorie": null
-        },
-        {
-            "nom": "La Pérouse",
-            "occurrences": 12,
-            "categorie": null
-        },
-        {
-            "nom": "Vanikoro",
-            "occurrences": 15,
-            "categorie": null
-        },
-        {
-            "nom": "Papouasie",
-            "occurrences": 12,
-            "categorie": null
-        },
-        {
-            "nom": "Ceylan",
-            "occurrences": 11,
-            "categorie": null
-        },
-        {
-            "nom": "Atlantide",
-            "occurrences": 11,
-            "categorie": null
-        },
-        {
-            "nom": "Gulf-Stream",
-            "occurrences": 11,
+            "nom": "pauvreNed Land - L'hiver de 1864",
+            "occurrences": 1,
             "categorie": null
         }
     ],
     "evenements": [
         {
-            "nom": "VI      À toute vapeur                VII     Une baleine d'espèce inconnue                VIII    Mobilis in mobile                IX      Les colères de Ned Land                X       L'homme des eaux                XI      Le Nautilus                XII     Tout par l'électricité                XIII    Quelques chiffres                XIV     Le Fleuve-Noir                XV      Une invitation par lettre                XVI     Promenade en plaine                XVII    Une forêt sous-marine                XVIII   Quatre mille lieues sous le Pacifique                XIX     Vanikoro                XX      Le détroit de Torrès                XXI     Quelques jours à terre                XXII    La foudre du capitaine Nemo                XXIII   Ægri somnia                XXIV    Le royaume du corail                              VINGT MILLE LIEUES                                   SOUS                                 LES MERS                          TOUR DU MONDE SOUS MARIN                              (Première partie)                                      I                              UN ÉCUEIL FUYANT  L'année 1866 fut marquée par un événement bizarre, un phénomène inexpliqué et inexplicable que personne n'a sans doute oublié.",
+            "nom": "Le brave Ned Land alla à Paris le 12 décembre 1864.Il y rencontra le soir venu,Mr Aronnax.",
             "occurrences": 0,
-            "date": "1866",
-            "heure": null,
-            "lieu": {
-                "nom": "détroit de Torrès",
-                "occurrences": 12,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Pareil fait fut également observé le 23 juillet de la même année, dans les mers du Pacifique, par le Cristobal-Colon, de West India and Pacific steam navigation Company.",
-            "occurrences": 0,
-            "date": "23 juillet",
-            "heure": null,
-            "lieu": {
-                "nom": "Pacifique",
-                "occurrences": 36,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Et l'impatience allait croissant, quand, le 2 juillet, on apprit qu'un steamer de la ligne de San Francisco de Californie à Shangaï avait revu l'animal, trois semaines auparavant, dans les mers septentrionales du Pacifique.",
-            "occurrences": 0,
-            "date": "2 juillet",
-            "heure": null,
-            "lieu": {
-                "nom": "Pacifique",
-                "occurrences": 36,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Les feux furent poussés ; l'hélice battit plus rapidement les flots ; la frégate longea la côte jaune et basse de Long-lsland, et, à huit heures du soir, après avoir perdu dans le nord-ouest les feux de Fire-lsland, elle courut à toute vapeur sur les sombres eaux de l'Atlantique.",
-            "occurrences": 0,
-            "date": null,
+            "date": "12 décembre 1864",
             "heure": "soir",
             "lieu": {
-                "nom": "Atlantique",
-                "occurrences": 39,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Vers deux heures du matin le foyer lumineux reparut, non moins intense, à cinq milles au vent de l'Abraham-Lincoln.",
-            "occurrences": 0,
-            "date": null,
-            "heure": "matin",
-            "lieu": {
-                "nom": "Abraham-Lincoln",
-                "occurrences": 17,
+                "nom": "Paris",
+                "occurrences": 1,
                 "categorie": null
             },
             "participants": [
                 {
-                    "nom": "Abraham-Lincoln",
-                    "occurrences": 30,
+                    "nom": "Ned Land",
+                    "occurrences": 1,
                     "attributs": [],
                     "genre": ""
+                },
+                {
+                    "nom": "Mr Aronnax",
+                    "occurrences": 2,
+                    "attributs": [
+                        "sympathique"
+                    ],
+                    "genre": "Masc"
                 }
             ]
         },
         {
-            "nom": "Le 11 novembre, de grand matin, l'air frais répandu à l'intérieur du Nautilus m'apprit que nous étions revenus à la surface de l'Océan, afin de renouveler les provisions d'oxygène.",
+            "nom": "Malgré le froid terrible qui faisait grelotter le pauvreNed Land - L'hiver de 1864 était particulièrement rigoureux - il sesentait réchauffé par la présence de son ami, le sympathique Mr Aronnax",
             "occurrences": 0,
-            "date": "11 novembre",
-            "heure": "matin",
-            "lieu": {
-                "nom": "Océan",
-                "occurrences": 113,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Le 15 décembre, nous laissions dans l'est le séduisant archipel de la Société, et la gracieuse Taiti, la reine du Pacifique.",
-            "occurrences": 0,
-            "date": "15 décembre",
+            "date": "1864",
             "heure": null,
             "lieu": {
-                "nom": "Pacifique",
-                "occurrences": 36,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "La Pérouse et son second, le capitaine de Langle, furent envoyés par Louis XVI, en 1785, pour accomplir un voyage de circumnavigation.",
-            "occurrences": 0,
-            "date": "en 1785",
-            "heure": null,
-            "lieu": {
-                "nom": "La Pérouse",
-                "occurrences": 12,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "La Recherche, après avoir relâché sur plusieurs points du Pacifique, mouilla devant Vanikoro, le 7 juillet 1827, dans ce même havre de Vanou, où le Nautilus flottait en ce moment.",
-            "occurrences": 0,
-            "date": "7 juillet 1827",
-            "heure": null,
-            "lieu": {
-                "nom": "Vanikoro",
-                "occurrences": 15,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Puis, il quitta Vanikoro, se dirigea vers la Nouvelle-Zélande, mouilla à Calcutta, le 7 avril 1828, et revint en France, où il fut très sympathiquement accueilli par Charles X.  Mais, à ce moment, Dumont d'Urville, sans avoir eu connaissance des travaux de Dillon, était déjà parti pour chercher ailleurs le théâtre du naufrage.",
-            "occurrences": 0,
-            "date": "7 avril 1828",
-            "heure": null,
-            "lieu": {
-                "nom": "France",
-                "occurrences": 10,
+                "nom": "pauvreNed Land - L'hiver de 1864",
+                "occurrences": 1,
                 "categorie": null
             },
             "participants": [
                 {
-                    "nom": "Dumont d'Urville",
-                    "occurrences": 17,
+                    "nom": "Mr Aronnax",
+                    "occurrences": 2,
                     "attributs": [
-                        "perplexe"
+                        "sympathique"
                     ],
-                    "genre": ""
+                    "genre": "Masc"
                 }
             ]
-        },
-        {
-            "nom": "Le 10 février 1828, I 'Astrolabe se présenta devant Tikopia, prit pour guide et interprète un déserteur fixé sur cette île, fit route vers Vanikoro, en eut connaissance le 12 février, prolongea ses récifs jusqu'au 14, et, le 20 seulement, mouilla au-dedans de la barrière, dans le havre de Vanou.",
-            "occurrences": 0,
-            "date": "10 février 1828",
-            "heure": null,
-            "lieu": {
-                "nom": "Vanikoro",
-                "occurrences": 15,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Et pendant que je regardais ces épaves désolées, le capitaine Nemo me dit d'une voix grave :  « Le commandant La Pérouse partit le 7 décembre 1785 avec ses navires la Boussole et l'Astrolabe.",
-            "occurrences": 0,
-            "date": "7 décembre 1785",
-            "heure": null,
-            "lieu": {
-                "nom": "La Pérouse",
-                "occurrences": 12,
-                "categorie": null
-            },
-            "participants": [
-                {
-                    "nom": "capitaine Nemo",
-                    "occurrences": 397,
-                    "attributs": [
-                        "XXIII",
-                        "sobre",
-                        "imprudent"
-                    ],
-                    "genre": ""
-                }
-            ]
-        },
-        {
-            "nom": "XX                            LE DÉTROIT DE TORRÈS  Pendant la nuit du 27 au 28 décembre, le Nautilus abandonna les parages de Vanikoro avec une vitesse excessive.",
-            "occurrences": 0,
-            "date": "28 décembre",
-            "heure": null,
-            "lieu": {
-                "nom": "Vanikoro",
-                "occurrences": 15,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Deux jours après avoir traversé la mer de Corail, le 4 janvier, nous eûmes connaissance des côtes de la Papouasie.",
-            "occurrences": 0,
-            "date": "4 janvier",
-            "heure": null,
-            "lieu": {
-                "nom": "Papouasie",
-                "occurrences": 12,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Le Canadien le dépouilla et le vida proprement, après en avoir retiré une demi-douzaine de côtelettes destinées à fournir une grillade pour le repas du soir.",
-            "occurrences": 0,
-            "date": null,
-            "heure": "soir",
-            "lieu": {
-                "nom": "Canadien",
-                "occurrences": 229,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Capitaine, dis-je, je ne doute pas....   Demain, ajouta le capitaine Nemo en se levant, demain, à deux heures quarante minutes du soir, le Nautilus flottera et quittera sans avarie le détroit de Torrès. »",
-            "occurrences": 0,
-            "date": null,
-            "heure": "soir",
-            "lieu": {
-                "nom": "détroit de Torrès",
-                "occurrences": 12,
-                "categorie": null
-            },
-            "participants": [
-                {
-                    "nom": "capitaine Nemo",
-                    "occurrences": 397,
-                    "attributs": [
-                        "XXIII",
-                        "sobre",
-                        "imprudent"
-                    ],
-                    "genre": ""
-                }
-            ]
-        },
-        {
-            "nom": "Le 25 janvier, l'Océan étant absolument désert, le Nautilus passa la journée à sa surface, battant les flots de sa puissante hélice et les faisant rejaillir à une grande hauteur.",
-            "occurrences": 0,
-            "date": "25 janvier",
-            "heure": null,
-            "lieu": {
-                "nom": "Océan",
-                "occurrences": 113,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Toujours, me répondit le capitaine Nemo, bien que ces pêcheries appartiennent au peuple le plus industrieux du globe, aux Anglais, auxquels le traité d'Amiens les a cédées en 1802.",
-            "occurrences": 0,
-            "date": "en 1802",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": [
-                {
-                    "nom": "capitaine Nemo",
-                    "occurrences": 397,
-                    "attributs": [
-                        "XXIII",
-                        "sobre",
-                        "imprudent"
-                    ],
-                    "genre": ""
-                }
-            ]
-        },
-        {
-            "nom": "IV                                LA MER ROUGE  Pendant la journée du 29 janvier, l'île de Ceylan disparut sous l'horizon, et le Nautilus, avec une vitesse de vingt milles à l'heure, se glissa dans ce labyrinthe de canaux qui séparent les Maledives des Laquedives.",
-            "occurrences": 0,
-            "date": "29 janvier",
-            "heure": null,
-            "lieu": {
-                "nom": "Ceylan",
-                "occurrences": 11,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Le lendemain 30 janvier - lorsque le Nautilus remonta à la surface de l'Océan, il n'avait plus aucune terre en vue.",
-            "occurrences": 0,
-            "date": "30 janvier",
-            "heure": null,
-            "lieu": {
-                "nom": "Océan",
-                "occurrences": 113,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Le 5 février, nous donnions enfin dans le golfe d'Aden, véritable entonnoir introduit dans ce goulot de Babel-Mandeb, qui entonne les eaux indiennes dans la mer Rouge.",
-            "occurrences": 0,
-            "date": "5 février",
-            "heure": null,
-            "lieu": {
-                "nom": "mer Rouge",
-                "occurrences": 33,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Le 6 février, le Nautilus flottait en vue d'Aden, perché sur un promontoire qu'un isthme étroit réunit au continent, sorte de Gibraltar inaccessible, dont les Anglais ont refait les fortifications, après s'en être emparés en 1839.",
-            "occurrences": 0,
-            "date": "6 février",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Enfin, à midi, nous sillonnions les flots de la mer Rouge.",
-            "occurrences": 0,
-            "date": null,
-            "heure": "midi",
-            "lieu": {
-                "nom": "mer Rouge",
-                "occurrences": 33,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Le 9 février, le Nautilus flottait dans cette partie la plus large de la mer Rouge, qui est comprise entre Souakin sur la côte ouest et Quonfodah sur la côte est, sur un diamètre de cent quatre-vingt-dix milles.",
-            "occurrences": 0,
-            "date": "9 février",
-            "heure": null,
-            "lieu": {
-                "nom": "mer Rouge",
-                "occurrences": 33,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Comme je me taisais toujours, le Canadien se leva, et se rapprochant de moi :  « Ce soir, à neuf heures, dit-il.",
-            "occurrences": 0,
-            "date": null,
-            "heure": "soir",
-            "lieu": {
-                "nom": "Canadien",
-                "occurrences": 229,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Or, vers la fin de 1702, elle attendait un riche convoi que la France faisait escorter par une flotte de vingt-trois vaisseaux commandés par l'amiral de Château-Renaud, car les marines coalisées couraient alors l'Atlantique.",
-            "occurrences": 0,
-            "date": "1702",
-            "heure": null,
-            "lieu": {
-                "nom": "Atlantique",
-                "occurrences": 39,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "IX                            UN CONTINENT DISPARU  Le lendemain matin, 19 février, je vis entrer le Canadien dans ma chambre.",
-            "occurrences": 0,
-            "date": "19 février",
-            "heure": "matin",
-            "lieu": {
-                "nom": "Canadien",
-                "occurrences": 229,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Depuis ce moment, pendant dix-neuf jours, du 23 février au 12 mars, le Nautilus, tenant le milieu de l'Atlantique, nous emporta avec une vitesse constante de cent lieues par vingt-quatre heures.",
-            "occurrences": 0,
-            "date": "23 février",
-            "heure": null,
-            "lieu": {
-                "nom": "Atlantique",
-                "occurrences": 39,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Vers onze heures du matin, étant à la surface de l'Océan, le Nautilus tomba au milieu d'une troupe de baleines.",
-            "occurrences": 0,
-            "date": null,
-            "heure": "matin",
-            "lieu": {
-                "nom": "Océan",
-                "occurrences": 113,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "En 1820, l'Anglais Brunsfield fut arrêté sur le soixante-cinquième degré.",
-            "occurrences": 0,
-            "date": "En 1820",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "En 1825, l'Anglais Powell ne pouvait dépasser le soixante-deuxième degré.",
-            "occurrences": 0,
-            "date": "En 1825",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "En 1829, l'Anglais Forster, commandant le Chanticleer, prenait possession du continent antarctique par 63°26' de latitude et 66°26' de longitude.",
-            "occurrences": 0,
-            "date": "En 1829",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "En 1831, l'Anglais Biscoë, le ler février, découvrait la terre d'Enderby par 68°50' de latitude, en 1832, le 5 février, la terre d'Adélaïde par 67° de latitude, et le 21 février, la terre de Graham par 64°45' de latitude.",
-            "occurrences": 0,
-            "date": "En 1831",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "En 1838, l'Anglais Wilkes s'avançait jusqu'au soixante-neuvième parallèle sur le centième méridien.",
-            "occurrences": 0,
-            "date": "En 1838",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "En 1839, l'Anglais Balleny découvrait la terre Sabrina, sur la limite du cercle polaire.",
-            "occurrences": 0,
-            "date": "En 1839",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Enfin, en 1842, l'Anglais James Ross, montant l'Érébus et le Terror, le 12 janvier, par 76°56' de latitude et 171°7' de longitude est, trouvait la terre Victoria ; le 23 du même mois, il relevait le soixante-quatorzième parallèle, le plus haut point atteint jusqu'alors ; le 27, il était par 76°8', le 28, par 77°32', le 2 février, par 78°4', et en 1842, il revenait au soixante-onzième degré qu'il ne put dépasser.",
-            "occurrences": 0,
-            "date": "en 1842",
-            "heure": null,
-            "lieu": {
-                "nom": "Anglais",
-                "occurrences": 14,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Or, ce soir-là, il devint évident, à ma grande satisfaction, que nous revenions au nord par la route de l'Atlantique.",
-            "occurrences": 0,
-            "date": null,
-            "heure": "soir",
-            "lieu": {
-                "nom": "Atlantique",
-                "occurrences": 39,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Jusqu'au 3 avril, nous ne quittâmes pas les parages de la Patagonie, tantôt sous l'Océan, tantôt à sa surface.",
-            "occurrences": 0,
-            "date": "3 avril",
-            "heure": null,
-            "lieu": {
-                "nom": "Océan",
-                "occurrences": 113,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "La tempête éclata dans la journée du 18 mai, précisément lorsque le Nautilus flottait à la hauteur de Long-Island, à quelques milles des passes de New York.",
-            "occurrences": 0,
-            "date": "18 mai",
-            "heure": null,
-            "lieu": {
-                "nom": "New York",
-                "occurrences": 15,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Le 30 mai, il passait en vue du Land's End, entre la pointe extrême de l'Angleterre et les Sorlingues, qu'il laissa sur tribord.",
-            "occurrences": 0,
-            "date": "30 mai",
-            "heure": null,
-            "lieu": {
-                "nom": "Angleterre",
-                "occurrences": 10,
-                "categorie": null
-            },
-            "participants": []
-        },
-        {
-            "nom": "Le soir, nous avions franchi deux cents lieues de l'Atlantique.",
-            "occurrences": 0,
-            "date": null,
-            "heure": "soir",
-            "lieu": {
-                "nom": "Atlantique",
-                "occurrences": 39,
-                "categorie": null
-            },
-            "participants": []
         }
     ]
 }

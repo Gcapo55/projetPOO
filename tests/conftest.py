@@ -40,7 +40,7 @@ def liste_perso(analyseur) :
 
 @pytest.fixture
 def liste_lieux(analyseur) :
-    """Rensoie la liste des Lieux"""
+    """Renvoie la liste des Lieux"""
     return analyseur.lieux
 
 @pytest.fixture
