@@ -28,9 +28,6 @@ class AnalyseTexte :
         self._liste_noms_perso: list[str] = []
         self._liste_noms_lieux: list[str] = []
 
-        self._tot_perso: list[str] = []
-        self._tot_lieux: list[str] = []
-
     def _ajouter_personnage(self, nom: str, doc: Doc ) -> None:
         """ Stocke tous nouveaux personnages dans la liste de la classe,
         et lance les fonctions d'analyse sur le personnage;
@@ -101,15 +98,10 @@ class AnalyseTexte :
                     or ent[0].text.lower() in titres_seuls
                 )
             ):
-                self._tot_perso.append(ent.text)
                 self._ajouter_personnage(nettoyer(ent.text), doc)
 
             elif ent.label_ in ["LOC", "GPE"]:
-                self._tot_lieux.append(ent.text)
                 self._ajouter_lieu(nettoyer(ent.text), ent.label_)
-
-        self._tot_perso = []
-        self._tot_lieux = []
 
         self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
         self.lieux = [lieu for lieu in self.lieux if lieu.occurrences >= min_occ]
