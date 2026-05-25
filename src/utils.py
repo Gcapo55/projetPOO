@@ -29,5 +29,8 @@ def patienter() -> None:
     for _ in range(3):
         time.sleep(0.2)
         print(".", end="", flush=True)
-
     print()
+
+def terminer() -> None:
+    """Affiche une animation de fin dans la console."""
+    print("Terminé!", end="", flush=True)

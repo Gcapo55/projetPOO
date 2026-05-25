@@ -2,7 +2,7 @@
 from exportateur import Exportateur
 from importateur import ChargeurTexte
 from Lecteur import AnalyseTexte
-from utils import patienter, spacy_conv
+from utils import patienter, terminer, spacy_conv
 
 
 class Pipeline:
@@ -32,6 +32,7 @@ class Pipeline:
         exportateur.exporter_lieux()
         exportateur.exporter_evenements()
         exportateur.exporter_json()
+        terminer()
 
 
 if __name__ == "__main__" :
