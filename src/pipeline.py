@@ -1,5 +1,5 @@
-﻿from importateur import ChargeurTexte
-import installation_spacy # pylint: disable=unused-import
+from importateur import ChargeurTexte
+import installation_spacy  # pylint: disable=unused-import
 from Lecteur import AnalyseTexte
 from utils import spacy_conv, patienter
 
@@ -7,11 +7,13 @@ from utils import spacy_conv, patienter
 class Pipeline:
     """Classe qui fait fonctionner toute l'architecture
     du projet (import, analyse, export)"""
-    def __init__(self,
-                 source : str,
-                 chargeur : ChargeurTexte,
-                 finder : AnalyseTexte,
-                 ):
+
+    def __init__(
+        self,
+        source: str,
+        chargeur: ChargeurTexte,
+        finder: AnalyseTexte,
+    ):
         self.source = source
         self._chargeur = chargeur
         self._finder = finder
@@ -30,11 +32,11 @@ class Pipeline:
         print(*liste_evenements, sep="\n")
 
 
-if __name__ == "__main__" :
-
-    pipeline = Pipeline("20'000 lieux sous les mers.txt",
-                    ChargeurTexte(),
-                    AnalyseTexte(),
-                    )
+if __name__ == "__main__":
+    pipeline = Pipeline(
+        "20'000 lieux sous les mers.txt",
+        ChargeurTexte(),
+        AnalyseTexte(),
+    )
 
     pipeline.executer()

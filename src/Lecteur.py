@@ -18,63 +18,39 @@ from utils import nettoyer
 
 titres_seuls = {"monsieur", "madame", "mme", "m.", "mr"}
 
-class AnalyseTexte :
-    """ Utilise spaCy pour extraire les personnages, les lieux,
-    et les événements, les stocke dans une liste d'instances """
+
+class AnalyseTexte:
+    """Utilise spaCy pour extraire les personnages, les lieux,
+    et les événements, les stocke dans une liste d'instances"""
+
     def __init__(self):
         self.personnages = []
         self.lieux = []
         self.evenements = []
 
-        # self._liste_noms_perso = []
-        # self._liste_noms_lieux = []
-        #
-        # self._tot_perso = []
-        # self._tot_lieux = []
-
-    def _ajouter_personnage(self, noms: dict, doc: Doc ) -> None:
-        """ Stocke tous nouveaux personnages dans la liste de la classe,
+    def _ajouter_personnage(self, noms: dict, doc: Doc) -> None:
+        """Stocke tous nouveaux personnages dans la liste de la classe,
         et lance les fonctions d'analyse sur le personnage;
-         compte les occurrences. """
+         compte les occurrences."""
         for nom, occ in noms.items():
             obj = Personnage(nom, trouver_attributs(nom, doc), trouver_genre(nom, doc))
             obj.compter(occ)
             self.personnages.append(obj)
-        # if nom not in self._liste_noms_perso:
-        #     self.personnages.append(
-        #         Personnage(nom,
-        #                    trouver_attributs(nom, doc),
-        #                    trouver_genre(nom, doc))
-        #     )
-        #     self.personnages[-1].compter()
-        #     self._liste_noms_perso.append(nom)
-        # else :
-        #     self.personnages[self._liste_noms_perso.index(nom)].compter()
-
 
 
     def _ajouter_lieu(self, noms: dict) -> None:
-        """ Stocke tous nouveaux lieux dans la liste de la classe,
+        """Stocke tous nouveaux lieux dans la liste de la classe,
         et lance les fonctions d'analyse sur le lieu;
-        compte les occurrences. """
+        compte les occurrences."""
         for nom, occ in noms.items():
             obj = Lieu(nom, None)
             obj.compter(occ)
             self.lieux.append(obj)
 
-        # if nom not in self._liste_noms_lieux:
-        #     self.lieux.append(
-        #         Lieu(nom,
-        #              None)
-        #     )
-        #     self.lieux[-1].compter()
-        #     self._liste_noms_lieux.append(nom)
-        # else :
-        #     self.lieux[self._liste_noms_lieux.index(nom)].compter()
 
-    def _ajouter_events(self, doc : Doc) -> None:
-        """ Détecte un lieu, une date et l'heure dans une phrase et
-        crée un événement dont le nom de l'objet est la phrase en question. """
+    def _ajouter_events(self, doc: Doc) -> None:
+        """Détecte un lieu, une date et l'heure dans une phrase et
+        crée un événement dont le nom de l'objet est la phrase en question."""
 
         for sent in doc.sents:
             # Itère chaque phrase du texte
@@ -83,15 +59,13 @@ class AnalyseTexte :
             participants = []
             for ent in sent.ents:
                 lieu = trouver_lieu(ent.text, self.lieux)
-                if lieu :
+                if lieu:
                     lieu_obj = lieu
-                participants.extend(
-                    trouver_participants(ent.text, self.personnages)
-                )
+                participants.extend(trouver_participants(ent.text, self.personnages))
             date = trouver_date(sent.text)
             heure = trouver_heure(sent.text)
 
-            #Ajoute, s'il existe, l'événement à la liste
+            # Ajoute, s'il existe, l'événement à la liste
             if (date or heure) and lieu_obj:
                 nom = nettoyer(sent.text.strip())
 
@@ -102,33 +76,14 @@ class AnalyseTexte :
                         heure=heure,
                         lieu=lieu_obj,
                         participants=participants,
-                    ))
-
+                    )
+                )
 
     def analyser(self, doc: Doc, min_occ: int) -> None:
-        """ Analyse le Doc récupéré de l'importateur en
-        appelant les fonctions ajouter. """
+        """Analyse le Doc récupéré de l'importateur en
+        appelant les fonctions ajouter."""
         finder = Finder(doc, min_occ)
         finder.find()
         self._ajouter_personnage(finder.liste_perso, doc)
         self._ajouter_lieu(finder.liste_lieux)
-        # for ent in doc.ents :
-        #     if ent.label_ == "PER" and not (
-        #             len(ent) == 1 and (
-        #             "Title" in ent[0].morph.get("NameType", [])
-        #             or ent[0].text.lower() in titres_seuls
-        #     )
-        #     ):
-        #         self._tot_perso.append(ent.text)
-        #         self._ajouter_personnage(nettoyer(ent.text), doc)
-        #
-        #     elif ent.label_ in ["LOC", "GPE"]:
-        #         self._tot_lieux.append(ent.text)
-        #         self._ajouter_lieu(nettoyer(ent.text))
-        #
-        # self._tot_perso = []
-        # self._tot_lieux = []
-        #
-        # self.personnages = [p for p in self.personnages if p.occurrences >= min_occ]
-        # self.lieux = [lieu for lieu in self.lieux if lieu.occurrences >= min_occ]
         self._ajouter_events(doc)

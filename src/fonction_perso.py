@@ -1,4 +1,4 @@
-﻿from collections import Counter
+from collections import Counter
 
 from spacy.tokens import Doc, Token
 
@@ -11,9 +11,13 @@ def check_attribut(N: str, tok: Token, doc: Doc) -> str | None:
     nom = N.split(" ")
     if tok.text not in nom and tok.head.text not in nom:
         return None
-    if tok.text in nom :
-        if (tok.dep_ == "appos" and tok.head.pos_ == "ADJ"
-        or tok.dep_ == "nsubj" and tok.head.pos_ == "ADJ") :
+    if tok.text in nom:
+        if (
+            tok.dep_ == "appos"
+            and tok.head.pos_ == "ADJ"
+            or tok.dep_ == "nsubj"
+            and tok.head.pos_ == "ADJ"
+        ):
             return tok.head.lemma_
 
         elif tok.dep_ == "appos" and doc[tok.i - 1].pos_ == "ADJ":
@@ -22,13 +26,14 @@ def check_attribut(N: str, tok: Token, doc: Doc) -> str | None:
         else:
             return None
 
-    elif tok.head.text in nom and tok.dep_ == "amod" :
+    elif tok.head.text in nom and tok.dep_ == "amod":
         return tok.lemma_
 
-    else :
+    else:
         return None
 
-def trouver_attributs(nom: str, doc : Doc) -> list[str]:
+
+def trouver_attributs(nom: str, doc: Doc) -> list[str]:
     """Détermine les 3 adjectifs les plus associés à chaque personnage"""
     liste_compl = [
         nettoyer(result)
@@ -38,11 +43,11 @@ def trouver_attributs(nom: str, doc : Doc) -> list[str]:
 
     return [att for att, _ in Counter(liste_compl).most_common(3)]
 
-def trouver_genre(nom: str, doc : Doc) -> str | None:
+
+def trouver_genre(nom: str, doc: Doc) -> str | None:
     """Détermine le genre d'un personnage"""
     liste_compl = [
-        "".join(token.morph.get("Gender", [])) for token in doc
-        if token.text in nom
+        "".join(token.morph.get("Gender", [])) for token in doc if token.text in nom
     ]
     if liste_compl:
         return Counter(liste_compl).most_common(1)[0][0]
