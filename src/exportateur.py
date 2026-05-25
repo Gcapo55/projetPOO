@@ -1,6 +1,7 @@
 """
-Classe Exportateur permettant de sérialiser les entités extraites (personnages, lieux, événements)
-vers des fichiers CSV individuels (personnages.csv, lieux.csv, evenements.csv) et un fichier JSON
+Classe Exportateur permettant de sérialiser les entités extraites
+(personnages, lieux, événements) vers des fichiers CSV individuels
+(personnages.csv, lieux.csv, evenements.csv) et un fichier JSON
 global (donnees.json) dans le dossier ./docs/.
 """
 
@@ -8,26 +9,35 @@ import csv
 import json
 from dataclasses import asdict
 from pathlib import Path
-from entite import Personnage, Lieu, Evenement
+
+from entite import Evenement, Lieu, Personnage
+
+BASE_DIR = Path(__file__).parent.parent
 
 
 class Exportateur:
     """Classe qui exporte les données extraites par le lecteur dans des fichiers CSV"""
-    def __init__(self,liste_persos: list[Personnage],liste_lieux: list[Lieu],liste_evenements: list[Evenement]) -> None:
-        self.personnages=liste_persos
-        self.lieux=liste_lieux
-        self.evenements=liste_evenements
+
+    def __init__(
+        self,
+        liste_persos: list[Personnage],
+        liste_lieux: list[Lieu],
+        liste_evenements: list[Evenement],
+    ) -> None:
+        self.personnages = liste_persos
+        self.lieux = liste_lieux
+        self.evenements = liste_evenements
 
     def exporter_personnages(self) -> None:
 
-        filename=Path("./docs/personnages.csv")
+        filename = Path(BASE_DIR / "docs/personnages.csv")
 
         with Path.open(filename, "w") as csvfile:
-            csvwriter=csv.writer(csvfile)
-            fields=self.personnages[0].__dict__.keys()
+            csvwriter = csv.writer(csvfile)
+            fields = self.personnages[0].__dict__.keys()
             csvwriter.writerow(fields)
             for perso in self.personnages:
-                values_lists=[]
+                values_lists = []
                 for value in perso.__dict__.values():
                     if type(value) is list:
                         values_lists.append(", ".join(map(str, value)))
@@ -37,14 +47,14 @@ class Exportateur:
 
     def exporter_lieux(self) -> None:
 
-        filename=Path("./docs/lieux.csv")
+        filename = Path(BASE_DIR / "docs/lieux.csv")
 
         with Path.open(filename, "w") as csvfile:
-            csvwriter=csv.writer(csvfile)
-            fields=self.lieux[0].__dict__.keys()
+            csvwriter = csv.writer(csvfile)
+            fields = self.lieux[0].__dict__.keys()
             csvwriter.writerow(fields)
             for lieu in self.lieux:
-                values_lists=[]
+                values_lists = []
                 for value in lieu.__dict__.values():
                     if type(value) is list:
                         values_lists.append(", ".join(map(str, value)))
@@ -54,14 +64,14 @@ class Exportateur:
 
     def exporter_evenements(self) -> None:
 
-        filename=Path("./docs/evenements.csv")
+        filename = Path(BASE_DIR / "docs/evenements.csv")
 
         with Path.open(filename, "w") as csvfile:
-            csvwriter=csv.writer(csvfile)
-            fields=self.evenements[0].__dict__.keys()
+            csvwriter = csv.writer(csvfile)
+            fields = self.evenements[0].__dict__.keys()
             csvwriter.writerow(fields)
             for event in self.evenements:
-                values_lists=[]
+                values_lists = []
                 for value in event.__dict__.values():
                     if type(value) is list:
                         values_lists.append(", ".join(map(str, value)))
@@ -74,9 +84,9 @@ class Exportateur:
         data = {
             "personnages": [asdict(perso) for perso in self.personnages],
             "lieux": [asdict(lieu) for lieu in self.lieux],
-            "evenements": [asdict(event) for event in self.evenements]
+            "evenements": [asdict(event) for event in self.evenements],
         }
 
-        filename = Path("./docs/donnees.json")
+        filename = Path(BASE_DIR / "docs/donnees.json")
         with Path.open(filename, "w", encoding="utf-8") as jsonfile:
             json.dump(data, jsonfile, indent=4, ensure_ascii=False)

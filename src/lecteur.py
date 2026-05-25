@@ -21,9 +21,11 @@ from utils import nettoyer
 
 titres_seuls = {"monsieur", "madame", "mme", "m.", "mr"}
 
-class AnalyseTexte :
-    """ Utilise spaCy pour extraire les personnages, les lieux,
-    et les événements, les stocke dans une liste d'instances """
+
+class AnalyseTexte:
+    """Utilise spaCy pour extraire les personnages, les lieux,
+    et les événements, les stocke dans une liste d'instances"""
+
     def __init__(self) -> None:
         self.personnages: list[Personnage] = []
         self.lieux: list[Lieu] = []
@@ -32,50 +34,42 @@ class AnalyseTexte :
         self._liste_noms_perso: list[str] = []
         self._liste_noms_lieux: list[str] = []
 
-    def _ajouter_personnage(self, nom: str, doc: Doc ) -> None:
-        """ Stocke tous nouveaux personnages dans la liste de la classe,
+    def _ajouter_personnage(self, nom: str, doc: Doc) -> None:
+        """Stocke tous nouveaux personnages dans la liste de la classe,
         et lance les fonctions d'analyse sur le personnage;
-         compte les occurrences. """
+         compte les occurrences."""
         if nom not in self._liste_noms_perso:
             self.personnages.append(
-                Personnage(nom,
-                           trouver_attributs(nom, doc),
-                           trouver_genre(nom, doc))
+                Personnage(nom, trouver_attributs(nom, doc), trouver_genre(nom, doc))
             )
             self.personnages[-1].compter()
             self._liste_noms_perso.append(nom)
-        else :
+        else:
             self.personnages[self._liste_noms_perso.index(nom)].compter()
 
-
-
     def _ajouter_lieu(self, nom: str, categorie: str) -> None:
-        """ Stocke tous nouveaux lieux dans la liste de la classe,
+        """Stocke tous nouveaux lieux dans la liste de la classe,
         et lance les fonctions d'analyse sur le lieu;
-        compte les occurrences. """
+        compte les occurrences."""
         if nom not in self._liste_noms_lieux:
-            self.lieux.append(
-                Lieu(nom, categorie)
-            )
+            self.lieux.append(Lieu(nom, categorie))
             self.lieux[-1].compter()
             self._liste_noms_lieux.append(nom)
-        else :
+        else:
             self.lieux[self._liste_noms_lieux.index(nom)].compter()
 
-    def _ajouter_events(self, doc : Doc) -> None:
-        """ Détecte un lieu, une date et l'heure dans une phrase et
-        crée un événement dont le nom de l'objet est la phrase en question. """
+    def _ajouter_events(self, doc: Doc) -> None:
+        """Détecte un lieu, une date et l'heure dans une phrase et
+        crée un événement dont le nom de l'objet est la phrase en question."""
 
         for sent in doc.sents:
             lieu_obj = None
             participants = []
             for ent in sent.ents:
                 lieu = trouver_lieu(ent.text, self.lieux)
-                if lieu :
+                if lieu:
                     lieu_obj = lieu
-                participants.extend(
-                    trouver_participants(ent.text, self.personnages)
-                )
+                participants.extend(trouver_participants(ent.text, self.personnages))
             date = trouver_date(sent.text)
             heure = trouver_heure(sent.text)
 
@@ -84,20 +78,21 @@ class AnalyseTexte :
 
                 self.evenements.append(
                     Evenement(
-                    nom=nom,
-                    date=date,
-                    heure=heure,
-                    lieu=lieu_obj,
-                    participants=participants,
-                ))
-
+                        nom=nom,
+                        date=date,
+                        heure=heure,
+                        lieu=lieu_obj,
+                        participants=participants,
+                    )
+                )
 
     def analyser(self, doc: Doc, min_occ: int) -> None:
-        """ Analyse le Doc récupéré de l'importateur en
-        appelant les fonctions ajouter. """
-        for ent in doc.ents :
+        """Analyse le Doc récupéré de l'importateur en
+        appelant les fonctions ajouter."""
+        for ent in doc.ents:
             if ent.label_ == "PER" and not (
-                len(ent) == 1 and (
+                len(ent) == 1
+                and (
                     "Title" in ent[0].morph.get("NameType", [])
                     or ent[0].text.lower() in titres_seuls
                 )
