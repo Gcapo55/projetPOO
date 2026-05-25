@@ -2,17 +2,18 @@ import csv
 import json
 from dataclasses import asdict
 from pathlib import Path
+from corpus import Personnage, Lieu, Evenement
 
 
 class Exportateur:
     """Classe qui exporte les données extraites par le lecteur dans des fichiers CSV"""
-    def __init__(self,liste_persos,liste_lieux,liste_evenements) -> None:
+    def __init__(self,liste_persos: list[Personnage],liste_lieux: list[Lieu],liste_evenements: list[Evenement]) -> None:
         self.personnages=liste_persos
         self.lieux=liste_lieux
         self.evenements=liste_evenements
 
 
-    def exporter_personnages(self):
+    def exporter_personnages(self) -> None:
 
         filename=Path("./docs/personnages.csv")
 
@@ -26,10 +27,10 @@ class Exportateur:
                     if type(value) is list:
                         values_lists.append(", ".join(map(str, value)))
                     else:
-                        values_lists.append([value])
+                        values_lists.append(str(value))
                 csvwriter.writerow(values_lists)
 
-    def exporter_lieux(self):
+    def exporter_lieux(self) -> None:
 
         filename=Path("./docs/lieux.csv")
 
@@ -43,10 +44,10 @@ class Exportateur:
                     if type(value) is list:
                         values_lists.append(", ".join(map(str, value)))
                     else:
-                        values_lists.append([value])
+                        values_lists.append(str(value))
                 csvwriter.writerow(values_lists)
 
-    def exporter_evenements(self):
+    def exporter_evenements(self) -> None:
 
         filename=Path("./docs/evenements.csv")
 
@@ -60,10 +61,10 @@ class Exportateur:
                     if type(value) is list:
                         values_lists.append(", ".join(map(str, value)))
                     else:
-                        values_lists.append([value])
+                        values_lists.append(str(value))
                 csvwriter.writerow(values_lists)
 
-    def exporter_json(self):
+    def exporter_json(self) -> None:
 
         data = {
             "personnages": [asdict(perso) for perso in self.personnages],
