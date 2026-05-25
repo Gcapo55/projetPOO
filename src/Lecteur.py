@@ -66,8 +66,6 @@ class AnalyseTexte :
         crée un événement dont le nom de l'objet est la phrase en question. """
 
         for sent in doc.sents:
-            # Itère chaque phrase du texte
-            # Trouve les attributs d'un éventuel événement
             lieu_obj = None
             participants = []
             for ent in sent.ents:
@@ -80,7 +78,6 @@ class AnalyseTexte :
             date = trouver_date(sent.text)
             heure = trouver_heure(sent.text)
 
-            #Ajoute, s'il existe, l'événement à la liste
             if (date or heure) and lieu_obj:
                 nom = nettoyer(sent.text.strip())
 
