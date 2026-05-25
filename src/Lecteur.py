@@ -1,8 +1,12 @@
-"""Lecteur de texte"""  # noqa: N999 disable invalid module name
+"""
+Classe AnalyseTexte qui utilise spaCy pour extraire et dédoublonner personnages (PER),
+lieux (LOC/GPE) et événements (phrase contenant date/heure et lieu) depuis un Doc,
+en filtrant les entités sous un seuil minimal d'occurrences.
+"""
 
 from spacy.tokens import Doc
 
-from corpus import Evenement, Lieu, Personnage
+from entite import Evenement, Lieu, Personnage
 from fonction_perso import (
     trouver_attributs,
     trouver_genre,

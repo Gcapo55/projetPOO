@@ -1,8 +1,14 @@
+"""
+Classe Exportateur permettant de sérialiser les entités extraites (personnages, lieux, événements)
+vers des fichiers CSV individuels (personnages.csv, lieux.csv, evenements.csv) et un fichier JSON
+global (donnees.json) dans le dossier ./docs/.
+"""
+
 import csv
 import json
 from dataclasses import asdict
 from pathlib import Path
-from corpus import Personnage, Lieu, Evenement
+from entite import Personnage, Lieu, Evenement
 
 
 class Exportateur:
@@ -11,7 +17,6 @@ class Exportateur:
         self.personnages=liste_persos
         self.lieux=liste_lieux
         self.evenements=liste_evenements
-
 
     def exporter_personnages(self) -> None:
 

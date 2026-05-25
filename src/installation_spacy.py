@@ -1,4 +1,7 @@
-"""Module pour installer spaCy"""
+"""
+Classe InstallateurSpacy qui vérifie la présence de spaCy au démarrage et propose à
+l'utilisateur de l'installer ainsi que le modèle français fr_core_news_lg si nécessaire.
+"""
 
 import importlib.util
 import subprocess

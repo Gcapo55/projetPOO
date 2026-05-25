@@ -1,4 +1,8 @@
-﻿"""FICHIER DE FONCTION UTILITAIRES"""
+﻿"""
+Fonctions utilitaires : conversion d'un Texte en Doc spaCy (fr_core_news_lg), nettoyage
+de chaînes (sauts de ligne, underscores, tirets) et animations de chargement en console.
+"""
+
 import spacy
 import time
 from spacy.tokens import Doc

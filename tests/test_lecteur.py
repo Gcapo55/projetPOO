@@ -1,6 +1,6 @@
 import pytest
 
-from corpus import Evenement, Lieu
+from entite import Evenement, Lieu
 
 
 @pytest.mark.parametrize("perso_attendus", [

@@ -1,4 +1,9 @@
-﻿from collections import Counter
+﻿"""
+Fonctions d'analyse morphosyntaxique via spaCy pour extraire les attributs adjectivaux
+d'un personnage (les 3 plus fréquents) et déterminer son genre grammatical à partir d'un Doc.
+"""
+
+from collections import Counter
 
 from spacy.tokens import Doc, Token
 

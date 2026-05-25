@@ -1,6 +1,12 @@
-﻿import re
+﻿"""
+Fonctions utilitaires pour extraire les métadonnées d'un événement : résolution du lieu et des
+participants par correspondance avec les listes existantes, et détection de la date et de l'heure
+via expressions régulières.
+"""
 
-from corpus import Lieu, Personnage
+import re
+
+from entite import Lieu, Personnage
 
 
 def trouver_lieu(texte: str, liste_lieux: list[Lieu]) -> Lieu|None:

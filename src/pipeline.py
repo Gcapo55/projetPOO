@@ -1,7 +1,12 @@
-﻿import installation_spacy  # pylint: disable=unused-import  # noqa: F401
+﻿"""
+Point d'entrée du programme : classe Pipeline orchestrant le chargement d'un fichier Gutenberg,
+son analyse spaCy (personnages, lieux, événements) et l'export des résultats en CSV et JSON.
+"""
+
+import installation_spacy  # pylint: disable=unused-import  # noqa: F401
 from exportateur import Exportateur
 from importateur import ChargeurTexte
-from Lecteur import AnalyseTexte
+from lecteur import AnalyseTexte
 from utils import patienter, spacy_conv, terminer
 
 

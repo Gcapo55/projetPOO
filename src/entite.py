@@ -1,3 +1,9 @@
+"""
+Dataclasses représentant les entités extraites d'un texte : Corpus (classe de base avec comptage
+d'occurrences), Personnage (avec attributs et genre), Lieu (avec catégorie) et Evenement
+(avec date, heure, lieu et participants).
+"""
+
 from dataclasses import dataclass, field
 
 

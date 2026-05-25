@@ -1,3 +1,8 @@
+"""
+Classes Texte (modèle d'un texte littéraire avec titre, auteur, contenu et année) et
+ChargeurTexte (lecture et parsing d'un fichier .txt au format Project Gutenberg depuis ./docs/).
+"""
+
 import re
 from pathlib import Path
 
