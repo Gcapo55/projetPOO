@@ -2,7 +2,7 @@
 from exportateur import Exportateur
 from importateur import ChargeurTexte
 from Lecteur import AnalyseTexte
-from utils import patienter, terminer, spacy_conv
+from utils import patienter, spacy_conv, terminer
 
 
 class Pipeline:
