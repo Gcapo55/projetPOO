@@ -26,6 +26,7 @@
 ```mermaid
 classDiagram
     class Corpus {
+        <<abstract>>
         +str nom
         +int occurrences
         +compter() void
@@ -77,8 +78,6 @@ classDiagram
         -evenements: list[Evenement]
         -_liste_noms_perso: list[str]
         -_liste_noms_lieux: list[str]
-        -_tot_perso: list[str]
-        -_tot_lieux: list[str]
         +analyser(doc: Doc, min_occ: int) void
         -_ajouter_personnage(nom: str, doc: Doc) void
         -_ajouter_lieu(nom: str) void
@@ -118,6 +117,7 @@ classDiagram
     }
 
     class fonction_perso {
+        +check_attribut(n: str, tok: Token, doc: Doc) str|None
         +trouver_attributs(nom: str, doc: Doc) list
         +trouver_genre(nom: str, doc: Doc) str|None
     }
