@@ -48,14 +48,13 @@ class AnalyseTexte :
 
 
 
-    def _ajouter_lieu(self, nom: str) -> None:
+    def _ajouter_lieu(self, nom: str, categorie: str) -> None:
         """ Stocke tous nouveaux lieux dans la liste de la classe,
         et lance les fonctions d'analyse sur le lieu;
         compte les occurrences. """
         if nom not in self._liste_noms_lieux:
             self.lieux.append(
-                Lieu(nom,
-                     None)
+                Lieu(nom, categorie)
             )
             self.lieux[-1].compter()
             self._liste_noms_lieux.append(nom)
@@ -110,7 +109,7 @@ class AnalyseTexte :
 
             elif ent.label_ in ["LOC", "GPE"]:
                 self._tot_lieux.append(ent.text)
-                self._ajouter_lieu(nettoyer(ent.text))
+                self._ajouter_lieu(nettoyer(ent.text), ent.label_)
 
         self._tot_perso = []
         self._tot_lieux = []

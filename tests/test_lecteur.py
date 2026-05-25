@@ -4,7 +4,7 @@ from corpus import Evenement, Lieu
 
 
 @pytest.mark.parametrize("perso_attendus", [
-    ("Ned Land"), ("Mr Aronnax"), # Liste des noms attendus dans ton texte de test
+    ("Ned Land"), ("Mr Aronnax"),
 ])
 def test_presence_personnage(liste_perso, perso_attendus):
     """Vérifie qu'un personnage spécifique est présent."""
@@ -22,7 +22,7 @@ def test_type_personnage(liste_lieux):
         assert isinstance(perso, Lieu)
 
 @pytest.mark.parametrize("lieux_attendus", [
-    ("Paris"), # Liste des lieux attendus dans ton texte de test
+    ("Paris"),
 ])
 def test_presence_lieux(liste_lieux, lieux_attendus):
     """Vérifie qu'un lieu spécifique est présent."""
